@@ -109,12 +109,12 @@
 		</div>
 		
 		<nav class="menu__nav">
-			<a href="account.jsp">Account</a>
+			<a href="account.jsp">账户</a>
 			<a href="catalog.jsp">目录</a>
-			<a href="news.jsp">News</a>
-			<a href="about.jsp">About</a>
+			<a href="news.jsp">新闻</a>
+			<a href="about.jsp">关于</a>
 			<a class="menu__drop" href="#">Pages</a>
-			<a href="authorization.jsp">Log In / Sign Up</a>
+			<a href="authorization.jsp">登 录 / 登 出</a>
 		</nav>
 
 		<div class="menu__submenu">
@@ -125,9 +125,9 @@
 				<a href="product2.jsp">Product style 2</a>
 				<a href="cart.jsp">Cart</a>
 				<a href="checkout.jsp">Checkout</a>
-				<a href="delivery.jsp">Delivery</a>
-				<a href="getintouch.jsp">Get in touch</a>
-				<a href="payment.jsp">Payment</a>
+				<a href="delivery.jsp">交货</a>
+				<a href="getintouch.jsp">保持联系</a>
+				<a href="payment.jsp">付款</a>
 				<a href="privacy.jsp">Privacy</a>
 				<a href="refund.jsp">Refund</a>
 				<a href="article.jsp">Article</a>
@@ -161,19 +161,19 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="page__title">
-						<h2>Account</h2>
-						<a href="index.jsp"><i class="lnr lnr-arrow-left"></i> Back to home</a>
+						<h2>账户</h2>
+						<a href="index.jsp"><i class="lnr lnr-arrow-left"></i> 返回主页</a>
 					</div>
 				</div>
 
 				<div class="col-12">
 					<div class="account">
 						<div class="nav page__nav page__nav--white" role="tablist">
-							<a class="active" id="tab-1" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="true">My orders</a>
+							<a class="active" id="tab-1" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="true">我的订单</a>
 
-							<a class="" id="tab-2" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false">Account details</a>
+							<a class="" id="tab-2" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false">账户详情</a>
 
-							<a href="#">Logout</a>
+							<a href="#">登出</a>
 						</div>
 
 						<div class="tab-content">
@@ -182,12 +182,12 @@
 									<table class="account__table">
 										<thead>
 											<tr>
-												<th>№</th>
-												<th>Name</th>
-												<th>Date</th>
-												<th>Quantity</th>
-												<th>Total</th>
-												<th>Status</th>
+												<th>订单号</th>
+												<th>品名</th>
+												<th>日期</th>
+												<th>数量</th>
+												<th>总价</th>
+												<th>状态</th>
 												<th></th>
 											</tr>
 										</thead>
@@ -231,7 +231,7 @@
 										<form action="#" class="account__form">
 											<div class="row">
 												<div class="col-12">
-													<h3 class="cart__form-title">Account Details</h3>
+													<h3 class="cart__form-title">账户详情</h3>
 												</div>
 
 												<div class="col-12 col-md-6 col-lg-12 col-xl-6">
@@ -351,22 +351,22 @@
 				<div class="col-12">
 					<div class="footer__content">
 						<div class="footer__item">
-							<span class="footer__title">Company</span>
+							<span class="footer__title">公司</span>
 							<ul class="footer__list">
-								<li><a href="about.jsp">About Us</a></li>
-								<li><a href="news.jsp">News</a></li>
-								<li><a href="catalog.jsp">Catalog</a></li>
-								<li><a href="account.jsp">Account</a></li>
+								<li><a href="about.jsp">关于我们</a></li>
+								<li><a href="news.jsp">新闻</a></li>
+								<li><a href="catalog.jsp">目录</a></li>
+								<li><a href="account.jsp">账户</a></li>
 							</ul>
 						</div>
 
 						<div class="footer__item">
-							<span class="footer__title">Services</span>
+							<span class="footer__title">服务</span>
 							<ul class="footer__list">
-								<li><a href="getintouch.jsp">Get in touch</a></li>
-								<li><a href="payment.jsp">Payment</a></li>
-								<li><a href="delivery.jsp">Delivery</a></li>
-								<li><a href="refund.jsp">Exchange and refund</a></li>
+								<li><a href="getintouch.jsp">保持联系</a></li>
+								<li><a href="payment.jsp">付款</a></li>
+								<li><a href="delivery.jsp">交货</a></li>
+								<li><a href="refund.jsp">换货和退款</a></li>
 							</ul>
 						</div>
 
@@ -381,13 +381,13 @@
 						</div>
 
 						<div class="footer__item">
-							<span class="footer__title">Contacts</span>
+							<span class="footer__title">联络人</span>
 							
-							<p class="footer__text">8258 Hickory Ave.<br> Oxford, MS 38655</p>
+							<p class="footer__text">jimei university.<br> post code 361021</p>
 
 							<p class="footer__text">
-								Tel.: <a href="#">8 800 333 00 44</a><br>
-								Email: <a href="#">support@shum.com</a>
+								Tel.: <a href="#">88888888888</a><br>
+								Email: <a href="#">201821121021@jmu.com</a>
 							</p>
 						</div>
 					</div>
@@ -395,11 +395,11 @@
 
 				<div class="col-12">
 					<div class="footer__copyright">
-						<small>Copyright © 2019</small>
+						<small>版权所有 © 2020</small>
 
 						<div>
-							<a href="privacy.jsp">Terms of Use</a>
-							<a href="privacy.jsp">Privacy Policy</a>
+							<a href="privacy.jsp">使用条款</a>
+							<a href="privacy.jsp">隐私政策</a>
 						</div>
 					</div>
 				</div>
@@ -416,12 +416,12 @@
 			<a href="#">龙岩</a>
 			<a class="active" href="#">厦门</a>
 			<a href="#">漳州</a>
-			<a href="#">New York</a>
-			<a href="#">Tokyo</a>
-			<a href="#">Cape Town</a>
-			<a href="#">Rio de Janeiro</a>
-			<a href="#">Sydney</a>
-			<a href="#">Lemesos</a>
+			<a href="#">泉州</a>
+			<a href="#">莆田</a>
+			<a href="#">宁德</a>
+			<a href="#">南平</a>
+			<a href="#">三明</a>
+			<a href="#">龙岩</a>
 			<a href="#">Dinajpur</a>
 			<a href="#">Cartagena</a>
 			<a href="#">Waitakere</a>
