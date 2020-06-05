@@ -2311,7 +2311,7 @@ ul {
     width: 66%;
   }
   .subscribe:before {
-    content: '';
+    content: '顮�';
     font-family: 'Linearicons-Free';
     font-size: 20px;
     color: #707070;
@@ -2564,7 +2564,7 @@ ul {
   position: relative;
 }
 .catalog-menu__item button:after {
-  content: '';
+  content: '睢�';
   font-family: 'Linearicons-Free';
   position: absolute;
   right: 0;
@@ -4051,7 +4051,7 @@ ul {
   padding: 0 40px 0 20px;
 }
 .form__wrap--select:after {
-  content: '';
+  content: '睢�';
   font-family: 'Linearicons-Free';
   font-size: 14px;
   color: #fa7268;
@@ -5088,7 +5088,7 @@ ul {
 }
 .mfp-image-holder .mfp-close:before,
 .mfp-iframe-holder .mfp-close:before {
-  content: '';
+  content: '睢�';
   font-family: 'Linearicons-Free';
   position: absolute;
   right: 0;
