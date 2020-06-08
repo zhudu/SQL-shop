@@ -24,6 +24,8 @@ public class Delivery {
 	private String Del_gettime;		//签收时间
 	@Column(name="Del_voucher")
 	private int Del_voucher;		//签收状态
+	@Column(name="Del_status")
+	private int Del_status;			//配送状态
 	public String getDel_no() {
 		return Del_no;
 	}
@@ -65,5 +67,11 @@ public class Delivery {
 	}
 	public void setDel_voucher(int del_voucher) {
 		Del_voucher = del_voucher;
+	}
+	public int getDel_status() {
+		return Del_status;
+	}
+	public void setDel_status(int del_status) {
+		Del_status = del_status;
 	}
 }

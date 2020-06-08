@@ -5270,3 +5270,12 @@ ul {
     right: -30px;
   }
 }
+.test_input{
+	width: 100%;
+  border: none;
+  height: 50px;
+  background-color: #e7e8eb;
+  padding: 0 20px;
+  font-size: 16px;
+  color: #303030;
+}

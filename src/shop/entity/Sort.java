@@ -22,6 +22,8 @@ public class Sort {
 	private String For_no;			//订单号
 	@Column(name="Sor_time")
 	private String Sor_time;		//分拣时间
+	@Column(name="Sor_state")
+	private int Sor_state;			//分拣状态
 	public String getSor_no() {
 		return Sor_no;
 	}

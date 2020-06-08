@@ -26,6 +26,14 @@ public class Goods {
 	private String Goo_detail;			//商品介绍
 	@Column(name="Store")
 	private String Store;				//仓库编号
+	@Column(name="Goo_class")
+	private String Goo_class;				//商品类别
+	public String getGoo_class() {
+		return Goo_class;
+	}
+	public void setGoo_class(String goo_class) {
+		Goo_class = goo_class;
+	}
 	public String getGoo_no() {
 		return Goo_no;
 	}

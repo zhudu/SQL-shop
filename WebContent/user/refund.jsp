@@ -1,38 +1,3 @@
-# SQL-shop
-
-jsp文件一览：
-
-about:公司介绍
-
-account：账户界面
-
-article：
-
-authorization：登录注册界面
-
-cart：购物车
-
-catalog：目录
-
-checkout：付款界面
-
-index：首页
-
-news：新闻
-
-payment：付款方式一览
-
-product：商品介绍页
-
-product2：
-
-refund：换货和退款一览
-
-
-
-界面整体框架：
-
-```javascript
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -42,21 +7,21 @@ refund：换货和退款一览
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<!-- CSS -->
-	<link rel="stylesheet" href="css/bootstrap-reboot.min.css">
-	<link rel="stylesheet" href="css/bootstrap-grid.min.css">
-	<link rel="stylesheet" href="css/owl.carousel.min.css">
-	<link rel="stylesheet" href="css/magnific-popup.css">
-	<link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
-	<link rel="stylesheet" href="css/linearicons.css">
-	<link rel="stylesheet" href="css/paymentfont.min.css">
-	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="../css/bootstrap-reboot.min.css">
+	<link rel="stylesheet" href="../css/bootstrap-grid.min.css">
+	<link rel="stylesheet" href="../css/owl.carousel.min.css">
+	<link rel="stylesheet" href="../css/magnific-popup.css">
+	<link rel="stylesheet" href="../css/jquery.mCustomScrollbar.min.css">
+	<link rel="stylesheet" href="../css/linearicons.css">
+	<link rel="stylesheet" href="../css/paymentfont.min.css">
+	<link rel="stylesheet" href="../css/main.css">
 
 	<!-- Favicons -->
-	<link rel="icon" type="image/png" href="icon/temp.ico" sizes="32x32">
-	<link rel="apple-touch-icon" href="icon/temp.ico">
-	<link rel="apple-touch-icon" sizes="72x72" href="icon/apple-touch-icon-72x72.png">
-	<link rel="apple-touch-icon" sizes="114x114" href="icon/apple-touch-icon-114x114.png">
-	<link rel="apple-touch-icon" sizes="144x144" href="icon/apple-touch-icon-144x144.png">
+	<link rel="icon" type="image/png" href="../icon/temp.ico" sizes="32x32">
+	<link rel="apple-touch-icon" href="../icon/temp.ico">
+	<link rel="apple-touch-icon" sizes="72x72" href="../icon/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="../icon/apple-touch-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="../icon/apple-touch-icon-144x144.png">
 
 	<meta name="description" content="">
 	<meta name="keywords" content="">
@@ -67,8 +32,8 @@ refund：换货和退款一览
 
 <body class="body">
 
-	<!-- header页眉 -->
-	<header class="header">
+	<!-- header -->
+	<header class="header header--dark">
 		<div class="container">
 			<div class="row">
 				<div class="col-12">
@@ -85,7 +50,7 @@ refund：换货和退款一览
 
 						<div class="header__bar header__bar--center">
 							<a href="index.jsp" class="header__logo">
-								<img src="img/temp1.png" alt="">
+								<img src="../img/temp1.png" alt="">
 							</a>
 						</div>
 
@@ -124,7 +89,7 @@ refund：换货和退款一览
 	</header>
 	<!-- end header -->
 
-	<!-- menu目录 -->
+	<!-- menu -->
 	<div class="menu">
 		<div class="menu__actions">
 			<a href="#city" class="menu__location">
@@ -171,7 +136,7 @@ refund：换货和退款一览
 	</div>
 	<!-- end menu -->
 
-	<!-- catmenu菜单 -->
+	<!-- catmenu -->
 	<div class="catmenu">
 		<div class="catmenu__actions">
 			<button class="catmenu__btn" type="button">
@@ -190,7 +155,89 @@ refund：换货和退款一览
 	</div>
 	<!-- end catmenu -->
 
-	<!-- footer页脚 -->
+	<!-- page -->
+	<div class="page">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="page__title">
+						<h2>换货和退款</h2>
+					</div>
+				</div>
+
+				<div class="col-12">
+					<div class="page__content">
+						<div class="page__double">
+							<div class="page__double-title">
+								<h3>Receiving an order</h3>
+							</div>
+							
+							<div class="page__double-content">
+								<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</p>
+							</div>
+						</div>
+
+						<div class="page__double">
+							<div class="page__double-title">
+								<h3>Exchange</h3>
+							</div>
+							
+							<div class="page__double-content">
+								<p>If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the <a href="#">middle</a> of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.</p>
+							</div>
+						</div>
+
+						<div class="page__double">
+							<div class="page__double-title">
+								<h3>Refund</h3>
+							</div>
+
+							<div class="page__double-content">
+								<p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.</p>
+
+								<ul>
+									<li>Full company name.</li>
+									<li>Your full name and passport details.</li>
+									<li>Full name of the product with the article number.</li>
+									<li>Reason for the return of the product.</li>
+									<li>Return date.</li>
+									<li>Amount to be refunded.</li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="page__double">
+							<div class="page__double-title">
+								<h3>Answers to questions</h3>
+							</div>
+							
+							<div class="page__double-content">
+								<p>Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end page -->
+
+	<!-- subscribe -->
+	<div class="section">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<form action="#" class="subscribe">
+						<input class="subscribe__input" type="text" placeholder="Subscribe to our newsletter">
+						<button class="subscribe__btn" type="button"><i class="lnr lnr-arrow-right"></i></button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end subscribe -->
+
+	<!-- footer -->
 	<footer class="footer">
 		<div class="container">
 			<div class="row">
@@ -254,7 +301,7 @@ refund：换货和退款一览
 	</footer>
 	<!-- end footer -->
 
-	<!-- choose a city选择城市 -->
+	<!-- choose a city -->
 	<div id="city" class="zoom-anim-dialog mfp-hide modal">
 		<input type="text" class="modal__input" placeholder="搜索城市...">
 
@@ -268,34 +315,24 @@ refund：换货和退款一览
 			<a href="#">南平</a>
 			<a href="#">三明</a>
 			<a href="#">龙岩</a>
+			<a href="#">Dinajpur</a>
+			<a href="#">Cartagena</a>
+			<a href="#">Waitakere</a>
+			<a href="#">Montpellier</a>
+			<a href="#">Berlin</a>
+			<a href="#">Valencia</a>
+			<a href="#">Parma</a>
 		</div>
 	</div>
 	<!-- end choose a city -->
 
 	<!-- JS -->
-	<script src="js/jquery-3.3.1.min.js"></script>
-	<script src="js/bootstrap.bundle.min.js"></script>
-	<script src="js/owl.carousel.min.js"></script>
-	<script src="js/jquery.magnific-popup.min.js"></script>
-	<script src="js/jquery.mousewheel.min.js"></script>
-	<script src="js/jquery.mCustomScrollbar.min.js"></script>
-	<script src="js/main.js"></script>
+	<script src="../js/jquery-3.3.1.min.js"></script>
+	<script src="../js/bootstrap.bundle.min.js"></script>
+	<script src="../js/owl.carousel.min.js"></script>
+	<script src="../js/jquery.magnific-popup.min.js"></script>
+	<script src="../js/jquery.mousewheel.min.js"></script>
+	<script src="../js/jquery.mCustomScrollbar.min.js"></script>
+	<script src="../js/main.js"></script>
 </body>
 </html>
-```
-
-
-
-hql多表查询：https://www.cnblogs.com/qlqwjy/p/8989917.html
-
-
-
-6.6
-
-1.员工表中新增登录密码
-
-2.商品表增加商品类别
-
-3.分拣表增加分拣状态
-
-4.配送表增加配送状态

@@ -26,6 +26,14 @@ public class Employees {
 	private String Emp_birthday;	//生日
 	@Column(name="Dep_no")
 	private String Dep_no;			//部门编号
+	@Column(name="Emp_pwd")
+	private String Emp_pwd;			//登录密码
+	public String getEmp_pwd() {
+		return Emp_pwd;
+	}
+	public void setEmp_pwd(String emp_pwd) {
+		Emp_pwd = emp_pwd;
+	}
 	public String getEmp_no() {
 		return Emp_no;
 	}
