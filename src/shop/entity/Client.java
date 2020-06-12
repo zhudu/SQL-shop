@@ -8,8 +8,8 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name="Client")
 public class Client {
 	@Id
-	@GeneratedValue(generator="Client")
-	@GenericGenerator(name="Client",strategy="assigned")
+	@GeneratedValue(generator="client")
+	@GenericGenerator(name="client",strategy="assigned")
 	@Column(name="Cli_no", unique=true)
 	private String Cli_no;			//顾客编码
 	@Column(name="Cli_name")

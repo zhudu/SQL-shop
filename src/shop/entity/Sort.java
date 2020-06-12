@@ -24,6 +24,12 @@ public class Sort {
 	private String Sor_time;		//分拣时间
 	@Column(name="Sor_state")
 	private int Sor_state;			//分拣状态
+	public int getSor_state() {
+		return Sor_state;
+	}
+	public void setSor_state(int sor_state) {
+		Sor_state = sor_state;
+	}
 	public String getSor_no() {
 		return Sor_no;
 	}

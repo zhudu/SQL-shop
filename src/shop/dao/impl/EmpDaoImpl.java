@@ -1,7 +1,11 @@
 package shop.dao.impl;
 
+import java.util.Iterator;
+import java.util.List;
+
 import javax.annotation.Resource;
 
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,28 +28,125 @@ public class EmpDaoImpl implements Empdao{
 	}
 
 	@Override
-	public int login(Employees e) {
-		return 0;
+	public List<Employees> login(Employees e) {
+		String hql="from Employees where Emp_no='"+e.getEmp_no()+"' and Emp_pwd='"+e.getEmp_pwd()+"'";
+		Query q=sf.getCurrentSession().createQuery(hql);
+		List rs=q.list();
+		return rs;
+//		Iterator<Employees> it=rs.iterator();
+//		Employees e1;
+//		System.out.println(it.toString());
+//		if(it.hasNext()) {
+//			e1=it.next();
+//			return e1.getDep_no();
+//		}
+//		return null;
 	}
 
 	@Override			//由待配送转变为配送中
 	public int delivery(Delivery d) {
-		return 0;
+		Query q = sf.getCurrentSession().createQuery("update Delivery set Del_status =1 where Del_no='"+d.getDel_no()+"'");
+		int num=q.executeUpdate();
+		return num;
 	}
 
 	@Override			//由配送中转为送达
 	public int delivery1(Delivery d) {
-		return 0;
-	}
-
-	@Override			//刷新用户是否已确认
-	public int delivery2(Delivery d) {
-		return 0;
+		Query q = sf.getCurrentSession().createQuery("update Delivery set Del_status =2 where Del_no='"+d.getDel_no()+"'");
+		int num=q.executeUpdate();
+		return num;
 	}
 
 	@Override			//分拣状态由待分拣变为分拣完成
 	public int sort(Sort s) {
-		return 0;
+		Query q = sf.getCurrentSession().createQuery("update Sort set Sor_state =1 where Sor_no='"+s.getSor_no()+"'");
+		int num=q.executeUpdate();
+		return num;
+	}
+
+	@Override			//枚举该员工对应的分拣单
+	public List SearchSort(Employees e) {
+		String hql="from Sort where Emp_no='"+e.getEmp_no()+"'";
+		Query q=sf.getCurrentSession().createQuery(hql);
+		List rs=q.list();
+		return rs;
+	}
+
+	@Override			//枚举该员工的配送单
+	public List SearchDelivery(Employees e) {
+		String hql="from Delivery where Emp_no='"+e.getEmp_no()+"'";
+		Query q=sf.getCurrentSession().createQuery(hql);
+		List rs=q.list();
+		return rs;
+	}
+
+	@Override			//枚举用户
+	public List ClientList() {
+		String hql="from Client";
+		Query q=sf.getCurrentSession().createQuery(hql);
+		List rs=q.list();
+		return rs;
+	}
+
+	@Override			//枚举员工
+	public List EmpList() {
+		String hql="from Employees";
+		Query q=sf.getCurrentSession().createQuery(hql);
+		List rs=q.list();
+		return rs;
+	}
+
+	@Override			//枚举商家
+	public List MerList() {
+		String hql="from Merchant";
+		Query q=sf.getCurrentSession().createQuery(hql);
+		List rs=q.list();
+		return rs;
+	}
+
+	@Override			//枚举商品
+	public List GooList() {
+		String hql="from Goods";
+		Query q=sf.getCurrentSession().createQuery(hql);
+		List rs=q.list();
+		return rs;
+	}
+
+	@Override
+	public List<Form> SearchForm(Sort s) {
+		String hql="from Form where For_no='"+s.getFor_no()+"'";
+		Query q=sf.getCurrentSession().createQuery(hql);
+		List<Form> rs=q.list();
+		return rs;
+	}
+
+	@Override
+	public List<Goods> SearchGoods(Form f) {
+		String hql="from Goods where Goo_no='"+f.getGoo_no()+"'";
+		Query q=sf.getCurrentSession().createQuery(hql);
+		List<Goods> rs=q.list();
+		return rs;
+	}
+
+	@Override
+	public List<Addres> Searchaddres(Delivery d) {
+		String hql="from Addres where Add_no='"+d.getAdd_no()+"'";
+		Query q=sf.getCurrentSession().createQuery(hql);
+		List<Addres> rs=q.list();
+		return rs;
+	}
+
+	@Override
+	public int register(Employees e) {
+		sf.getCurrentSession().save(e);
+		return 1;
+	}
+
+	@Override
+	public int forget(Employees e) {
+		Query q = sf.getCurrentSession().createQuery("update Employees set Emp_pwd ='"+e.getEmp_pwd()+"' where Emp_no='"+e.getEmp_no()+"' and Emp_ID='"+e.getEmp_ID()+"'");
+		int num=q.executeUpdate();
+		return num;
 	}
 
 }

@@ -39,6 +39,7 @@ Primary use:	SHUM - eCommerce HTML Template
 /*==============================
 	Common styles
 ==============================*/
+
 html {
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
@@ -2564,7 +2565,7 @@ ul {
   position: relative;
 }
 .catalog-menu__item button:after {
-  content: '睢�';
+  content: '∨';
   font-family: 'Linearicons-Free';
   position: absolute;
   right: 0;
@@ -2844,6 +2845,12 @@ ul {
   padding: 0 20px;
 }
 .cart__content--checkout {
+  background-color: #fff;
+}
+.cart__content1 {
+  padding: 0 90px;
+}
+.cart__content1--checkout {
   background-color: #fff;
 }
 .cart__total-wrap {
@@ -4051,7 +4058,7 @@ ul {
   padding: 0 40px 0 20px;
 }
 .form__wrap--select:after {
-  content: '睢�';
+  content: '∨';
   font-family: 'Linearicons-Free';
   font-size: 14px;
   color: #fa7268;
@@ -4160,7 +4167,7 @@ ul {
 }
 .form__checkbox input:not(:checked) + label:after,
 .form__checkbox input:checked + label:after {
-  content: '';
+  content: '∨';
   position: absolute;
   left: 4px;
   top: 4px;
@@ -5088,7 +5095,7 @@ ul {
 }
 .mfp-image-holder .mfp-close:before,
 .mfp-iframe-holder .mfp-close:before {
-  content: '睢�';
+  content: '';
   font-family: 'Linearicons-Free';
   position: absolute;
   right: 0;

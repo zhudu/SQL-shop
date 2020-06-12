@@ -73,7 +73,7 @@
 				<div class="col-12">
 					<div class="authorization">
 						<div class="nav page__nav" role="tablist">
-							<a href="../Emp/admin.jsp">返回</a>
+							<a href="../emp/admin.jsp">返回</a>
 							
 							<a class="active" id="tab-1" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="true">更新信息</a>
 
@@ -90,7 +90,8 @@
 
 										<div class="col-12">
 											<label for="Mer_no" class="form__label">商家编号</label>
-											<input id="Mer_no" type="text" name="Mer_no" class="form__input">
+											<input id="Mer_no" type="text" name="Mer_no" onBlur="return checkmerno()" class="form__input">
+											<span id="checkmerno" style="color:#fa7268"></span>
 										</div>
 										
 										<div class="col-12">
@@ -110,7 +111,8 @@
 										
 										<div class="col-12">
 											<label for="Mer_email" class="form__label">邮箱</label>
-											<input id="Mer_email" type="text" name="Mer_email" class="form__input">
+											<input id="Mer_email" type="text" name="Mer_email" onBlur="return checkmeremail()" class="form__input">
+											<span id="checkmeremail" style="color:#fa7268"></span>
 										</div>
 
 										<div class="col-12">
@@ -181,5 +183,6 @@
 	<script src="../js/jquery.mousewheel.min.js"></script>
 	<script src="../js/jquery.mCustomScrollbar.min.js"></script>
 	<script src="../js/main.js"></script>
+	<script type="text/javascript" src="../js/check.js"></script>
 </body>
 </html>

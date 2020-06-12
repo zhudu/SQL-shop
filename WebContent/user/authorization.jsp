@@ -55,9 +55,15 @@
 						</div>
 
 						<div class="header__bar header__bar--right">
-							<a href="account.jsp" class="header__phone">
-								8 800 333 00 44
-							</a>
+							<%
+								String haslogin=(String)session.getAttribute("hasLogin");
+								String Cli_no=(String)session.getAttribute("Cli_no");
+								if(haslogin==null || haslogin.equals("")){
+									out.print("<a href=\"authorization.jsp\" class=\"header__phone\">未登录</a>");
+								}else{
+									out.print("<a href=\"account.jsp\" class=\"header__phone\">"+Cli_no+"</a>");
+								}
+							%>
 
 							<button class="header__search" type="button">
 								<i class="lnr lnr-magnifier"></i>
@@ -174,14 +180,14 @@
 							
 							<a class="" id="tab-3" data-toggle="tab" href="#tab3" role="tab" aria-controls="tab3" aria-selected="false">忘记密码</a>
 						</div>
-
-						<div class="tab-content">
+						
+						<div class="tab-content">	<!-- 登录 -->
 							<div id="tab1" class="tab-pane fade show active" role="tabpanel" aria-labelledby="tab-1">
-								<form action="#" class="authorization__form">
+								<form action="../usercontrol?function=login" method="post" class="authorization__form">
 									<div class="row">
 										<div class="col-12">
 											<label for="phone" class="form__label">手机号</label>
-											<input id="phone" type="text" name="phone" class="form__input">
+											<input id="phone" type="text" name="phone" value="${cookie.u.value}" class="form__input">
 										</div>
 
 										<div class="col-12">
@@ -197,14 +203,15 @@
 										</div>
 
 										<div class="col-12">
-											<button class="form__send" type="button">提交</button>
+											<button class="form__send" type="submit">提交</button>
 										</div>
 									</div>
 								</form>
 							</div>
-
+							
+							<!-- 注册 -->
 							<div id="tab2" class="tab-pane fade" role="tabpanel" aria-labelledby="tab-2">
-								<form action="#" class="authorization__form">
+								<form action="../usercontrol?function=register" method="post" class="authorization__form" onsubmit="return AuthorizationRegister()">
 									<div class="row">
 										<div class="col-12">
 											<label for="name" class="form__label">姓名</label>
@@ -212,59 +219,74 @@
 										</div>
 
 										<div class="col-12">
-											<label for="phone2" class="form__label">手机号</label>
-											<input id="phone2" type="text" name="phone2" class="form__input">
+											<label for="phone1" class="form__label">手机号</label>
+											<input id="phone1" type="text" name="phone1" onBlur="return AuthorizationRegister()" class="form__input">
+											<span id="checkphone" style="color:#fa7268"></span>
 										</div>
 										
 										<div class="col-12">
 											<label for="Cli_id" class="form__label">身份证号</label>
-											<input id="Cli_id" type="text" name="Cli_id" class="form__input">
+											<input id="Cli_id" type="text" name="Cli_id" onBlur="return AuthorizationRegister()" class="form__input">
+											<span id="checkcliid" style="color:#fa7268"></span>
 										</div>
 
 										<div class="col-12">
-											<label for="password2" class="form__label">密码</label>
-											<input id="password2" type="password" name="password2" class="form__input">
+											<label for="password1" class="form__label">密码</label>
+											<input id="password1" type="password" name="password1" onBlur="return AuthorizationRegister()" class="form__input">
+											<span id="checkclipwd" style="color:#fa7268"></span>
+										</div>
+										
+										<div class="col-12">
+											<label for="password2" class="form__label">确认密码</label>
+											<input id="password2" type="password" name="password2" onBlur="return AuthorizationRegister()" class="form__input">
+											<span id="checkpwd2" style="color:#fa7268"></span>
 										</div>
 
 										<div class="col-12">
 											<div class="form__checkbox">
-												<input id="privacy" name="privacy" type="checkbox" checked="checked">
+												<input id="privacy" name="privacy" type="checkbox" onBlur="return AuthorizationRegister()"  checked="checked">
 												<label for="privacy">我同意 <a href="privacy.jsp">隐私政策</a></label>
+												<span id="checkprivacy" style="color:#fa7268"></span>
 											</div>
 										</div>
 
 										<div class="col-12">
-											<button class="form__send" type="button">提交</button>
+											<button class="form__send" type="submit">提交</button>
 										</div>
 									</div>
 								</form>
 							</div>
 							
+							<!-- 忘记密码 -->
 							<div id="tab3" class="tab-pane fade" role="tabpanel" aria-labelledby="tab-3">
-								<form action="#" class="authorization__form">
+								<form action="../usercontrol?function=forget" method="post" class="authorization__form" onsubmit="return AuthorizationForget()">
 									<div class="row">
 										<div class="col-12">
-											<label for="phone" class="form__label">手机号</label>
-											<input id="phone" type="text" name="phone" class="form__input">
+											<label for="phone2" class="form__label">手机号</label>
+											<input id="phone2" type="text" name="phone2" onBlur="return AuthorizationForget()" class="form__input">
+											<span id="checkphone1" style="color:#fa7268"></span>
 										</div>
 										
 										<div class="col-12">
 											<label for="id" class="form__label">身份证号</label>
-											<input id="id" type="text" name="id" class="form__input">
+											<input id="id" type="text" name="id" onBlur="return AuthorizationForget()" class="form__input">
+											<span id="checkcliid1" style="color:#fa7268"></span>
 										</div>
 
 										<div class="col-12">
-											<label for="password" class="form__label">密码</label>
-											<input id="password" type="password" name="password" class="form__input">
+											<label for="password3" class="form__label">密码</label>
+											<input id="password3" type="password" name="password3" onBlur="return AuthorizationForget()" class="form__input">
+											<span id="checkclipwd1" style="color:#fa7268"></span>
 										</div>
 
 										<div class="col-12">
-											<label for="password1" class="form__label">确认密码</label>
-											<input id="password1" type="password" name="password1" class="form__input">
+											<label for="password4" class="form__label">确认密码</label>
+											<input id="password4" type="password" name="password4" onBlur="return AuthorizationForget()" class="form__input">
+											<span id="checkpwd4" style="color:#fa7268"></span>
 										</div>
 
 										<div class="col-12">
-											<button class="form__send" type="button">更新密码</button>
+											<button class="form__send" type="submit">更新密码</button>
 										</div>
 									</div>
 								</form>
@@ -355,13 +377,6 @@
 			<a href="#">南平</a>
 			<a href="#">三明</a>
 			<a href="#">龙岩</a>
-			<a href="#">Dinajpur</a>
-			<a href="#">Cartagena</a>
-			<a href="#">Waitakere</a>
-			<a href="#">Montpellier</a>
-			<a href="#">Berlin</a>
-			<a href="#">Valencia</a>
-			<a href="#">Parma</a>
 		</div>
 	</div>
 	<!-- end choose a city -->
@@ -374,5 +389,6 @@
 	<script src="../js/jquery.mousewheel.min.js"></script>
 	<script src="../js/jquery.mCustomScrollbar.min.js"></script>
 	<script src="../js/main.js"></script>
+	<script type="text/javascript" src="../js/check.js"></script>
 </body>
 </html>

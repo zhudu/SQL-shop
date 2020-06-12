@@ -2,6 +2,7 @@ package shop.dao.impl;
 
 import javax.annotation.Resource;
 
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +29,8 @@ public class AdmDaoImpl implements Admdao{
 
 	@Override
 	public int insert(Client c) {
-		return 0;
+		sf.getCurrentSession().save(c);
+		return 1;
 	}
 
 	@Override
@@ -38,7 +40,8 @@ public class AdmDaoImpl implements Admdao{
 
 	@Override
 	public int insert(Employees e) {
-		return 0;
+		sf.getCurrentSession().save(e);
+		return 1;
 	}
 
 	@Override
@@ -48,7 +51,8 @@ public class AdmDaoImpl implements Admdao{
 
 	@Override
 	public int insert(Goods g) {
-		return 0;
+		sf.getCurrentSession().save(g);
+		return 1;
 	}
 
 	@Override
@@ -58,7 +62,8 @@ public class AdmDaoImpl implements Admdao{
 
 	@Override
 	public int insert(Merchant m) {
-		return 0;
+		sf.getCurrentSession().save(m);
+		return 1;
 	}
 
 	@Override
@@ -68,21 +73,29 @@ public class AdmDaoImpl implements Admdao{
 
 	@Override
 	public int userdelete(String id) {
-		return 0;
+		Query q = sf.getCurrentSession().createQuery("delete from Client where Cli_no="+id);
+		int num=q.executeUpdate();
+		return num;
 	}
 
 	@Override
 	public int empdelete(String id) {
-		return 0;
+		Query q = sf.getCurrentSession().createQuery("delete from Employees where Emp_no="+id);
+		int num=q.executeUpdate();
+		return num;
 	}
 
 	@Override
 	public int goodelete(String id) {
-		return 0;
+		Query q = sf.getCurrentSession().createQuery("delete from Goods where Goo_no="+id);
+		int num=q.executeUpdate();
+		return num;
 	}
 
 	@Override
 	public int merdelete(String id) {
-		return 0;
+		Query q = sf.getCurrentSession().createQuery("delete from Merchant where Mer_no="+id);
+		int num=q.executeUpdate();
+		return num;
 	}
 }

@@ -73,7 +73,7 @@
 				<div class="col-12">
 					<div class="authorization">
 						<div class="nav page__nav" role="tablist">
-							<a href="../Emp/admin.jsp">返回</a>
+							<a href="../emp/admin.jsp">返回</a>
 							
 							<a class="active" id="tab-1" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="true">添加用户</a>
 
@@ -90,17 +90,20 @@
 
 										<div class="col-12">
 											<label for="phone" class="form__label">手机号</label>
-											<input id="phone" type="text" name="phone" class="form__input">
+											<input id="phone" type="text" name="phone" onBlur="return checkphone()" class="form__input">
+											<span id="checkphone" style="color:#fa7268"></span>
 										</div>
 										
 										<div class="col-12">
 											<label for="Cli_id" class="form__label">身份证号</label>
-											<input id="Cli_id" type="text" name="Cli_id" class="form__input">
+											<input id="Cli_id" type="text" name="Cli_id" onBlur="return checkcliid()" class="form__input">
+											<span id="checkcliid" style="color:#fa7268"></span>
 										</div>
 
 										<div class="col-12">
 											<label for="password" class="form__label">密码</label>
-											<input id="password" type="text" name="password" class="form__input">
+											<input id="password" type="text" name="password" onBlur="return checkclipwd()" class="form__input">
+											<span id="checkclipwd" style="color:#fa7268"></span>
 										</div>
 
 										<div class="col-12">
@@ -171,5 +174,6 @@
 	<script src="../js/jquery.mousewheel.min.js"></script>
 	<script src="../js/jquery.mCustomScrollbar.min.js"></script>
 	<script src="../js/main.js"></script>
+	<script type="text/javascript" src="../js/check.js"></script>
 </body>
 </html>

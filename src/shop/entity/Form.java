@@ -21,7 +21,7 @@ public class Form {
 	@Column(name="Goo_no")
 	private String Goo_no;			//商品编号
 	@Column(name="For_num")
-	private String For_num;			//数量
+	private int For_num;			//数量
 	@Column(name="For_time")
 	private String For_time;		//下单时间
 	@Column(name="For_pay")
@@ -44,10 +44,10 @@ public class Form {
 	public void setGoo_no(String goo_no) {
 		Goo_no = goo_no;
 	}
-	public String getFor_num() {
+	public int getFor_num() {
 		return For_num;
 	}
-	public void setFor_num(String for_num) {
+	public void setFor_num(int for_num) {
 		For_num = for_num;
 	}
 	public String getFor_time() {

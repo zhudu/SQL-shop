@@ -3,17 +3,26 @@ package shop.service;
 import shop.entity.Delivery;
 import shop.entity.Employees;
 import shop.entity.Sort;
+import shop.entity.empjob;
 
 public interface Empservice {
 
-	int login(Employees e);
+	empjob login(Employees e);
 
 	int delivery(Delivery d);
 
 	int delivery1(Delivery d);
 
-	int delivery2(Delivery d);
-
 	int sort(Sort s);
+
+	int register(Employees e);
+
+	int forget(Employees e);
+	
+	String job1(Employees e);
+	
+	String job2(Employees e);
+	
+	String job3();
 
 }

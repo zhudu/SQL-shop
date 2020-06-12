@@ -73,7 +73,7 @@
 				<div class="col-12">
 					<div class="authorization">
 						<div class="nav page__nav" role="tablist">
-							<a href="../Emp/admin.jsp">返回</a>
+							<a href="../emp/admin.jsp">返回</a>
 							
 							<a class="active" id="tab-1" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="true">添加员工</a>
 
@@ -90,22 +90,26 @@
 
 										<div class="col-12">
 											<label for="Emp_no" class="form__label">工号</label>
-											<input id="Emp_no" type="text" name="Emp_no" class="form__input">
+											<input id="Emp_no" type="text" name="Emp_no" onBlur="return checkempno()" class="form__input">
+											<span id="checkempno" style="color:#fa7268"></span>
 										</div>
 										
 										<div class="col-12">
 											<label for="Emp_pwd" class="form__label">密码</label>
-											<input id="Emp_pwd" type="text" name="Emp_pwd" placeholder="默认为123456" class="form__input">
+											<input id="Emp_pwd" type="text" name="Emp_pwd" onBlur="return checkemp()" value="123456" placeholder="默认为123456" class="form__input">
+											<span id="checkpwd" style="color:#fa7268"></span>
 										</div>
 
 										<div class="col-12">
 											<label for="Emp_ID" class="form__label">身份证号</label>
-											<input id="Emp_ID" type="text" name="Emp_ID" class="form__input">
+											<input id="Emp_ID" type="text" name="Emp_ID" onBlur="return checkID()" class="form__input">
+											<span id="checkID" style="color:#fa7268"></span>
 										</div>
 										
 										<div class="col-12">
 											<label for="Dep_no" class="form__label">部门号</label>
-											<input id="Dep_no" type="text" name="Dep_no" class="form__input">
+											<input id="Dep_no" type="text" name="Dep_no" onBlur="return checkdepno()" class="form__input">
+											<span id="checkdepno" style="color:#fa7268"></span>
 										</div>
 										
 										<div class="col-12">
@@ -176,5 +180,6 @@
 	<script src="../js/jquery.mousewheel.min.js"></script>
 	<script src="../js/jquery.mCustomScrollbar.min.js"></script>
 	<script src="../js/main.js"></script>
+	<script type="text/javascript" src="../js/check.js"></script>
 </body>
 </html>

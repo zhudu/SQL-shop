@@ -1,20 +1,25 @@
 package shop.web;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import shop.service.Admservice;
-
+import shop.service.Empservice;
 import shop.entity.*;
 
 @Controller
 public class AdmControl {
 	@Autowired
 	private Admservice as;
+	@Autowired
+	private Empservice es;
 	
 	@RequestMapping(value="/admcontrol", params= {"function=insert"})
 	private void fun_insert(HttpServletRequest request, HttpServletResponse response) {
@@ -51,6 +56,14 @@ public class AdmControl {
 		}
 		c.setCli_birthday(birthday);
 		int num = as.useradd(c);
+		HttpSession ss = request.getSession();
+		String info=es.job3();
+		try {
+			ss.setAttribute("empjob", info);		//将工作内容写入session属性
+			response.sendRedirect("emp/authorization.jsp");		//跳转管理员操作界面
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 
 	@RequestMapping(value="/admcontrol", params= {"function=userupdate"})//更新用户信息
@@ -76,6 +89,14 @@ public class AdmControl {
 		}
 		c.setCli_birthday(birthday);
 		int num = as.userupdate(c);
+		HttpSession ss = request.getSession();
+		String info=es.job3();
+		try {
+			ss.setAttribute("empjob", info);		//将工作内容写入session属性
+			response.sendRedirect("emp/authorization.jsp");		//跳转管理员操作界面
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 
 	@RequestMapping(value="/admcontrol", params= {"function=empadd"})//添加员工
@@ -103,6 +124,14 @@ public class AdmControl {
 		}
 		e.setEmp_birthday(birthday);
 		int num = as.empadd(e);
+		HttpSession ss = request.getSession();
+		String info=es.job3();
+		try {
+			ss.setAttribute("empjob", info);		//将工作内容写入session属性
+			response.sendRedirect("emp/authorization.jsp");		//跳转管理员操作界面
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 
 	@RequestMapping(value="/admcontrol", params= {"function=empupdate"})//更新员工信息
@@ -130,6 +159,14 @@ public class AdmControl {
 		}
 		e.setEmp_birthday(birthday);
 		int num = as.empupdate(e);
+		HttpSession ss = request.getSession();
+		String info=es.job3();
+		try {
+			ss.setAttribute("empjob", info);		//将工作内容写入session属性
+			response.sendRedirect("emp/authorization.jsp");		//跳转管理员操作界面
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 
 	@RequestMapping(value="/admcontrol", params= {"function=gooadd"})//添加商品
@@ -150,6 +187,14 @@ public class AdmControl {
 		g.setMer_no(Mer_no);
 		g.setGoo_class(Goo_class);
 		int num = as.gooadd(g);
+		HttpSession ss = request.getSession();
+		String info=es.job3();
+		try {
+			ss.setAttribute("empjob", info);		//将工作内容写入session属性
+			response.sendRedirect("emp/authorization.jsp");		//跳转管理员操作界面
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 
 	@RequestMapping(value="/admcontrol", params= {"function=gooupdate"})//更新商品信息
@@ -170,6 +215,14 @@ public class AdmControl {
 		g.setMer_no(Mer_no);
 		g.setGoo_class(Goo_class);
 		int num = as.gooupdate(g);
+		HttpSession ss = request.getSession();
+		String info=es.job3();
+		try {
+			ss.setAttribute("empjob", info);		//将工作内容写入session属性
+			response.sendRedirect("emp/authorization.jsp");		//跳转管理员操作界面
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 
 	@RequestMapping(value="/admcontrol", params= {"function=meradd"})//添加商家
@@ -190,6 +243,14 @@ public class AdmControl {
 		m.setMer_phone(Mer_phone);
 		m.setMer_email(Mer_email);
 		int num = as.meradd(m);
+		HttpSession ss = request.getSession();
+		String info=es.job3();
+		try {
+			ss.setAttribute("empjob", info);		//将工作内容写入session属性
+			response.sendRedirect("emp/authorization.jsp");		//跳转管理员操作界面
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 
 	@RequestMapping(value="/admcontrol", params= {"function=merupdate"})//更新商家信息
@@ -210,29 +271,69 @@ public class AdmControl {
 		m.setMer_phone(Mer_phone);
 		m.setMer_email(Mer_email);
 		int num = as.merupdate(m);
+		HttpSession ss = request.getSession();
+		String info=es.job3();
+		try {
+			ss.setAttribute("empjob", info);		//将工作内容写入session属性
+			response.sendRedirect("emp/authorization.jsp");		//跳转管理员操作界面
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 	
 	@RequestMapping(value="/admcontrol", params= {"function=userdelete"})//删除用户
 	private void fun_userdelete(HttpServletRequest request, HttpServletResponse response) {
 		String id = request.getParameter("id");
 		int num = as.userdelete(id);
+		HttpSession ss = request.getSession();
+		String info=es.job3();
+		try {
+			ss.setAttribute("empjob", info);		//将工作内容写入session属性
+			response.sendRedirect("emp/authorization.jsp");		//跳转管理员操作界面
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 	
 	@RequestMapping(value="/admcontrol", params= {"function=empdelete"})//删除员工
 	private void fun_empdelete(HttpServletRequest request, HttpServletResponse response) {
 		String id = request.getParameter("id");
 		int num = as.empdelete(id);
+		HttpSession ss = request.getSession();
+		String info=es.job3();
+		try {
+			ss.setAttribute("empjob", info);		//将工作内容写入session属性
+			response.sendRedirect("emp/authorization.jsp");		//跳转管理员操作界面
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 	
 	@RequestMapping(value="/admcontrol", params= {"function=goodelete"})//删除商品
 	private void fun_goodelete(HttpServletRequest request, HttpServletResponse response) {
 		String id = request.getParameter("id");
 		int num = as.goodelete(id);
+		HttpSession ss = request.getSession();
+		String info=es.job3();
+		try {
+			ss.setAttribute("empjob", info);		//将工作内容写入session属性
+			response.sendRedirect("emp/authorization.jsp");		//跳转管理员操作界面
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 	
 	@RequestMapping(value="/admcontrol", params= {"function=merdelete"})//删除商家
 	private void fun_merdelete(HttpServletRequest request, HttpServletResponse response) {
 		String id = request.getParameter("id");
 		int num = as.merdelete(id);
+		HttpSession ss = request.getSession();
+		String info=es.job3();
+		try {
+			ss.setAttribute("empjob", info);		//将工作内容写入session属性
+			response.sendRedirect("emp/authorization.jsp");		//跳转管理员操作界面
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 }

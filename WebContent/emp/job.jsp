@@ -108,7 +108,11 @@
 							<div id="tab1" class="tab-pane fade" role="tabpanel" aria-labelledby="tab-1">
 								<div class="account__wrap">
 									<table class="account__table">
-										<!--  <thead>
+										<%
+										String empjob=(String)session.getAttribute("empjob");
+											out.print(empjob);
+										%>
+										<!-- <thead>
 											<tr>
 												<th>分拣号</th>
 												<th>品名</th>
@@ -126,7 +130,7 @@
 												<td>Aug 22, 2019</td>
 												<td>2</td>
 												<td>待分拣</td>
-												<td><button type="button"><i class="lnr lnr-arrow-up"></i></button></td>
+												<td><form action="../empcontrol?function=sort?Sor_no=" method="post"><button type="submit"><i class="lnr lnr-arrow-up"></i></button></form></td>
 											</tr>
 											<tr>
 												<td><a href="#">7314</a></td>
@@ -136,16 +140,16 @@
 												<td>任务完成</td>
 												<td><button type="button"><i class="lnr lnr-sync"></i></button></td>
 											</tr>
-										</tbody>-->
+										</tbody> -->
 										
-										<thead>
+										<!--  <thead>
 											<tr>
 												<th>配送号</th>
 												<th>收货地址</th>
-												<th>状态</th>
+												<th>收件人号码</th>
 												<th>配送时间</th>
 												<th>送达时间</th>
-												<th>收件人号码</th>
+												<th>状态</th>
 												<th></th>
 											</tr>
 										</thead>
@@ -154,10 +158,10 @@
 										<tr>
 												<td><a href="#">7314</a></td>
 												<td>厦门</td>
+												<td>777777</td>
+												<td>June 12, 2019</td>
+												<td>June 12, 2019</td>
 												<td>待配送</td>
-												<td>June 12, 2019</td>
-												<td>June 12, 2019</td>
-												<td>77777777</td>
 												<td><form action="../empcontrol?function=delivery?Del_no="><button type="submit"><i class="lnr lnr-select"></i></button></form></td>
 											</tr>
 											<tr>
@@ -187,7 +191,7 @@
 												<td>9999999</td>
 												<td><button type="button"><i class="lnr lnr-sync"></i></button></td>
 											</tr>
-										</tbody>
+										</tbody>-->
 									</table>
 								</div>
 							</div>
@@ -267,7 +271,7 @@
 						<span>
 							<i class="lnr lnr-phone"></i>
 						</span>
-						<h4>Support</h4>
+						<h4>支持</h4>
 						<p>For questions regarding the use of BORK equipment, you can call 8 800 500 88 99 or your nearest service center. Our experts will quickly find the right solution.</p>
 					</div>
 				</div>

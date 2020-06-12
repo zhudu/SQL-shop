@@ -10,6 +10,7 @@ import shop.entity.Employees;
 import shop.entity.Goods;
 import shop.entity.Merchant;
 import shop.service.Admservice;
+
 @Service("admservice")
 public class AdmServiceImpl implements Admservice{
 	

@@ -85,7 +85,7 @@
 									<div class="row">
 										<div class="col-12">
 											<label for="phone" class="form__label">工号</label>
-											<input id="phone" type="text" name="phone" class="form__input">
+											<input id="phone" type="text" name="phone" value="${cookie.e.value}" class="form__input">
 										</div>
 
 										<div class="col-12">
@@ -101,7 +101,7 @@
 										</div>
 
 										<div class="col-12">
-											<button class="form__send" type="button">提交</button>
+											<button class="form__send" type="submit">提交</button>
 										</div>
 									</div>
 								</form>
@@ -116,18 +116,23 @@
 										</div>
 
 										<div class="col-12">
-											<label for="phone2" class="form__label">工号</label>
-											<input id="phone2" type="text" name="phone2" class="form__input">
+											<label for="Emp_no" class="form__label">工号</label>
+											<input id="Emp_no" type="text" name="Emp_no" class="form__input">
 										</div>
 										
 										<div class="col-12">
-											<label for="Cli_id" class="form__label">身份证号</label>
-											<input id="Cli_id" type="text" name="Cli_id" class="form__input">
+											<label for="Emp_ID" class="form__label">身份证号</label>
+											<input id="Emp_ID" type="text" name="Emp_ID" class="form__input">
+										</div>
+										
+										<div class="col-12">
+											<label for="Dep_no" class="form__label">部门号</label>
+											<input id="Dep_no" type="text" name="Dep_no" class="form__input">
 										</div>
 
 										<div class="col-12">
-											<label for="password2" class="form__label">密码</label>
-											<input id="password2" type="password" name="password2" class="form__input">
+											<label for="password" class="form__label">密码</label>
+											<input id="password" type="password" name="password" class="form__input">
 										</div>
 
 										<div class="col-12">
@@ -148,13 +153,13 @@
 								<form action="../empcontrol?function=forget" method="post" class="authorization__form">
 									<div class="row">
 										<div class="col-12">
-											<label for="phone" class="form__label">工号</label>
-											<input id="phone" type="text" name="phone" class="form__input">
+											<label for="Emp_no" class="form__label">工号</label>
+											<input id="Emp_no" type="text" name="Emp_no" class="form__input">
 										</div>
 										
 										<div class="col-12">
-											<label for="id" class="form__label">身份证号</label>
-											<input id="id" type="text" name="id" class="form__input">
+											<label for="Emp_ID" class="form__label">身份证号</label>
+											<input id="Emp_ID" type="text" name="Emp_ID" class="form__input">
 										</div>
 
 										<div class="col-12">

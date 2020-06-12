@@ -55,10 +55,18 @@
 						</div>
 
 						<div class="header__bar header__bar--right">
-							<a href="account.jsp" class="header__phone">
+							<%
+								String haslogin=(String)session.getAttribute("hasLogin");
+								String Cli_no=(String)session.getAttribute("Cli_no");
+								if(haslogin==null || haslogin.equals("")){
+									out.print("<a href=\"authorization.jsp\" class=\"header__phone\">未登录</a>");
+								}else{
+									out.print("<a href=\"account.jsp\" class=\"header__phone\">"+Cli_no+"</a>");
+								}
+							%>
+							<!-- <a href="account.jsp" class="header__phone">
 								8 800 333 00 44
-							</a>
-
+							</a> -->
 							<button class="header__search" type="button">
 								<i class="lnr lnr-magnifier"></i>
 							</button>
@@ -255,8 +263,8 @@
 						<span>
 							<i class="lnr lnr-phone"></i>
 						</span>
-						<h4>Support</h4>
-						<p>For questions regarding the use of BORK equipment, you can call 8 800 500 88 99 or your nearest service center. Our experts will quickly find the right solution.</p>
+						<h4>支持</h4>
+						<p>如果对使用该系统有疑问，可以致电8 888 888 888或离您最近的服务中心。我们将迅速找到正确的解决方案。</p>
 					</div>
 				</div>
 
@@ -265,8 +273,8 @@
 						<span>
 							<i class="lnr lnr-sync"></i>
 						</span>
-						<h4>Exchange and return</h4>
-						<p>For questions regarding the use of BORK equipment, you can call 8 800 500 88 99 or your nearest service center. Our experts will quickly find the right solution.</p>
+						<h4>换货和退货</h4>
+						<p>如果对使用该系统有疑问，可以致电8 888 888 888或离您最近的服务中心。我们将迅速找到正确的解决方案。</p>
 					</div>
 				</div>
 
@@ -275,8 +283,8 @@
 						<span>
 							<i class="lnr lnr-location"></i>
 						</span>
-						<h4>Tracker</h4>
-						<p>For questions regarding the use of BORK equipment, you can call 8 800 500 88 99 or your nearest service center. Our experts will quickly find the right solution.</p>
+						<h4>定位</h4>
+						<p>如果对使用该系统有疑问，可以致电8 888 888 888或离您最近的服务中心。我们将迅速找到正确的解决方案。</p>
 					</div>
 				</div>
 			</div>
@@ -377,13 +385,6 @@
 			<a href="#">南平</a>
 			<a href="#">三明</a>
 			<a href="#">龙岩</a>
-			<a href="#">Dinajpur</a>
-			<a href="#">Cartagena</a>
-			<a href="#">Waitakere</a>
-			<a href="#">Montpellier</a>
-			<a href="#">Berlin</a>
-			<a href="#">Valencia</a>
-			<a href="#">Parma</a>
 		</div>
 	</div>
 	<!-- end choose a city -->

@@ -55,9 +55,18 @@
 						</div>
 
 						<div class="header__bar header__bar--right">
-							<a href="account.jsp" class="header__phone">
+							<%
+								String haslogin=(String)session.getAttribute("hasLogin");
+								String Cli_no=(String)session.getAttribute("Cli_no");
+								if(haslogin==null || haslogin.equals("")){
+									out.print("<a href=\"authorization.jsp\" class=\"header__phone\">未登录</a>");
+								}else{
+									out.print("<a href=\"account.jsp\" class=\"header__phone\">"+Cli_no+"</a>");
+								}
+							%>
+							<!-- <a href="account.jsp" class="header__phone">
 								8 800 333 00 44
-							</a>
+							</a> -->
 
 							<button class="header__search" type="button">
 								<i class="lnr lnr-magnifier"></i>
@@ -75,9 +84,9 @@
 							</button>
 						</div>
 
-						<form action="#" class="header__form">
-							<input type="text" placeholder="点击Enter进行搜索">
-							<button type="button">
+						<form action="../usercontrol?function=search" class="header__form">
+							<input id="searchname" type="text" name="searchname" placeholder="点击Enter进行搜索">
+							<button type="submit">
 								<span></span>
 								<span></span>
 							</button>
@@ -173,8 +182,10 @@
 							<a class="active" id="tab-2" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="true">账户详情</a>
 							
 							<a class="" id="tab-1" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="false">我的订单</a>
+							
+							<a class="" id="tab-3" data-toggle="tab" href="#tab3" role="tab" aria-controls="tab3" aria-selected="false">收货地址</a>
 
-							<a href="#">登出</a>
+							<a href="../usercontrol?function=logout">登出</a>
 						</div>
 
 						<div class="tab-content">
@@ -185,7 +196,7 @@
 											<tr>
 												<th>订单号</th>
 												<th>品名</th>
-												<th>日期</th>
+												<th>下单时间</th>
 												<th>数量</th>
 												<th>总价</th>
 												<th>状态</th>
@@ -194,7 +205,11 @@
 										</thead>
 
 										<tbody>
-											<tr>
+											<%
+												String FormDetail=(String)session.getAttribute("FormDetail");
+												out.println(FormDetail);
+											%>
+											<!-- <tr>
 												<td><a href="#">8451</a></td>
 												<td>Power bank B600</td>
 												<td>Aug 22, 2019</td>
@@ -220,7 +235,7 @@
 												<td>$399</td>
 												<td>Canceled</td>
 												<td><button type="button"><i class="lnr lnr-sync"></i></button></td>
-											</tr>
+											</tr> -->
 										</tbody>
 									</table>
 								</div>
@@ -229,20 +244,20 @@
 							<div id="tab2" class="tab-pane fade show active" role="tabpanel" aria-labelledby="tab-2">
 								<div class="row">
 									<div class="col-12 col-lg-6">
-										<form action="#" class="account__form">
+										<form action="../usercontrol?function=saveClient" method="post" class="account__form" onsubmit="return AccountUpdateDetail()">
 											<div class="row">
 												<div class="col-12">
 													<h3 class="cart__form-title">账户详情</h3>
 												</div>
 
-												<div class="col-12 col-md-6 col-lg-12 col-xl-6">
-													<label for="firstname" class="form__label">姓</label>
-													<input id="firstname" type="text" name="firstname" class="form__input">
-												</div>
-
-												<div class="col-12 col-md-6 col-lg-12 col-xl-6">
-													<label for="lastname" class="form__label">名</label>
-													<input id="lastname" type="text" name="lastname" class="form__input">
+												<%
+													String clientdetail=(String)session.getAttribute("clientdetail");
+													out.println(clientdetail);
+												%>
+												
+												<!-- <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+													<label for="name" class="form__label">姓名</label>
+													<input id="name" type="text" name="name" class="form__input">
 												</div>
 
 												<div class="col-12 col-md-6 col-lg-12 col-xl-6">
@@ -253,17 +268,17 @@
 												<div class="col-12 col-md-6 col-lg-12 col-xl-6">
 													<label for="email" class="form__label">Email</label>
 													<input id="email" type="text" name="email" class="form__input">
-												</div>
+												</div> -->
 
 												<div class="col-12">
-													<button class="form__send" type="button">保存</button>
+													<button class="form__send" type="submit">保存</button>
 												</div>
 											</div>
 										</form>
 									</div>
 
 									<div class="col-12 col-lg-6">
-										<form action="#" class="account__form account__form--last">
+										<form action="../usercontrol?function=pwdchange" method="post" class="account__form account__form--last" onsubmit="return AccountUpdatepwd()">
 											<div class="row">
 												<div class="col-12">
 													<h3 class="cart__form-title">修改密码</h3>
@@ -276,19 +291,57 @@
 
 												<div class="col-12 col-md-6 col-lg-12 col-xl-6">
 													<label for="newpassword" class="form__label">新密码</label>
-													<input id="newpassword" type="password" name="newpassword" class="form__input">
+													<input id="newpassword" type="password" name="newpassword" onBlur="return AccountUpdatepwd()" class="form__input">
+													<span id="checkpwd" style="color:#fa7268"></span>
 												</div>
 
 												<div class="col-12 col-md-6 col-lg-12 col-xl-6">
 													<label for="confirmpassword" class="form__label">确认密码</label>
-													<input id="confirmpassword" type="password" name="confirmpassword" class="form__input">
+													<input id="confirmpassword" type="password" name="confirmpassword" onBlur="return AccountUpdatepwd()" class="form__input">
+													<span id="checkpwd2" style="color:#fa7268"></span>
 												</div>
 
 												<div class="col-12">
-													<button class="form__send" type="button">修改</button>
+													<button class="form__send" type="submit">修改</button>
 												</div>
 											</div>
 										</form>
+									</div>
+								</div>
+							</div>
+							
+							<div id="tab3" class="tab-pane fade" role="tabpanel" aria-labelledby="tab-3">
+								<div class="account__wrap">
+									<table class="account__table">
+										<thead>
+											<tr>
+												<th>收件人</th>
+												<th>地址</th>
+												<th>手机号</th>
+												<th></th>
+											</tr>
+										</thead>
+
+										<tbody>
+											<%
+												String detail=(String)session.getAttribute("AddressDetail");
+												if(detail==null){
+													out.println("快去新增收货地址吧！<br>");
+												}else{
+													out.println(detail);
+													
+												}
+											%>
+											<!-- <tr>
+												<td><a href="#">8451</a></td>
+												<td>Power bank B600</td>
+												<td>Aug 22, 2019</td>
+												<td><button type="button"><i class="lnr lnr-cross"></i></button></td>
+											</tr> -->
+										</tbody>
+									</table>
+									<div class="col-12">
+										<a href="address.jsp" class="form__send">新增收货地址</a>
 									</div>
 								</div>
 							</div>
@@ -301,8 +354,8 @@
 						<span>
 							<i class="lnr lnr-phone"></i>
 						</span>
-						<h4>Support</h4>
-						<p>For questions regarding the use of BORK equipment, you can call 8 800 500 88 99 or your nearest service center. Our experts will quickly find the right solution.</p>
+						<h4>支持</h4>
+						<p>如果对使用该系统有疑问，可以致电8 888 888 888或离您最近的服务中心。我们将迅速找到正确的解决方案。</p>
 					</div>
 				</div>
 
@@ -311,8 +364,8 @@
 						<span>
 							<i class="lnr lnr-sync"></i>
 						</span>
-						<h4>Exchange and return</h4>
-						<p>For questions regarding the use of BORK equipment, you can call 8 800 500 88 99 or your nearest service center. Our experts will quickly find the right solution.</p>
+						<h4>换货和退货</h4>
+						<p>如果对使用该系统有疑问，可以致电8 888 888 888或离您最近的服务中心。我们将迅速找到正确的解决方案。</p>
 					</div>
 				</div>
 
@@ -321,8 +374,8 @@
 						<span>
 							<i class="lnr lnr-location"></i>
 						</span>
-						<h4>Tracker</h4>
-						<p>For questions regarding the use of BORK equipment, you can call 8 800 500 88 99 or your nearest service center. Our experts will quickly find the right solution.</p>
+						<h4>定位</h4>
+						<p>如果对使用该系统有疑问，可以致电8 888 888 888或离您最近的服务中心。我们将迅速找到正确的解决方案。</p>
 					</div>
 				</div>
 			</div>
@@ -423,13 +476,6 @@
 			<a href="#">南平</a>
 			<a href="#">三明</a>
 			<a href="#">龙岩</a>
-			<a href="#">Dinajpur</a>
-			<a href="#">Cartagena</a>
-			<a href="#">Waitakere</a>
-			<a href="#">Montpellier</a>
-			<a href="#">Berlin</a>
-			<a href="#">Valencia</a>
-			<a href="#">Parma</a>
 		</div>
 	</div>
 	<!-- end choose a city -->

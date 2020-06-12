@@ -99,8 +99,8 @@
 							<a class="active" id="tab-2" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="true">个人信息</a>
 							
 							<a class="" id="tab-1" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="false">用户及商品管理</a>
-
-							<form action="../empcontrol?function=logout" method="post"><button type="submit">登出</button></form>
+							
+							<a href="../empcontrol?function=logout">登出</a>
 						</div>
 
 						<div class="tab-content">
@@ -118,6 +118,12 @@
 												<a class="" id="tab-14" data-toggle="tab" href="#tab14" role="tab" aria-controls="tab14" aria-selected="false">商家管理</a>
 											</div>
 											<div class="tab-content">
+											<%
+												String empjob=(String)session.getAttribute("empjob");
+													out.print(empjob);
+											%>
+											
+											<!-- 此处有魔法，傻逼别乱动
 												<div id="tab11" class="tab-pane fade show active" role="tabpanel" aria-labelledby="tab-11">
 													<table class="account__table">	
 														<thead>
@@ -300,7 +306,7 @@
 															</tr>
 														</tbody>
 													</table>
-												</div>
+												</div>-->
 												
 											</div>
 										</div>
@@ -318,13 +324,8 @@
 												</div>
 
 												<div class="col-12 col-md-6 col-lg-12 col-xl-6">
-													<label for="firstname" class="form__label">姓</label>
-													<input id="firstname" type="text" name="firstname" class="form__input">
-												</div>
-
-												<div class="col-12 col-md-6 col-lg-12 col-xl-6">
-													<label for="lastname" class="form__label">名</label>
-													<input id="lastname" type="text" name="lastname" class="form__input">
+													<label for="name" class="form__label">姓名</label>
+													<input id="name" type="text" name="name" class="form__input">
 												</div>
 
 												<div class="col-12 col-md-6 col-lg-12 col-xl-6">

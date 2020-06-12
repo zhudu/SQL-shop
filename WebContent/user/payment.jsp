@@ -55,9 +55,18 @@
 						</div>
 
 						<div class="header__bar header__bar--right">
-							<a href="account.jsp" class="header__phone">
+							<%
+								String haslogin=(String)session.getAttribute("hasLogin");
+								String Cli_no=(String)session.getAttribute("Cli_no");
+								if(haslogin==null || haslogin.equals("")){
+									out.print("<a href=\"authorization.jsp\" class=\"header__phone\">未登录</a>");
+								}else{
+									out.print("<a href=\"account.jsp\" class=\"header__phone\">"+Cli_no+"</a>");
+								}
+							%>
+							<!-- <a href="account.jsp" class="header__phone">
 								8 800 333 00 44
-							</a>
+							</a> -->
 
 							<button class="header__search" type="button">
 								<i class="lnr lnr-magnifier"></i>
@@ -328,13 +337,6 @@
 			<a href="#">南平</a>
 			<a href="#">三明</a>
 			<a href="#">龙岩</a>
-			<a href="#">Dinajpur</a>
-			<a href="#">Cartagena</a>
-			<a href="#">Waitakere</a>
-			<a href="#">Montpellier</a>
-			<a href="#">Berlin</a>
-			<a href="#">Valencia</a>
-			<a href="#">Parma</a>
 		</div>
 	</div>
 	<!-- end choose a city -->

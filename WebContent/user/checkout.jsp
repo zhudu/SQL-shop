@@ -55,9 +55,18 @@
 						</div>
 
 						<div class="header__bar header__bar--right">
-							<a href="account.jsp" class="header__phone">
+							<%
+								String haslogin=(String)session.getAttribute("hasLogin");
+								String Cli_no=(String)session.getAttribute("Cli_no");
+								if(haslogin==null || haslogin.equals("")){
+									out.print("<a href=\"authorization.jsp\" class=\"header__phone\">未登录</a>");
+								}else{
+									out.print("<a href=\"account.jsp\" class=\"header__phone\">"+Cli_no+"</a>");
+								}
+							%>
+							<!-- <a href="account.jsp" class="header__phone">
 								8 800 333 00 44
-							</a>
+							</a> -->
 
 							<button class="header__search" type="button">
 								<i class="lnr lnr-magnifier"></i>
@@ -170,128 +179,91 @@
 					<div class="cart__wrap">
 						<div class="cart__content cart__content--checkout">
 							<!-- personal information -->
-							<form action="#" class="cart__form">
+							<form action="../usercontrol?function=checkout" class="cart__form">
 								<div class="row">
 									<div class="col-12">
-										<h3 class="cart__form-title">1. Personal information</h3>
+										<h3 class="cart__form-title">1. 个人信息</h3>
 									</div>
 
 									<div class="col-12 col-lg-6">
-										<label for="firstname" class="form__label">First Name</label>
+										<label for="name" class="form__label">姓名</label>
 										<div class="form__wrap form__wrap--required">
-											<input id="firstname" type="text" name="firstname" class="form__input" required>
+											<input id="name" type="text" name="name" class="form__input" required>
 										</div>
 									</div>
 
 									<div class="col-12 col-lg-6">
-										<label for="lastname" class="form__label">Last Name</label>
-										<div class="form__wrap form__wrap--required">
-											<input id="lastname" type="text" name="lastname" class="form__input" required>
-										</div>
-									</div>
-
-									<div class="col-12 col-lg-6">
-										<label for="phone" class="form__label">Phone</label>
+										<label for="phone" class="form__label">手机号</label>
 										<div class="form__wrap form__wrap--required">
 											<input id="phone" type="text" name="phone" class="form__input" required>
 										</div>
 									</div>
-
-									<div class="col-12 col-lg-6">
-										<label for="email" class="form__label">Email</label>
-										<div class="form__wrap">
-											<input id="email" type="text" name="email" class="form__input">
-										</div>
-									</div>
 								</div>
-							</form>
 							<!-- end personal information -->
-
+							<br><br>
 							<!-- delivery -->
-							<form action="#" class="cart__form">
 								<div class="row">
 									<div class="col-12">
-										<h3 class="cart__form-title">2. 交货</h3>
+										<h3 class="cart__form-title">2. 收货地址</h3>
 									</div>
 
 									<div class="col-12 col-lg-6">
-										<label for="cityvalue" class="form__label">City</label>
+										<label for="provincevalue" class="form__label">省</label>
 										<div class="form__wrap form__wrap--select">
-											<select id="cityvalue" name="cityvalue" class="form__select">
-												<option value="1">厦门</option>
-												<option value="2">泉州</option>
-												<option value="3">漳州</option>
+											<select id="provincevalue" name="provincevalue" class="form__select">
+												<option value="1">福建省</option>
 											</select>
 										</div>
 									</div>
 
 									<div class="col-12 col-lg-6">
-										<label for="street" class="form__label">Street</label>
+										<label for="cityvalue" class="form__label">市</label>
+										<div class="form__wrap form__wrap--select">
+											<select id="cityvalue" name="cityvalue" class="form__select">
+												<option value="1">厦门市</option>
+												<option value="2">泉州市</option>
+												<option value="3">漳州市</option>
+											</select>
+										</div>
+									</div>
+
+									<div class="col-12">
+										<label for="street" class="form__label">街道</label>
 										<div class="form__wrap form__wrap--required">
 											<input id="street" type="text" name="street" class="form__input" required>
 										</div>
 									</div>
-
-									<div class="col-12 col-lg-4">
-										<label for="building" class="form__label">Building</label>
-										<div class="form__wrap form__wrap--required">
-											<input id="building" type="text" name="building" class="form__input" required>
-										</div>
-									</div>
-
-									<div class="col-12 col-lg-4">
-										<label for="corpus" class="form__label">Corpus</label>
-										<div class="form__wrap">
-											<input id="corpus" type="text" name="corpus" class="form__input">
-										</div>
-									</div>
-
-									<div class="col-12 col-lg-4">
-										<label for="office" class="form__label">Appartment / office</label>
-										<div class="form__wrap">
-											<input id="office" type="text" name="office" class="form__input">
-										</div>
-									</div>
-
-									<div class="col-12">
-										<label for="comment" class="form__label">Comment</label>
-										<div class="form__wrap">
-											<textarea id="comment" name="comment" class="form__textarea"></textarea>
-										</div>
-									</div>
 								</div>
-							</form>
 							<!-- end delivery -->
-
+							<br><br>
 							<!-- payment type -->
-							<form action="#" class="cart__form">
 								<div class="row">
 									<div class="col-12">
-										<h3 class="cart__form-title">3. 付款 option</h3>
+										<h3 class="cart__form-title">3. 付款方式</h3>
 									</div>
 
 									<div class="col-12 col-lg-5">
 										<ul class="cart__payment">
 											<li>
 												<input id="payment1" type="radio" name="payment" checked="">
-												<label for="payment1">Cash</label>
+												<label for="payment1">现金</label>
 											</li>
 											<li>
 												<input id="payment2" type="radio" name="payment">
-												<label for="payment2">Card on delivery</label>
+												<label for="payment2">货到付款</label>
 											</li>
 											<li>
 												<input id="payment3" type="radio" name="payment">
-												<label for="payment3">Card Online</label>
+												<label for="payment3">银行卡</label>
 											</li>
 										</ul>
 									</div>
 
 									<div class="col-12 col-lg-7">
 										<div class="cart__text">
-											<p>You can pay in cash for the order on receipt. All necessary financial documents will be included with the delivered items.</p>
+											<p>您可以在收货时以现金支付订单。所有必要的财务文件将包括在交货的物品中。</p>
 
-											<p>Or you can pay using Visa, MasterCard, Maestro, PayPal.</p>
+											<p>或者，您可以使用Visa，MasterCard，Maestro，PayPal付款。</p>
 
 											<ul>
 												<li><i class="pf pf-visa"></i></li>
@@ -303,7 +275,7 @@
 									</div>
 
 									<div class="col-12">
-										<a href="#" class="form__send form__send--checkout">Complete the order</a>
+										<a class="form__send form__send--checkout"><button type="submit">确认支付</button></a>
 									</div>
 								</div>
 							</form>
@@ -334,8 +306,8 @@
 						<span>
 							<i class="lnr lnr-phone"></i>
 						</span>
-						<h4>Support</h4>
-						<p>For questions regarding the use of BORK equipment, you can call 8 800 500 88 99 or your nearest service center. Our experts will quickly find the right solution.</p>
+						<h4>支持</h4>
+						<p>如果对使用该系统有疑问，可以致电8 888 888 888或离您最近的服务中心。我们将迅速找到正确的解决方案。</p>
 					</div>
 				</div>
 
@@ -344,8 +316,8 @@
 						<span>
 							<i class="lnr lnr-sync"></i>
 						</span>
-						<h4>Exchange and return</h4>
-						<p>For questions regarding the use of BORK equipment, you can call 8 800 500 88 99 or your nearest service center. Our experts will quickly find the right solution.</p>
+						<h4>换货和退货</h4>
+						<p>如果对使用该系统有疑问，可以致电8 888 888 888或离您最近的服务中心。我们将迅速找到正确的解决方案。</p>
 					</div>
 				</div>
 
@@ -354,8 +326,8 @@
 						<span>
 							<i class="lnr lnr-location"></i>
 						</span>
-						<h4>Tracker</h4>
-						<p>For questions regarding the use of BORK equipment, you can call 8 800 500 88 99 or your nearest service center. Our experts will quickly find the right solution.</p>
+						<h4>定位</h4>
+						<p>如果对使用该系统有疑问，可以致电8 888 888 888或离您最近的服务中心。我们将迅速找到正确的解决方案。</p>
 					</div>
 				</div>
 			</div>
@@ -456,13 +428,6 @@
 			<a href="#">南平</a>
 			<a href="#">三明</a>
 			<a href="#">龙岩</a>
-			<a href="#">Dinajpur</a>
-			<a href="#">Cartagena</a>
-			<a href="#">Waitakere</a>
-			<a href="#">Montpellier</a>
-			<a href="#">Berlin</a>
-			<a href="#">Valencia</a>
-			<a href="#">Parma</a>
 		</div>
 	</div>
 	<!-- end choose a city -->
