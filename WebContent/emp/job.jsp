@@ -199,41 +199,37 @@
 							<div id="tab2" class="tab-pane fade show active" role="tabpanel" aria-labelledby="tab-2">
 								<div class="row">
 									<div class="col-12 col-lg-6">
-										<form action="#" class="account__form">
+										<form action="../empcontrol?function=saveemp" method="post" class="account__form" onsubmit="return EmpUpdateDetail()">
 											<div class="row">
 												<div class="col-12">
 													<h3 class="cart__form-title">账户详情</h3>
 												</div>
 
-												<div class="col-12 col-md-6 col-lg-12 col-xl-6">
-													<label for="firstname" class="form__label">姓</label>
-													<input id="firstname" type="text" name="firstname" class="form__input">
+												<%
+													String empdetail=(String)session.getAttribute("empdetail");
+													out.println(empdetail);
+												%>
+
+												<!-- <div class="col-12 col-md-6 col-lg-12 col-xl-6">
+													<label for="name" class="form__label">姓名</label>
+													<input id="name" type="text" name="name" class="form__input">
 												</div>
 
 												<div class="col-12 col-md-6 col-lg-12 col-xl-6">
-													<label for="lastname" class="form__label">名</label>
-													<input id="lastname" type="text" name="lastname" class="form__input">
-												</div>
-
-												<div class="col-12 col-md-6 col-lg-12 col-xl-6">
-													<label for="phone" class="form__label">手机号</label>
-													<input id="phone" type="text" name="phone" class="form__input">
-												</div>
-
-												<div class="col-12 col-md-6 col-lg-12 col-xl-6">
-													<label for="email" class="form__label">Email</label>
-													<input id="email" type="text" name="email" class="form__input">
-												</div>
+													<label for="phone" class="form__label">工号</label>
+													<input id="phone" type="text" name="phone" onBlur="return EmpUpdateDetail()" class="form__input">
+													<span id="checkphone" style="color:#fa7268"></span>
+												</div> -->
 
 												<div class="col-12">
-													<button class="form__send" type="button">保存</button>
+													<button class="form__send" type="submit">保存</button>
 												</div>
 											</div>
 										</form>
 									</div>
 
 									<div class="col-12 col-lg-6">
-										<form action="#" class="account__form account__form--last">
+										<form action="../empcontrol?function=pwdchange" method="post" class="account__form account__form--last" onsubmit="return EmpUpdatepwd()">
 											<div class="row">
 												<div class="col-12">
 													<h3 class="cart__form-title">修改密码</h3>
@@ -246,16 +242,18 @@
 
 												<div class="col-12 col-md-6 col-lg-12 col-xl-6">
 													<label for="newpassword" class="form__label">新密码</label>
-													<input id="newpassword" type="password" name="newpassword" class="form__input">
+													<input id="newpassword" type="password" name="newpassword" onBlur="return EmpUpdatepwd()" class="form__input">
+													<span id="checkpwd" style="color:#fa7268"></span>
 												</div>
 
 												<div class="col-12 col-md-6 col-lg-12 col-xl-6">
 													<label for="confirmpassword" class="form__label">确认密码</label>
-													<input id="confirmpassword" type="password" name="confirmpassword" class="form__input">
+													<input id="confirmpassword" type="password" name="confirmpassword" onBlur="return EmpUpdatepwd()" class="form__input">
+													<span id="checkpwd2" style="color:#fa7268"></span>
 												</div>
 
 												<div class="col-12">
-													<button class="form__send" type="button">修改</button>
+													<button class="form__send" type="submit">修改</button>
 												</div>
 											</div>
 										</form>

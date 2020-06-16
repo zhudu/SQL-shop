@@ -108,7 +108,7 @@
 							</div>
 
 							<div id="tab2" class="tab-pane fade" role="tabpanel" aria-labelledby="tab-2">
-								<form action="../empcontrol?function=register" method="post" class="authorization__form">
+								<form action="../empcontrol?function=register" method="post" class="authorization__form" onsubmit="return AdminRegister()">
 									<div class="row">
 										<div class="col-12">
 											<label for="name" class="form__label">姓名</label>
@@ -117,63 +117,78 @@
 
 										<div class="col-12">
 											<label for="Emp_no" class="form__label">工号</label>
-											<input id="Emp_no" type="text" name="Emp_no" class="form__input">
+											<input id="Emp_no" type="text" name="Emp_no" onBlur="return AdminRegister()" class="form__input">
+											<span id="checkempno" style="color:#fa7268"></span>
 										</div>
 										
 										<div class="col-12">
 											<label for="Emp_ID" class="form__label">身份证号</label>
-											<input id="Emp_ID" type="text" name="Emp_ID" class="form__input">
+											<input id="Emp_ID" type="text" name="Emp_ID" onBlur="return AdminRegister()" class="form__input">
+											<span id="checkempid" style="color:#fa7268"></span>
 										</div>
 										
 										<div class="col-12">
 											<label for="Dep_no" class="form__label">部门号</label>
-											<input id="Dep_no" type="text" name="Dep_no" class="form__input">
+											<input id="Dep_no" type="text" name="Dep_no" onBlur="return AdminRegister()" class="form__input">
+											<span id="checkdepno" style="color:#fa7268"></span>
 										</div>
 
 										<div class="col-12">
-											<label for="password" class="form__label">密码</label>
-											<input id="password" type="password" name="password" class="form__input">
+											<label for="password1" class="form__label">密码</label>
+											<input id="password1" type="password" name="password1" onBlur="return AdminRegister()" class="form__input">
+											<span id="checkpwd1" style="color:#fa7268"></span>
+										</div>
+										
+										<div class="col-12">
+											<label for="password2" class="form__label">确认密码</label>
+											<input id="password2" type="password" name="password2" onBlur="return AdminRegister()" class="form__input">
+											<span id="checkpwd2" style="color:#fa7268"></span>
 										</div>
 
 										<div class="col-12">
 											<div class="form__checkbox">
-												<input id="privacy" name="privacy" type="checkbox" checked="checked">
+												<input id="privacy" name="privacy" type="checkbox" onBlur="return AdminRegister()" checked="checked">
 												<label for="privacy">我同意 <a href="privacy.jsp">隐私政策</a></label>
+												<span id="checkprivacy" style="color:#fa7268"></span>
 											</div>
 										</div>
 
 										<div class="col-12">
-											<button class="form__send" type="button">提交</button>
+											<button class="form__send" type="submit">提交</button>
 										</div>
 									</div>
 								</form>
 							</div>
 							
 							<div id="tab3" class="tab-pane fade" role="tabpanel" aria-labelledby="tab-3">
-								<form action="../empcontrol?function=forget" method="post" class="authorization__form">
+								<form action="../empcontrol?function=forget" method="post" class="authorization__form" onsubmit="return AdminForget()">
 									<div class="row">
 										<div class="col-12">
-											<label for="Emp_no" class="form__label">工号</label>
-											<input id="Emp_no" type="text" name="Emp_no" class="form__input">
+											<label for="Emp_no1" class="form__label">工号</label>
+											<input id="Emp_no1" type="text" name="Emp_no1" onBlur="return AdminForget()" class="form__input">
+											<span id="checkempno1" style="color:#fa7268"></span>
 										</div>
 										
 										<div class="col-12">
-											<label for="Emp_ID" class="form__label">身份证号</label>
-											<input id="Emp_ID" type="text" name="Emp_ID" class="form__input">
+											<label for="Emp_ID1" class="form__label">身份证号</label>
+											<input id="Emp_ID1" type="text" name="Emp_ID1" onBlur="return AdminForget()" class="form__input">
+											<span id="checkempno1" style="color:#fa7268"></span>
 										</div>
 
 										<div class="col-12">
-											<label for="password" class="form__label">密码</label>
-											<input id="password" type="password" name="password" class="form__input">
+											<label for="password3" class="form__label">密码</label>
+											<input id="password3" type="password" name="password3" onBlur="return AdminForget()" class="form__input">
+											<span id="checkpwd3" style="color:#fa7268"></span>
 										</div>
 
 										<div class="col-12">
-											<label for="password1" class="form__label">确认密码</label>
-											<input id="password1" type="password" name="password1" class="form__input">
+											<label for="password4" class="form__label">确认密码</label>
+											<input id="password4" type="password" name="password4" onBlur="return AdminForget()" class="form__input">
+											<span id="checkpwd4" style="color:#fa7268"></span>
 										</div>
 
 										<div class="col-12">
-											<button class="form__send" type="button">更新密码</button>
+											<button class="form__send" type="submit">更新密码</button>
 										</div>
 									</div>
 								</form>
@@ -238,5 +253,6 @@
 	<script src="../js/jquery.mousewheel.min.js"></script>
 	<script src="../js/jquery.mCustomScrollbar.min.js"></script>
 	<script src="../js/main.js"></script>
+	<script type="text/javascript" src="../js/check.js"></script>
 </body>
 </html>

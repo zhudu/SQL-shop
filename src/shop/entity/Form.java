@@ -26,6 +26,8 @@ public class Form {
 	private String For_time;		//下单时间
 	@Column(name="For_pay")
 	private int For_pay;			//支付状态
+	@Column(name="Add_no")
+	private String Add_no;			//收货地址
 	public String getFor_no() {
 		return For_no;
 	}
@@ -61,5 +63,11 @@ public class Form {
 	}
 	public void setFor_pay(int for_pay) {
 		For_pay = for_pay;
+	}
+	public String getAdd_no() {
+		return Add_no;
+	}
+	public void setAdd_no(String addno) {
+		Add_no = addno;
 	}
 }

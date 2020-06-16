@@ -74,7 +74,14 @@
 
 							<a href="cart.jsp" class="header__cart">
 								<i class="lnr lnr-cart"></i>
-								<span>2</span>
+								<%
+								String cartnum=String.valueOf(session.getAttribute("cartnum"));
+								if(cartnum.equals("null")==false){
+									if(cartnum.equals("0")==false){
+										out.print("<span>"+cartnum+"</span>");
+									}
+								}
+								%>
 							</a>
 							
 							<button class="header__menu" type="button">
@@ -84,9 +91,9 @@
 							</button>
 						</div>
 
-						<form action="#" class="header__form">
-							<input type="text" placeholder="点击Enter进行搜索">
-							<button type="button">
+						<form action="../usercontrol?function=search" method="post" class="header__form">
+							<input id="search" name="search" type="text" placeholder="点击Enter进行搜索">
+							<button type="submit">
 								<span></span>
 								<span></span>
 							</button>
@@ -130,8 +137,6 @@
 			<button type="button"><i class="lnr lnr-arrow-left"></i> Back</button>
 
 			<nav>
-				<a href="product.jsp">Product style 1</a>
-				<a href="product2.jsp">Product style 2</a>
 				<a href="cart.jsp">Cart</a>
 				<a href="checkout.jsp">Checkout</a>
 				<a href="delivery.jsp">交货</a>
@@ -156,10 +161,10 @@
 		</div>
 
 		<nav class="catmenu__nav">
-			<a href="catalog.jsp">厨具</a>
-			<a href="catalog.jsp">家具</a>
-			<a href="catalog.jsp">健康</a>
-			<a href="catalog.jsp">配饰</a>
+			<a href="../usercontrol?function=class&class=文具">文具</a>
+			<a href="../usercontrol?function=class&class=家具">家具</a>
+			<a href="../usercontrol?function=class&class=手表">手表</a>
+			<a href="../usercontrol?function=class&class=服饰">服饰</a>
 		</nav>
 	</div>
 	<!-- end catmenu -->

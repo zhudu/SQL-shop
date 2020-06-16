@@ -42,4 +42,12 @@ public interface Empdao {
 
 	int forget(Employees e);
 
+	int empcheck(Employees e);
+
+	int UpdateEmp(Employees e);
+
+	int checkpwd(Employees e);
+
+	int changepwd(Employees e);
+
 }

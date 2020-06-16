@@ -30,4 +30,12 @@ public interface Admservice {
 	int goodelete(String id);
 
 	int merdelete(String id);
+
+	String ClientDetail(String id);
+
+	String MerDetail(String id);
+
+	String GooDetail(String id);
+
+	String EmpDetail(String id);
 }

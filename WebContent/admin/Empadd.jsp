@@ -81,7 +81,7 @@
 
 						<div class="tab-content">
 							<div id="tab1" class="tab-pane fade show active" role="tabpanel" aria-labelledby="tab-1">
-								<form action="../admcontrol?function=empadd" method="post" class="authorization__form">
+								<form action="../admcontrol?function=empadd" method="post" class="authorization__form" onsubmit="return Emp()">
 									<div class="row">
 										<div class="col-12">
 											<label for="name" class="form__label">姓名</label>
@@ -90,25 +90,25 @@
 
 										<div class="col-12">
 											<label for="Emp_no" class="form__label">工号</label>
-											<input id="Emp_no" type="text" name="Emp_no" onBlur="return checkempno()" class="form__input">
+											<input id="Emp_no" type="text" name="Emp_no" onBlur="return Emp()" class="form__input">
 											<span id="checkempno" style="color:#fa7268"></span>
 										</div>
 										
 										<div class="col-12">
 											<label for="Emp_pwd" class="form__label">密码</label>
-											<input id="Emp_pwd" type="text" name="Emp_pwd" onBlur="return checkemp()" value="123456" placeholder="默认为123456" class="form__input">
+											<input id="Emp_pwd" type="text" name="Emp_pwd" onBlur="return Emp()" value="123456" placeholder="默认为123456" class="form__input">
 											<span id="checkpwd" style="color:#fa7268"></span>
 										</div>
 
 										<div class="col-12">
 											<label for="Emp_ID" class="form__label">身份证号</label>
-											<input id="Emp_ID" type="text" name="Emp_ID" onBlur="return checkID()" class="form__input">
+											<input id="Emp_ID" type="text" name="Emp_ID" onBlur="return Emp()" class="form__input">
 											<span id="checkID" style="color:#fa7268"></span>
 										</div>
 										
 										<div class="col-12">
 											<label for="Dep_no" class="form__label">部门号</label>
-											<input id="Dep_no" type="text" name="Dep_no" onBlur="return checkdepno()" class="form__input">
+											<input id="Dep_no" type="text" name="Dep_no" onBlur="return Emp()" class="form__input">
 											<span id="checkdepno" style="color:#fa7268"></span>
 										</div>
 										

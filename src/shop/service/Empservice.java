@@ -25,4 +25,10 @@ public interface Empservice {
 	
 	String job3();
 
+	String detail(Employees e);
+
+	int UpdateEmp(Employees e);
+
+	int changepwd(Employees olde, Employees newe);
+
 }

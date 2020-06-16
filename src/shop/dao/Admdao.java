@@ -1,5 +1,7 @@
 package shop.dao;
 
+import java.util.List;
+
 import shop.entity.Client;
 import shop.entity.Employees;
 import shop.entity.Goods;
@@ -30,5 +32,13 @@ public interface Admdao {
 	int goodelete(String id);
 
 	int merdelete(String id);
+
+	List<Client> ClientDetail(String id);
+
+	List<Merchant> MerDetail(String id);
+
+	List<Goods> GooDetail(String id);
+
+	List<Employees> EmpDetail(String id);
 
 }

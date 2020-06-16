@@ -3,6 +3,7 @@ package shop.dao;
 import java.util.List;
 
 import shop.entity.Addres;
+import shop.entity.Cart;
 import shop.entity.Client;
 import shop.entity.Delivery;
 import shop.entity.Form;
@@ -40,5 +41,29 @@ public interface Userdao {
 	int changepwd(Client c);
 
 	int deleteadd(Addres a);
+
+	List<Goods> searchgood(Goods g);
+
+	List<Goods> classfind(Goods g);
+
+	int searchcart(Cart c);
+
+	int insertcart(Cart c);
+
+	int updatecart(Cart c);
+
+	int cartnum(String cli_no);
+
+	List<Goods> search(String searchname);
+
+	List<Cart> cart(String cli_no);
+
+	List<Goods> goodfind(String goo_no);
+
+	int deletecart(Cart c);
+
+	int Formno(String no);
+
+	void addform(shop.entity.Form f);
 
 }

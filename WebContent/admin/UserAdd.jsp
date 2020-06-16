@@ -81,7 +81,7 @@
 
 						<div class="tab-content">
 							<div id="tab1" class="tab-pane fade show active" role="tabpanel" aria-labelledby="tab-1">
-								<form action="../admcontrol?function=useradd" method="post" class="authorization__form">
+								<form action="../admcontrol?function=useradd" method="post" class="authorization__form" onsubmit="return Client()">
 									<div class="row">
 										<div class="col-12">
 											<label for="name" class="form__label">姓名</label>
@@ -90,19 +90,19 @@
 
 										<div class="col-12">
 											<label for="phone" class="form__label">手机号</label>
-											<input id="phone" type="text" name="phone" onBlur="return checkphone()" class="form__input">
+											<input id="phone" type="text" name="phone" onBlur="return Client()" class="form__input">
 											<span id="checkphone" style="color:#fa7268"></span>
 										</div>
 										
 										<div class="col-12">
 											<label for="Cli_id" class="form__label">身份证号</label>
-											<input id="Cli_id" type="text" name="Cli_id" onBlur="return checkcliid()" class="form__input">
+											<input id="Cli_id" type="text" name="Cli_id" onBlur="return Client()" class="form__input">
 											<span id="checkcliid" style="color:#fa7268"></span>
 										</div>
 
 										<div class="col-12">
 											<label for="password" class="form__label">密码</label>
-											<input id="password" type="text" name="password" onBlur="return checkclipwd()" class="form__input">
+											<input id="password" type="text" name="password" onBlur="return Client()" class="form__input">
 											<span id="checkclipwd" style="color:#fa7268"></span>
 										</div>
 

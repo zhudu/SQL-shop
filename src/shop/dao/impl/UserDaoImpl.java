@@ -145,9 +145,117 @@ public class UserDaoImpl implements Userdao{
 	@Override
 	public int deleteadd(Addres a) {
 		String hql="delete Addres where Add_no='"+a.getAdd_no()+"'";
-		Query q=sf.getCurrentSession().createQuery(hql);
+		Query q = sf.getCurrentSession().createQuery(hql);
 		int num=q.executeUpdate();
 		return num;
 	}
+
+	@Override
+	public List<Goods> searchgood(Goods g) {
+		String hql="from Goods where Goo_no = '"+g.getGoo_no()+"'";
+		Query q=sf.getCurrentSession().createQuery(hql);
+		List rs=q.list();
+		return rs;
+	}
+
+	@Override
+	public List<Goods> classfind(Goods g) {
+		String hql="from Goods where Goo_class = '"+g.getGoo_class()+"'";
+		Query q=sf.getCurrentSession().createQuery(hql);
+		List rs=q.list();
+		return rs;
+	}
+
+	@Override
+	public int searchcart(Cart c) {
+		int re = 0;
+		String hql="from Cart where Cli_no='"+c.getCli_no()+"'and Goo_no='"+c.getGoo_no()+"'";
+		Query q=sf.getCurrentSession().createQuery(hql);
+		List<Cart> rs=q.list();
+		Iterator<Cart> it=rs.iterator();
+		Cart c1;
+		if(it.hasNext()) {
+			c1=it.next();
+			return c1.getCart_num();
+		}
+		return 0;
+	}
+
+	@Override
+	public int insertcart(Cart c) {
+		sf.getCurrentSession().save(c);
+		return 1;
+	}
+
+	@Override
+	public int updatecart(Cart c) {
+		String hql="update Cart set Cart_num="+c.getCart_num()+" where Cli_no='"+c.getCli_no()+"'and Goo_no='"+c.getGoo_no()+"'";
+		Query q = sf.getCurrentSession().createQuery(hql);
+		int num=q.executeUpdate();
+		return num;
+	}
+
+	@Override
+	public int cartnum(String cli_no) {
+		String hql="from Cart where Cli_no='"+cli_no+"'";
+		Query q=sf.getCurrentSession().createQuery(hql);
+		List<Cart> rs=q.list();
+		Iterator<Cart> it=rs.iterator();
+		Cart c1;
+		int num=0;
+		while(it.hasNext()) {
+			c1=it.next();
+			num++;
+		}
+		return num;
+	}
+
+	@Override
+	public List<Goods> search(String searchname) {
+		String hql="from Goods where Goo_name like '%"+searchname+"%' or Goo_class like '%"+searchname+"%'";
+		Query q=sf.getCurrentSession().createQuery(hql);
+		List rs=q.list();
+		return rs;
+	}
+
+	@Override
+	public List<Cart> cart(String cli_no) {
+		String hql="from Cart where Cli_no ='"+cli_no+"'";
+		Query q=sf.getCurrentSession().createQuery(hql);
+		List rs=q.list();
+		return rs;
+	}
+
+	@Override
+	public List<Goods> goodfind(String goo_no) {
+		String hql="from Goods where Goo_no ='"+goo_no+"'";
+		Query q=sf.getCurrentSession().createQuery(hql);
+		List rs=q.list();
+		return rs;
+	}
+
+	@Override
+	public int deletecart(Cart c) {
+		String hql="delete Cart where Cli_no='"+c.getCli_no()+"'and Goo_no='"+c.getGoo_no()+"'";
+		Query q = sf.getCurrentSession().createQuery(hql);
+		int num=q.executeUpdate();
+		return num;
+	}
+
+	@Override
+	public int Formno(String no) {
+		int re = 0;
+		String hql="from Form where For_no='"+no+"'";
+		Query q=sf.getCurrentSession().createQuery(hql);
+		List rs=q.list();
+		re=rs.size()==0?0:1;
+		return re;
+	}
+
+	@Override
+	public void addform(shop.entity.Form f) {
+		sf.getCurrentSession().save(f);
+	}
+
 
 }

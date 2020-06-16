@@ -74,7 +74,14 @@
 
 							<a href="cart.jsp" class="header__cart">
 								<i class="lnr lnr-cart"></i>
-								<span>2</span>
+								<%
+								String cartnum=String.valueOf(session.getAttribute("cartnum"));
+								if(cartnum.equals("null")==false){
+									if(cartnum.equals("0")==false){
+										out.print("<span>"+cartnum+"</span>");
+									}
+								}
+								%>
 							</a>
 							
 							<button class="header__menu" type="button">
@@ -84,9 +91,9 @@
 							</button>
 						</div>
 
-						<form action="#" class="header__form">
-							<input type="text" placeholder="点击Enter进行搜索">
-							<button type="button">
+						<form action="../usercontrol?function=search" method="post" class="header__form">
+							<input id="search" name="search" type="text" placeholder="点击Enter进行搜索">
+							<button type="submit">
 								<span></span>
 								<span></span>
 							</button>
@@ -130,8 +137,6 @@
 			<button type="button"><i class="lnr lnr-arrow-left"></i> Back</button>
 
 			<nav>
-				<a href="product.jsp">Product style 1</a>
-				<a href="product2.jsp">Product style 2</a>
 				<a href="cart.jsp">Cart</a>
 				<a href="checkout.jsp">Checkout</a>
 				<a href="delivery.jsp">交货</a>
@@ -156,10 +161,10 @@
 		</div>
 
 		<nav class="catmenu__nav">
-			<a href="catalog.jsp">厨具</a>
-			<a href="catalog.jsp">家具</a>
-			<a href="catalog.jsp">健康</a>
-			<a href="catalog.jsp">配饰</a>
+			<a href="../usercontrol?function=class&class=文具">文具</a>
+			<a href="../usercontrol?function=class&class=家具">家具</a>
+			<a href="../usercontrol?function=class&class=手表">手表</a>
+			<a href="../usercontrol?function=class&class=服饰">服饰</a>
 		</nav>
 	</div>
 	<!-- end catmenu -->
@@ -179,81 +184,124 @@
 					<div class="cart__wrap">
 						<div class="cart__content cart__content--checkout">
 							<!-- personal information -->
-							<form action="../usercontrol?function=checkout" class="cart__form">
-								<div class="row">
-									<div class="col-12">
-										<h3 class="cart__form-title">1. 个人信息</h3>
-									</div>
-
-									<div class="col-12 col-lg-6">
-										<label for="name" class="form__label">姓名</label>
-										<div class="form__wrap form__wrap--required">
-											<input id="name" type="text" name="name" class="form__input" required>
-										</div>
-									</div>
-
-									<div class="col-12 col-lg-6">
-										<label for="phone" class="form__label">手机号</label>
-										<div class="form__wrap form__wrap--required">
-											<input id="phone" type="text" name="phone" class="form__input" required>
-										</div>
-									</div>
+							<form action="../usercontrol?function=checkout" method="post" class="cart__form">
+							
+							<div class="row">
+								<!-- <div class="col-12">
+									<h3 class="cart__form-title">选择收货地址</h3>
 								</div>
-							<!-- end personal information -->
-							<br><br>
-							<!-- delivery -->
-								<div class="row">
-									<div class="col-12">
-										<h3 class="cart__form-title">2. 收货地址</h3>
+								<br><br>
+								<div  class="col-12">
+									<div class="form__wrap form__wrap--select">
+										<select id="provincevalue" name="provincevalue" class="form__select">
+											<option value="0">选择收货地址或创建新的收货地址</option>
+											<option value="1">xxxxxxxxxxxxxxxxxxxxxx</option>
+										</select>
 									</div>
-
-									<div class="col-12 col-lg-6">
-										<label for="provincevalue" class="form__label">省</label>
-										<div class="form__wrap form__wrap--select">
-											<select id="provincevalue" name="provincevalue" class="form__select">
-												<option value="1">福建省</option>
-											</select>
-										</div>
-									</div>
-
-									<div class="col-12 col-lg-6">
-										<label for="cityvalue" class="form__label">市</label>
-										<div class="form__wrap form__wrap--select">
-											<select id="cityvalue" name="cityvalue" class="form__select">
-												<option value="1">厦门市</option>
-												<option value="2">泉州市</option>
-												<option value="3">漳州市</option>
-											</select>
-										</div>
+								</div> -->
+								<div class="col-12">
+										<h3 class="cart__form-title"> 选择收货地址</h3>
 									</div>
 
 									<div class="col-12">
-										<label for="street" class="form__label">街道</label>
-										<div class="form__wrap form__wrap--required">
-											<input id="street" type="text" name="street" class="form__input" required>
+										<ul class="cart__payment">
+											<%
+												String checkoutaddress=(String)session.getAttribute("checkoutaddress");
+												if(checkoutaddress!=null){
+													out.print(checkoutaddress);
+												}
+											%>
+											<li>
+												<input id="addressother" type="radio" value="999" name="address">
+												<label for="addressother">新建</label>
+											</li>
+										</ul>
+									</div>
+							</div>
+								
+								<div class="catalog-menu__item">
+									<button type="button" data-toggle="collapse" data-target="#collapse" aria-expanded="false" aria-controls="collapse">新增收货地址</button>
+										<div class="collapse" id="collapse">
+											<div class="catalog-menu__collapse">
+									
+												<br><br>
+												<div class="row">
+													<div class="col-12">
+														<h3 class="cart__form-title">1. 个人信息</h3>
+													</div>
+													<div class="col-12 col-lg-6">
+														<label for="name" class="form__label">姓名</label>
+														<div class="form__wrap form__wrap--required">
+															<input id="name" type="text" name="name" class="form__input">
+														</div>
+													</div>
+													<div class="col-12 col-lg-6">
+														<label for="phone" class="form__label">手机号</label>
+														<div class="form__wrap form__wrap--required">
+															<input id="phone" type="text" name="phone" class="form__input">
+														</div>
+													</div>
+												</div>
+												<!-- end personal information -->
+												<br><br>
+												<!-- delivery -->
+												<div class="row">
+													<div class="col-12">
+														<h3 class="cart__form-title">2. 收货地址</h3>
+													</div>
+													<div class="col-12 col-lg-6">
+														<label for="provincevalue" class="form__label">省</label>
+														<div class="form__wrap form__wrap--select">
+															<select id="provincevalue" name="provincevalue" class="form__select">
+																<option value="福建省">福建省</option>
+															</select>
+														</div>
+													</div>
+
+													<div class="col-12 col-lg-6">
+														<label for="cityvalue" class="form__label">市</label>
+														<div class="form__wrap form__wrap--select">
+															<select id="cityvalue" name="cityvalue" class="form__select">
+																<option value="厦门市">厦门市</option>
+																<option value="泉州市">泉州市</option>
+																<option value="漳州市">漳州市</option>
+															</select>
+														</div>
+													</div>
+
+													<div class="col-12">
+														<label for="street" class="form__label">街道</label>
+														<div class="form__wrap form__wrap--required">
+															<input id="street" type="text" name="street" class="form__input">
+														</div>
+													</div>
+												</div>
+											<!-- end delivery -->
+									
+											</div>
 										</div>
 									</div>
-								</div>
-							<!-- end delivery -->
+								
+							
 							<br><br>
 							<!-- payment type -->
 								<div class="row">
 									<div class="col-12">
-										<h3 class="cart__form-title">3. 付款方式</h3>
+										<h3 class="cart__form-title"> 付款方式</h3>
 									</div>
 
 									<div class="col-12 col-lg-5">
 										<ul class="cart__payment">
 											<li>
-												<input id="payment1" type="radio" name="payment" checked="">
-												<label for="payment1">现金</label>
+												<input id="payment1" type="radio" name="payment" value="1" checked="">
+												<label for="payment1" >现金</label>
 											</li>
 											<li>
-												<input id="payment2" type="radio" name="payment">
+												<input id="payment2" type="radio" value="2" name="payment">
 												<label for="payment2">货到付款</label>
 											</li>
 											<li>
-												<input id="payment3" type="radio" name="payment">
+												<input id="payment3" type="radio" value="3" name="payment">
 												<label for="payment3">银行卡</label>
 											</li>
 										</ul>
@@ -284,17 +332,15 @@
 
 						<div class="cart__total cart__total--checkout">
 							<div class="cart__total-wrap">
-								<div class="cart__total-value">Total: <b>$829</b></div>
-								<div class="cart__total-value">Shipping: <span>Free</span></div>
+								<div class="cart__total-value">共计: <b>￥<%String checkouttotal=(String)session.getAttribute("checkouttotal");if(checkouttotal!=null){out.print(checkouttotal);} %></b></div>
 								
 								<div class="cart__previews">
-									<a href="product.jsp">
-										<img src="../img/products/product6.png" alt="">
-									</a>
-
-									<a href="product.jsp">
-										<img src="../img/products/product5.png" alt="">
-									</a>
+									<%
+										String checkoutimg=(String)session.getAttribute("checkoutimg"); 
+										if(checkoutimg!=null){
+											out.print(checkoutimg);
+										}
+									%>
 								</div>
 							</div>
 						</div>

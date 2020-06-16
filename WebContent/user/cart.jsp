@@ -73,7 +73,14 @@
 
 							<a href="cart.jsp" class="header__cart">
 								<i class="lnr lnr-cart"></i>
-								<span>2</span>
+								<%
+								String cartnum=String.valueOf(session.getAttribute("cartnum"));
+								if(cartnum.equals("null")==false){
+									if(cartnum.equals("0")==false){
+										out.print("<span>"+cartnum+"</span>");
+									}
+								}
+								%>
 							</a>
 							
 							<button class="header__menu" type="button">
@@ -83,9 +90,9 @@
 							</button>
 						</div>
 
-						<form action="#" class="header__form">
-							<input type="text" placeholder="点击Enter进行搜索">
-							<button type="button">
+						<form action="../usercontrol?function=search" method="post" class="header__form">
+							<input id="search" name="search" type="text" placeholder="点击Enter进行搜索">
+							<button type="submit">
 								<span></span>
 								<span></span>
 							</button>
@@ -129,8 +136,6 @@
 			<button type="button"><i class="lnr lnr-arrow-left"></i> Back</button>
 
 			<nav>
-				<a href="product.jsp">Product style 1</a>
-				<a href="product2.jsp">Product style 2</a>
 				<a href="cart.jsp">Cart</a>
 				<a href="checkout.jsp">Checkout</a>
 				<a href="delivery.jsp">交货</a>
@@ -155,10 +160,10 @@
 		</div>
 
 		<nav class="catmenu__nav">
-			<a href="catalog.jsp">厨具</a>
-			<a href="catalog.jsp">家具</a>
-			<a href="catalog.jsp">健康</a>
-			<a href="catalog.jsp">配饰</a>
+			<a href="../usercontrol?function=class&class=文具">文具</a>
+			<a href="../usercontrol?function=class&class=家具">家具</a>
+			<a href="../usercontrol?function=class&class=手表">手表</a>
+			<a href="../usercontrol?function=class&class=服饰">服饰</a>
 		</nav>
 	</div>
 	<!-- end catmenu -->
@@ -177,7 +182,11 @@
 				<div class="col-12">
 					<div class="cart__wrap">
 						<div class="cart__content">
-							<div class="cart__item">
+							<%
+								String cartdetail=(String)session.getAttribute("cartdetail");
+								out.print(cartdetail);
+								%>
+							<!-- <div class="cart__item">
 								<div class="cart__item-img">
 									<img src="../img/products/product6.png" alt="">
 								</div>
@@ -187,10 +196,6 @@
 										<h3>Meat grinder zx345</h3>
 										<ul>
 											<li>It uses a dictionary</li>
-											<li>Various versions</li>
-											<li>It has survived not</li>
-											<li>Letraset sheets</li>
-											<li>The first line</li>
 										</ul>
 									</div>
 
@@ -250,11 +255,10 @@
 
 						<div class="cart__total">
 							<div class="cart__total-wrap">
-								<div class="cart__total-value">Total: <b>$829</b></div>
-								<div class="cart__total-value">Shipping: <span>Free</span></div>
-								<a href="checkout.jsp" class="cart__total-btn">Checkout</a>
+								<div class="cart__total-value">共计: <b>$829</b></div>
+								<a href="checkout.jsp" class="cart__total-btn">结算</a>
 							</div>
-						</div>
+						</div><!--  -->
 					</div>
 				</div>
 

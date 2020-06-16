@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.tags.EditorAwareTag;
 
 import shop.entity.Delivery;
 import shop.entity.Employees;
@@ -38,6 +39,9 @@ public class EmpControl {
 				ss.setAttribute("empjob", ej.getInfo());		//将工作内容写入session属性
 				ss.setAttribute("Emp_name", ej.getE().getEmp_name());
 				ss.setAttribute("Emp_no", ej.getE().getEmp_no());
+				e.setEmp_name(ej.getE().getEmp_name());
+				ss.setAttribute("empdetail", es.detail(e));
+				ss.setAttribute("depno", "1");
 				if(remember!=null) {
 					Cookie cookie = new Cookie("e", phone);
 					cookie.setMaxAge(7*24*60*60);//如果登录成功，设置cookie的存活时间
@@ -55,6 +59,9 @@ public class EmpControl {
 				ss.setAttribute("empjob", ej.getInfo());
 				ss.setAttribute("Emp_name", ej.getE().getEmp_name());
 				ss.setAttribute("Emp_no", ej.getE().getEmp_no());
+				e.setEmp_name(ej.getE().getEmp_name());
+				ss.setAttribute("empdetail", es.detail(e));
+				ss.setAttribute("depno", "2");
 				if(remember!=null) {
 					Cookie cookie = new Cookie("u", phone);
 					cookie.setMaxAge(7*24*60*60);//如果登录成功，设置cookie的存活时间
@@ -95,7 +102,7 @@ public class EmpControl {
 	private void fun_register(HttpServletRequest request, HttpServletResponse response) {
 		String name=request.getParameter("name");				//获取表单信息
 		String Emp_no=request.getParameter("Emp_no");
-		String Emp_pwd=request.getParameter("password");
+		String Emp_pwd=request.getParameter("password1");
 		String Emp_ID=request.getParameter("Emp_ID");
 		String Dep_no=request.getParameter("Dep_no");
 		System.out.println(name+Emp_no+Emp_pwd+Emp_ID+Dep_no);
@@ -129,9 +136,9 @@ public class EmpControl {
 	
 	@RequestMapping(value="/empcontrol", params= {"function=forget"})//忘记密码√
 	private void fun_forget(HttpServletRequest request, HttpServletResponse response) {
-		String Emp_no=request.getParameter("Emp_no");				//获取表单信息
-		String Emp_pwd=request.getParameter("password");
-		String Emp_ID=request.getParameter("Emp_ID");
+		String Emp_no=request.getParameter("Emp_no1");				//获取表单信息
+		String Emp_pwd=request.getParameter("password3");
+		String Emp_ID=request.getParameter("Emp_ID1");
 		//将获取的信息写入实体
 		Employees e = new Employees();
 		e.setEmp_no(Emp_no);
@@ -218,6 +225,75 @@ public class EmpControl {
 			response.sendRedirect("emp/job.jsp");		//跳转分拣员/配送员操作界面
 		} catch (IOException e1) {
 			e1.printStackTrace();
+		}
+	}
+	
+	@RequestMapping(value="/empcontrol", params= {"function=saveemp"})
+	private void fun_saveemp(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession ss = request.getSession();
+		String Emp_no=(String)ss.getAttribute("Emp_no");
+		String depno=(String)ss.getAttribute("depno");
+		String name=request.getParameter("name");
+		Employees e=new Employees();
+		e.setEmp_name(name);
+		e.setEmp_no(Emp_no);
+		int num=es.UpdateEmp(e);
+		try {
+			ss.setAttribute("empdetail", es.detail(e));
+			if(num==0) {
+				if(depno.equals("1")) {
+					response.getWriter().print("<script>alert('保存失败 请重试！');window.location.href='emp/job.jsp';</script>");
+				}else {
+					response.getWriter().print("<script>alert('保存失败 请重试！');window.location.href='emp/authorization.jsp';</script>");
+				}
+			}else {
+				if(depno.equals("1")) {
+					response.sendRedirect("emp/job.jsp");
+				}else {
+					response.sendRedirect("emp/authorization.jsp");
+				}
+			}
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
+	@RequestMapping(value="/empcontrol", params= {"function=pwdchange"})
+	private void fun_pwdchange(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession ss = request.getSession();
+		String Emp_no=(String)ss.getAttribute("Emp_no");
+		String depno=(String)ss.getAttribute("depno");
+		String oldpassword=request.getParameter("oldpassword");
+		String newpassword=request.getParameter("newpassword");
+		Employees olde=new Employees();
+		Employees newe=new Employees();
+		olde.setEmp_no(Emp_no);
+		olde.setEmp_pwd(oldpassword);
+		newe.setEmp_no(Emp_no);
+		newe.setEmp_pwd(newpassword);
+		int num=es.changepwd(olde,newe);
+		try {
+			if(depno.equals("1")) {
+				if(num==2) {
+					response.getWriter().print("<script>alert('密码错误 请重试！');window.location.href='emp/job.jsp';</script>");
+				}else if(num==1){
+					response.getWriter().print("<script>alert('更新成功 请重新登录！');</script>");
+					fun_logout(request, response);
+				}else {
+					response.getWriter().print("<script>alert('更新失败 请重试！');window.location.href='emp/job.jsp';</script>");
+				}
+			}else {
+				if(num==2) {
+					response.getWriter().print("<script>alert('密码错误 请重试！');window.location.href='emp/authorization.jsp';</script>");
+				}else if(num==1){
+					response.getWriter().print("<script>alert('更新成功 请重新登录！');</script>");
+					fun_logout(request, response);
+				}else {
+					response.getWriter().print("<script>alert('更新失败 请重试！');window.location.href='emp/authorization.jsp';</script>");
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 	

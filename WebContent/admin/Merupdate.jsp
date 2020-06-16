@@ -81,16 +81,20 @@
 
 						<div class="tab-content">
 							<div id="tab1" class="tab-pane fade show active" role="tabpanel" aria-labelledby="tab-1">
-								<form action="../admcontrol?function=merupdate" method="post"  class="authorization__form">
+								<form action="../admcontrol?function=mer_update" method="post"  class="authorization__form" onsubmit="return Mer()">
 									<div class="row">
-										<div class="col-12">
+										<%
+												String MerDetail=(String)session.getAttribute("MerDetail");
+												out.println(MerDetail);
+											%>
+										<!-- <div class="col-12">
 											<label for="name" class="form__label">店名</label>
 											<input id="name" type="text" name="name" class="form__input">
 										</div>
 
 										<div class="col-12">
 											<label for="Mer_no" class="form__label">商家编号</label>
-											<input id="Mer_no" type="text" name="Mer_no" onBlur="return checkmerno()" class="form__input">
+											<input id="Mer_no" type="text" name="Mer_no" onBlur="return Mer()" class="form__input">
 											<span id="checkmerno" style="color:#fa7268"></span>
 										</div>
 										
@@ -111,9 +115,9 @@
 										
 										<div class="col-12">
 											<label for="Mer_email" class="form__label">邮箱</label>
-											<input id="Mer_email" type="text" name="Mer_email" onBlur="return checkmeremail()" class="form__input">
+											<input id="Mer_email" type="text" name="Mer_email" onBlur="return Mer()" class="form__input">
 											<span id="checkmeremail" style="color:#fa7268"></span>
-										</div>
+										</div> -->
 
 										<div class="col-12">
 											<button class="form__send" type="submit">更新</button>

@@ -3,6 +3,8 @@ package shop.service.impl;
 
 import java.util.Iterator;
 import java.util.List;
+
+import org.apache.derby.catalog.types.UDTAliasInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -78,7 +80,11 @@ public class EmpServiceImpl implements Empservice{
 
 	@Override
 	public int register(Employees e) {
-		return ed.register(e);
+		if (ed.empcheck(e)==0) {		//账号不存在才创建
+			return ed.register(e);
+		}else {
+			return 0;
+		}
 	}
 
 	@Override
@@ -172,7 +178,7 @@ public class EmpServiceImpl implements Empservice{
 			client=it.next();
 			info.append("<tr>\r\n<td><a href=\"#\">"+client.getCli_name()+"</a></td>\r\n<td>"+client.getCli_no()+"</td>\r\n" + 
 					"<td>"+client.getCli_email()+"</td>\r\n<td>"+client.getCli_sex()+"</td>\r\n<td>"+client.getCli_birthday().substring(0, 10)+"</td>\r\n" + 
-					"<td>"+client.getCli_password()+"</td>\r\n<th><a href=\"../admin/Userupdate.jsp\"><button type=\"button\"><i class=\"lnr lnr-sync\"></i></button></a>\r\n" + 
+					"<td>"+client.getCli_password()+"</td>\r\n<th><a href=\"../admcontrol?function=userupdate&id="+client.getCli_no()+"\"><button type=\"button\"><i class=\"lnr lnr-sync\"></i></button></a>\r\n" + 
 					"<form action=\"../admcontrol?function=userdelete&id="+client.getCli_no()+"\"><button type=\"submit\"><i class=\"lnr lnr-cross\"></i></button></form></th>\r\n</tr>");
 		}
 		info.append("</tbody>\r\n</table>\r\n</div>\r\n\r\n<div id=\"tab12\" class=\"tab-pane fade\" role=\"tabpanel\" aria-labelledby=\"tab-12\">\r\n" + 
@@ -188,8 +194,8 @@ public class EmpServiceImpl implements Empservice{
 			goods=it1.next();
 			info.append("<tr>\r\n<td><a href=\"#\">"+goods.getGoo_no()+"</a></td>\r\n<td>"+goods.getGoo_name()+"</td>\r\n<td>"+goods.getGoo_price()+"</td>\r\n" + 
 					"<td>"+goods.getStore()+"</td>\r\n<td>"+goods.getMer_no()+"</td>\r\n<td>"+goods.getGoo_class()+"</td>\r\n<th>\r\n" + 
-					"<a href=\"../admin/Gooupdate.jsp\"><button type=\"button\"><i class=\"lnr lnr-sync\"></i></button></a>\r\n" + 
-					"<a href=\"\"><button type=\"button\"><i class=\"lnr lnr-cross\"></i></button></a>\r\n" + 
+					"<a href=\"../admcontrol?function=gooupdate&id="+goods.getGoo_no()+"\"><button type=\"button\"><i class=\"lnr lnr-sync\"></i></button></a>\r\n" + 
+					"<a href=\"../admcontrol?function=goodelete&id="+goods.getGoo_no()+"\"><button type=\"button\"><i class=\"lnr lnr-cross\"></i></button></a>\r\n" + 
 					"</th>\r\n</tr>");
 		}
 		info.append("</tbody>\r\n</table>\r\n</div>\r\n\r\n<div id=\"tab13\" class=\"tab-pane fade\" role=\"tabpanel\" aria-labelledby=\"tab-13\">\r\n" + 
@@ -206,8 +212,8 @@ public class EmpServiceImpl implements Empservice{
 			info.append("<tr>\r\n<td><a href=\"#\">"+employees.getEmp_no()+"</a></td>\r\n<td>"+employees.getEmp_name()+"</td>\r\n"+
 					"<td>"+employees.getEmp_sex()+"</td>\r\n<td>"+employees.getEmp_birthday().substring(0, 10)+"</td>\r\n" + 
 					"<td>"+employees.getDep_no()+"</td>\r\n<td>"+employees.getEmp_pwd()+"</td>\r\n<th>\r\n" + 
-					"<a href=\"../admin/Empupdate.jsp\"><button type=\"button\"><i class=\"lnr lnr-sync\"></i></button></a>\r\n" + 
-					"<a href=\"\"><button type=\"button\"><i class=\"lnr lnr-cross\"></i></button></a>\r\n" + 
+					"<a href=\"../admcontrol?function=empupdate&id="+employees.getEmp_no()+"\"><button type=\"button\"><i class=\"lnr lnr-sync\"></i></button></a>\r\n" + 
+					"<a href=\"../admcontrol?function=empdelete&id="+employees.getEmp_no()+"\"><button type=\"button\"><i class=\"lnr lnr-cross\"></i></button></a>\r\n" + 
 					"</th>\r\n</tr>");
 		}
 		info.append("</tbody>\r\n</table>\r\n</div>\r\n\r\n<div id=\"tab14\" class=\"tab-pane fade\" role=\"tabpanel\" aria-labelledby=\"tab-14\">\r\n" + 
@@ -223,12 +229,41 @@ public class EmpServiceImpl implements Empservice{
 			merchant=it3.next();
 			info.append("<tr>\r\n<td><a href=\"#\">"+merchant.getMer_no()+"</a></td>\r\n<td>"+merchant.getMer_name()+"</td>\r\n<td>"+merchant.getMer_legal()+"</td>\r\n" + 
 					"<td>"+merchant.getMer_address()+"</td>\r\n<td>"+merchant.getMer_phone()+"</td>\r\n<td>"+merchant.getMer_email()+"</td>\r\n<th>\r\n" + 
-					"<a href=\"../admin/Merupdate.jsp\"><button type=\"button\"><i class=\"lnr lnr-sync\"></i></button></a>\r\n" + 
-					"<a href=\"\"><button type=\"button\"><i class=\"lnr lnr-cross\"></i></button></a>\r\n" + 
+					"<a href=\"../admcontrol?function=merupdate&id="+merchant.getMer_no()+"\"><button type=\"button\"><i class=\"lnr lnr-sync\"></i></button></a>\r\n" + 
+					"<a href=\"../admcontrol?function=merdelete&id="+merchant.getMer_no()+"\"><button type=\"button\"><i class=\"lnr lnr-cross\"></i></button></a>\r\n" + 
 					"</th>\r\n</tr>");
 		}
 		info.append("</tbody>\r\n</table>\r\n</div>");
 		return info.toString();
+	}
+
+	@Override
+	public String detail(Employees e) {
+		StringBuffer info = new StringBuffer();
+		info.append("<div class=\"col-12 col-md-6 col-lg-12 col-xl-6\">\r\n" + 
+				"<label for=\"name\" class=\"form__label\">姓名</label>\r\n" + 
+				"<input id=\"name\" type=\"text\" value=\""+e.getEmp_name()+"\" name=\"name\" class=\"form__input\">\r\n" + 
+				"</div>\r\n\r\n" + 
+				"<div class=\"col-12 col-md-6 col-lg-12 col-xl-6\">\r\n" + 
+				"<label for=\"phone\" class=\"form__label\">工号</label>\r\n" + 
+				"<input id=\"phone\" type=\"text\" value=\""+e.getEmp_no()+"\" name=\"phone\" onBlur=\"return EmpUpdateDetail()\" class=\"form__input\">\r\n" + 
+				"<span id=\"checkphone\" style=\"color:#fa7268\"></span>\r\n</div>");
+		return info.toString();
+	}
+
+	@Override
+	public int UpdateEmp(Employees e) {
+		return ed.UpdateEmp(e);
+	}
+
+	@Override
+	public int changepwd(Employees olde, Employees newe) {
+		int num=ed.checkpwd(olde);
+		if(num==2) {
+			return 2;
+		}else {
+			return ed.changepwd(newe);
+		}
 	}
 
 }

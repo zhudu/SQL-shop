@@ -28,6 +28,14 @@ public class Goods {
 	private String Store;				//仓库编号
 	@Column(name="Goo_class")
 	private String Goo_class;				//商品类别
+	@Column(name="Goo_img")
+	private String Goo_img;				//商品图片
+	public String getGoo_img() {
+		return Goo_img;
+	}
+	public void setGoo_img(String goo_img) {
+		Goo_img = goo_img;
+	}
 	public String getGoo_class() {
 		return Goo_class;
 	}

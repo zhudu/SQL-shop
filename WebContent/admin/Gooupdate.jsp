@@ -81,16 +81,20 @@
 
 						<div class="tab-content">
 							<div id="tab1" class="tab-pane fade show active" role="tabpanel" aria-labelledby="tab-1">
-								<form action="../admcontrol?function=gooupdate" method="post"  class="authorization__form">
+								<form action="../admcontrol?function=goo_update" method="post"  class="authorization__form" onsubmit="return Goo()">
 									<div class="row">
-										<div class="col-12">
+									<%
+												String GooDetail=(String)session.getAttribute("GooDetail");
+												out.println(GooDetail);
+											%>
+										<!-- <div class="col-12">
 											<label for="name" class="form__label">品名</label>
 											<input id="name" type="text" name="name" class="form__input">
 										</div>
 
 										<div class="col-12">
 											<label for="Goo_no" class="form__label">商品编号</label>
-											<input id="Goo_no" type="text" name="Goo_no" onBlur="return checkgoono()" class="form__input">
+											<input id="Goo_no" type="text" name="Goo_no" onBlur="return Goo()" class="form__input">
 											<span id="checkgoono" style="color:#fa7268"></span>
 										</div>
 										
@@ -101,20 +105,20 @@
 
 										<div class="col-12">
 											<label for="Store" class="form__label">仓库号</label>
-											<input id="Store" type="text" name="Store" onBlur="return checkstore()" class="form__input">
+											<input id="Store" type="text" name="Store" onBlur="return Goo()" class="form__input">
 											<span id="checkstore" style="color:#fa7268"></span>
 										</div>
 										
 										<div class="col-12">
 											<label for="Mer_no" class="form__label">商家编号</label>
-											<input id="Mer_no" type="text" name="Mer_no" onBlur="return checkmerno()" class="form__input">
+											<input id="Mer_no" type="text" name="Mer_no" onBlur="return Goo()" class="form__input">
 											<span id="checkmerno" style="color:#fa7268"></span>
 										</div>
 										
 										<div class="col-12">
 											<label for="Goo_class" class="form__label">商品类别</label>
 											<input id="Goo_class" type="text" name="Goo_class" class="form__input">
-										</div>
+										</div> -->
 
 										<div class="col-12">
 											<button class="form__send" type="submit">更新</button>

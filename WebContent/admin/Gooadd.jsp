@@ -81,7 +81,7 @@
 
 						<div class="tab-content">
 							<div id="tab1" class="tab-pane fade show active" role="tabpanel" aria-labelledby="tab-1">
-								<form action="../admcontrol?function=gooadd" method="post"  class="authorization__form">
+								<form action="../admcontrol?function=gooadd" method="post"  class="authorization__form" onsubmit="return Goo()">
 									<div class="row">
 										<div class="col-12">
 											<label for="name" class="form__label">品名</label>
@@ -90,7 +90,7 @@
 
 										<div class="col-12">
 											<label for="Goo_no" class="form__label">商品编号</label>
-											<input id="Goo_no" type="text" name="Goo_no" onBlur="return checkgoono()" class="form__input">
+											<input id="Goo_no" type="text" name="Goo_no" onBlur="return Goo()" class="form__input">
 											<span id="checkgoono" style="color:#fa7268"></span>
 										</div>
 										
@@ -101,19 +101,30 @@
 
 										<div class="col-12">
 											<label for="Store" class="form__label">仓库号</label>
-											<input id="Store" type="text" name="Store" onBlur="return checkstore()" class="form__input">
+											<input id="Store" type="text" name="Store" onBlur="return Goo()" class="form__input">
 											<span id="checkstore" style="color:#fa7268"></span>
 										</div>
 										
 										<div class="col-12">
 											<label for="Mer_no" class="form__label">商家编号</label>
-											<input id="Mer_no" type="text" name="Mer_no" onBlur="return checkmerno()" class="form__input">
+											<input id="Mer_no" type="text" name="Mer_no" onBlur="return Goo()" class="form__input">
 											<span id="checkmerno" style="color:#fa7268"></span>
 										</div>
 										
 										<div class="col-12">
 											<label for="Goo_class" class="form__label">商品类别</label>
 											<input id="Goo_class" type="text" name="Goo_class" class="form__input">
+										</div>
+										
+										<div class="col-12">
+											<label for="img" class="form__label">图片</label>
+											<button class="form__send1" type="button">选择图片</button>
+											<input id="img" type="file" name="img" style="opacity:0">
+										</div>
+										
+										<div class="col-12">
+											<label for="Goo_detail" class="form__label">简介</label>
+											<input id="Goo_detail" type="text" name="Goo_detail" class="form__textarea">	
 										</div>
 
 										<div class="col-12">
@@ -184,5 +195,10 @@
 	<script src="../js/jquery.mousewheel.min.js"></script>
 	<script src="../js/jquery.mCustomScrollbar.min.js"></script>
 	<script src="../js/main.js"></script>
+	<script type="text/javascript">
+	$('button').eq(0).click(function () {
+	    $('#img').click()
+	})
+	</script>
 </body>
 </html>

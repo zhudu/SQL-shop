@@ -149,4 +149,40 @@ public class EmpDaoImpl implements Empdao{
 		return num;
 	}
 
+	@Override
+	public int empcheck(Employees e) {
+		int re = 0;
+		String hql="from Employees where Emp_no='"+e.getEmp_no()+"'";
+		Query q=sf.getCurrentSession().createQuery(hql);
+		List rs=q.list();
+		re=rs.size()==0?0:1;
+		return re;
+	}
+
+	@Override
+	public int UpdateEmp(Employees e) {
+		String hql="update Employees set Emp_name='"+e.getEmp_name()+"' where Emp_no='"+e.getEmp_no()+"'";
+		Query q=sf.getCurrentSession().createQuery(hql);
+		int num=q.executeUpdate();
+		return num;
+	}
+
+	@Override
+	public int checkpwd(Employees e) {
+		int re = 0;
+		String hql="from Employees where Emp_no='"+e.getEmp_no()+"'and Emp_pwd='"+e.getEmp_pwd()+"'";
+		Query q=sf.getCurrentSession().createQuery(hql);
+		List rs=q.list();
+		re=rs.size()==0?2:1;		//查询失败返回2，成功返回1
+		return re;
+	}
+
+	@Override
+	public int changepwd(Employees e) {
+		String hql="update Employees set Emp_pwd='"+e.getEmp_pwd()+"' where Emp_no='"+e.getEmp_no()+"'";
+		Query q=sf.getCurrentSession().createQuery(hql);
+		int num=q.executeUpdate();
+		return num;
+	}
+
 }

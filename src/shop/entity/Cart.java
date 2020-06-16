@@ -17,7 +17,7 @@ public class Cart {
 	@Column(name="Goo_no", unique=false)
 	private String Goo_no;			//商品条码
 	@Column(name="Cart_num")
-	private String Cart_num;		//数量
+	private int Cart_num;		//数量
 	@Column(name="Cli_no")
 	private String Cli_no;			//顾客编码
 	public String getGoo_no() {
@@ -26,10 +26,10 @@ public class Cart {
 	public void setGoo_no(String goo_no) {
 		Goo_no = goo_no;
 	}
-	public String getCart_num() {
+	public int getCart_num() {
 		return Cart_num;
 	}
-	public void setCart_num(String cart_num) {
+	public void setCart_num(int cart_num) {
 		Cart_num = cart_num;
 	}
 	public String getCli_no() {

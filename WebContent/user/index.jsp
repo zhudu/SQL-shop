@@ -1,3 +1,4 @@
+<%@page import="javafx.scene.control.Alert"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -72,9 +73,17 @@
 								<i class="lnr lnr-magnifier"></i>
 							</button>
 
-							<a href="cart.jsp" class="header__cart">
+							<a href="../usercontrol?function=cart" class="header__cart">
 								<i class="lnr lnr-cart"></i>
-								<span>2</span>
+								
+								<%
+								String cartnum=String.valueOf(session.getAttribute("cartnum"));
+								if(cartnum.equals("null")==false){
+									if(cartnum.equals("0")==false){
+										out.print("<span>"+cartnum+"</span>");
+									}
+								}
+								%>
 							</a>
 							
 							<button class="header__menu" type="button">
@@ -84,9 +93,9 @@
 							</button>
 						</div>
 
-						<form action="#" class="header__form">
-							<input type="text" placeholder="点击Enter进行搜索">
-							<button type="button">
+						<form action="../usercontrol?function=search" method="post" class="header__form">
+							<input id="search" name="search" type="text" placeholder="点击Enter进行搜索">
+							<button type="submit">
 								<span></span>
 								<span></span>
 							</button>
@@ -130,8 +139,6 @@
 			<button type="button"><i class="lnr lnr-arrow-left"></i> Back</button>
 
 			<nav>
-				<a href="product.jsp">Product style 1</a>
-				<a href="product2.jsp">Product style 2</a>
 				<a href="cart.jsp">Cart</a>
 				<a href="checkout.jsp">Checkout</a>
 				<a href="delivery.jsp">交货</a>
@@ -156,10 +163,10 @@
 		</div>
 
 		<nav class="catmenu__nav">
-			<a href="catalog.jsp">厨具</a>
-			<a href="catalog.jsp">家具</a>
-			<a href="catalog.jsp">健康</a>
-			<a href="catalog.jsp">配饰</a>
+			<a href="../usercontrol?function=class&class=文具">文具</a>
+			<a href="../usercontrol?function=class&class=家具">家具</a>
+			<a href="../usercontrol?function=class&class=手表">手表</a>
+			<a href="../usercontrol?function=class&class=服饰">服饰</a>
 		</nav>
 	</div>
 	<!-- end catmenu -->
@@ -167,13 +174,13 @@
 	<!-- home -->
 	<section class="home">
 		<div class="home__slider owl-carousel">
-			<div class="home__slide" data-bg="../img/home/slide.jpg">
+			<div class="home__slide" data-bg="../img/home/watch.jpg">
 				<div class="container">
 					<div class="row">
 						<div class="col-12 col-md-10 col-lg-6 col-xl-5">
 							<div class="home__content">
-								<h1 class="home__title">燃气灶</h1>
-								<p class="home__text">燃气灶是用合成气，天然气，冷凝，丁烷，液化石油气或其他易燃气体等可燃气体提供燃料的炉具。在天然气出现之前，炊具只能是煤或木材等固体燃料。</p>
+								<h1 class="home__title">手表</h1>
+								<p class="home__text">是用“石英晶体”作为振荡器，通过电子分频去控制马达运转，带动指针，走时精度很高。电子行针表。即是将电子机芯与石英机芯组合而成的，既有电子显示又有表针行走指示的手表。</p>
 								<a href="product.jsp" class="home__link">了解更多</a>
 							</div>
 						</div>
@@ -181,13 +188,13 @@
 				</div>
 			</div>
 			
-			<div class="home__slide" data-bg="../img/home/slide2.jpg">
+			<div class="home__slide" data-bg="../img/home/desk.jpg">
 				<div class="container">
 					<div class="row">
 						<div class="col-12 col-md-10 col-lg-6 col-xl-5">
 							<div class="home__content">
-								<h1 class="home__title">咖啡壶</h1>
-								<p class="home__text">一种冲煮咖啡的器具。咖啡壶是欧洲最早的发明之一，约在1685年于法国问世，在路易十五时期在各地广为流传。现代电咖啡壶有三种：渗滤式、滴漏式和真空式。</p>
+								<h1 class="home__title">家具</h1>
+								<p class="home__text">家具的类型、数量、功能、形式、风格和制作水平以及当时的占有情况，还反映了一个国家与地区在某一历史时期的社会生活方式，社会物质文明的水平以及历史文化特征。家具是某一国家或地域在某一历史时期社会生产力发展水平的标志，是某种生活方式的缩影，是某种文化形态的显现，因而家具凝聚了丰富而深刻的社会性。</p>
 								<a href="product.jsp" class="home__link">了解更多</a>
 							</div>
 						</div>
@@ -195,13 +202,13 @@
 				</div>
 			</div>
 
-			<div class="home__slide" data-bg="../img/home/slide3.jpg">
+			<div class="home__slide" data-bg="../img/home/pen.jpg">
 				<div class="container">
 					<div class="row">
 						<div class="col-12 col-md-10 col-lg-6 col-xl-5">
 							<div class="home__content">
-								<h1 class="home__title">洗衣机</h1>
-								<p class="home__text">滚筒洗衣机发源于欧洲，洗衣方法是模仿棒锤击打衣物原理设计。滚筒洗衣机是由不锈钢内桶，机械程序控制器，经过磷化、电泳、喷涂三重保护的外壳，和若干笨重的水泥块用于平衡滚筒旋转时产生的巨大离心力做重复运动，加上洗衣粉和水的共同作用使衣物洗涤干净。</p>
+								<h1 class="home__title">文房四宝</h1>
+								<p class="home__text">梅尧臣《再和潘歙州纸砚》诗：“文房四宝出二郡，迩来赏玩君与予。”</p>
 								<a href="product.jsp" class="home__link">了解更多</a>
 							</div>
 						</div>
@@ -237,96 +244,99 @@
 					<div class="product-grid row">
 						<div class="col-12 col-md-8 col-xl-6">
 							<article class="product product--big">
-								<a href="product.jsp" class="product__link"></a>
-								<img class="product__cover" src="../img/products/cover.jpg" alt="">
-								<a href="#" class="product__add"><svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px"><path fill-rule="evenodd" d="M15.000,8.000 L8.000,8.000 L8.000,15.000 L7.000,15.000 L7.000,8.000 L-0.000,8.000 L-0.000,7.000 L7.000,7.000 L7.000,-0.000 L8.000,-0.000 L8.000,7.000 L15.000,7.000 L15.000,8.000 Z"/></svg></a>
+								<a href="../usercontrol?function=product&no=CZ888898" class="product__link"></a>
+								<img class="product__cover" src="../img/picture/016.jpg" alt="">
+								<a href="../usercontrol?function=productadd&no=CZ888898" class="product__add"><svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px"><path fill-rule="evenodd" d="M15.000,8.000 L8.000,8.000 L8.000,15.000 L7.000,15.000 L7.000,8.000 L-0.000,8.000 L-0.000,7.000 L7.000,7.000 L7.000,-0.000 L8.000,-0.000 L8.000,7.000 L15.000,7.000 L15.000,8.000 Z"/></svg></a>
 								<footer class="product__footer">
-									<h3 class="product__title">Coffee Machine cm311</h3>
-									<span class="product__price">$1 349</span>
+									<h3 class="product__title">华为手环4</h3>
+									<span class="product__price">￥159.00</span>
 								</footer>
 							</article>
 						</div>
 
 						<div class="col-6 col-md-4 col-xl-3">
 							<article class="product">
-								<a href="product.jsp" class="product__link"></a>
+								<a href="../usercontrol?function=product&no=CZ845788" class="product__link"></a>
 								<div class="product__img">
-									<img src="../img/products/product2.png" alt="">
+									<!-- <img src="../img/products/product2.png" alt=""> -->
+									<img alt="" src="../img/picture/001.jpg">
 								</div>
-								<a href="#" class="product__add"><svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px"><path fill-rule="evenodd" d="M15.000,8.000 L8.000,8.000 L8.000,15.000 L7.000,15.000 L7.000,8.000 L-0.000,8.000 L-0.000,7.000 L7.000,7.000 L7.000,-0.000 L8.000,-0.000 L8.000,7.000 L15.000,7.000 L15.000,8.000 Z"/></svg></a>
+								<a href="../usercontrol?function=productadd&no=CZ845788" class="product__add"><svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px"><path fill-rule="evenodd" d="M15.000,8.000 L8.000,8.000 L8.000,15.000 L7.000,15.000 L7.000,8.000 L-0.000,8.000 L-0.000,7.000 L7.000,7.000 L7.000,-0.000 L8.000,-0.000 L8.000,7.000 L15.000,7.000 L15.000,8.000 Z"/></svg></a>
 								<footer class="product__footer">
-									<h3 class="product__title">Forged kettle 0.8</h3>
-									<span class="product__price">$1 599</span>
+									<h3 class="product__title">usb安卓数据线快充</h3>
+									<span class="product__price">￥7.90</span>
 								</footer>
 							</article>
 						</div>
 
 						<div class="col-6 col-md-4 col-xl-3">
 							<article class="product">
-								<a href="product.jsp" class="product__link"></a>
+								<a href="../usercontrol?function=product&no=AH000004" class="product__link"></a>
 								<div class="product__img">
-									<img src="../img/products/product3.png" alt="">
+									<!-- <img src="../img/products/product3.png" alt=""> -->
+									<img alt="" src="../img/picture/014.jpg">
 								</div>
-								<a href="#" class="product__add"><svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px"><path fill-rule="evenodd" d="M15.000,8.000 L8.000,8.000 L8.000,15.000 L7.000,15.000 L7.000,8.000 L-0.000,8.000 L-0.000,7.000 L7.000,7.000 L7.000,-0.000 L8.000,-0.000 L8.000,7.000 L15.000,7.000 L15.000,8.000 Z"/></svg></a>
+								<a href="../usercontrol?function=productadd&no=AH000004" class="product__add"><svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px"><path fill-rule="evenodd" d="M15.000,8.000 L8.000,8.000 L8.000,15.000 L7.000,15.000 L7.000,8.000 L-0.000,8.000 L-0.000,7.000 L7.000,7.000 L7.000,-0.000 L8.000,-0.000 L8.000,7.000 L15.000,7.000 L15.000,8.000 Z"/></svg></a>
 								<footer class="product__footer">
-									<h3 class="product__title">Power bank B600</h3>
-									<span class="product__price product__price--new">$55</span>
+									<h3 class="product__title">护眼台灯</h3>
+									<span class="product__price product__price--new">￥69.00</span>
 								</footer>
 							</article>
 						</div>
 
 						<div class="col-6 col-md-4 col-xl-3">
 							<article class="product">
-								<a href="product.jsp" class="product__link"></a>
+								<a href="../usercontrol?function=product&no=AH000001" class="product__link"></a>
 								<div class="product__img">
-									<img src="../img/products/product5.png" alt="">
+									<!-- <img src="../img/products/product5.png" alt=""> -->
+									<img alt="" src="../img/picture/025.jpg">
 								</div>
-								<a href="#" class="product__add"><svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px"><path fill-rule="evenodd" d="M15.000,8.000 L8.000,8.000 L8.000,15.000 L7.000,15.000 L7.000,8.000 L-0.000,8.000 L-0.000,7.000 L7.000,7.000 L7.000,-0.000 L8.000,-0.000 L8.000,7.000 L15.000,7.000 L15.000,8.000 Z"/></svg></a>
+								<a href="../usercontrol?function=productadd&no=AH000001" class="product__add"><svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px"><path fill-rule="evenodd" d="M15.000,8.000 L8.000,8.000 L8.000,15.000 L7.000,15.000 L7.000,8.000 L-0.000,8.000 L-0.000,7.000 L7.000,7.000 L7.000,-0.000 L8.000,-0.000 L8.000,7.000 L15.000,7.000 L15.000,8.000 Z"/></svg></a>
 								<footer class="product__footer">
-									<h3 class="product__title">Microwave oven M707</h3>
-									<span class="product__price">$430</span>
+									<h3 class="product__title">卧室储物小柜子</h3>
+									<span class="product__price">￥44.00</span>
 								</footer>
 							</article>
 						</div>
 
 						<div class="col-6 col-md-4 col-xl-3">
 							<article class="product">
-								<a href="product.jsp" class="product__link"></a>
+								<a href="../usercontrol?function=product&no=AH000003" class="product__link"></a>
 								<div class="product__img">
-									<img src="../img/products/product4.png" alt="">
+									<img src="../img/picture/018.jpg" alt="">
 								</div>
-								<a href="#" class="product__add"><svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px"><path fill-rule="evenodd" d="M15.000,8.000 L8.000,8.000 L8.000,15.000 L7.000,15.000 L7.000,8.000 L-0.000,8.000 L-0.000,7.000 L7.000,7.000 L7.000,-0.000 L8.000,-0.000 L8.000,7.000 L15.000,7.000 L15.000,8.000 Z"/></svg></a>
+								<a href="../usercontrol?function=productadd&no=AH000003" class="product__add"><svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px"><path fill-rule="evenodd" d="M15.000,8.000 L8.000,8.000 L8.000,15.000 L7.000,15.000 L7.000,8.000 L-0.000,8.000 L-0.000,7.000 L7.000,7.000 L7.000,-0.000 L8.000,-0.000 L8.000,7.000 L15.000,7.000 L15.000,8.000 Z"/></svg></a>
 								<footer class="product__footer">
-									<h3 class="product__title">Toaster t298</h3>
-									<span class="product__price">$200</span>
+									<h3 class="product__title">简约沙发</h3>
+									<span class="product__price">￥2350.00</span>
 								</footer>
 							</article>
 						</div>
 
 						<div class="col-6 col-md-4 col-xl-3">
 							<article class="product">
-								<a href="product.jsp" class="product__link"></a>
+								<a href="../usercontrol?function=product&no=ZX156472" class="product__link"></a>
 								<div class="product__img">
-									<img src="../img/products/product.png" alt="">
+									<img src="../img//picture/017.jpg" alt="">
 								</div>
-								<a href="#" class="product__add"><svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px"><path fill-rule="evenodd" d="M15.000,8.000 L8.000,8.000 L8.000,15.000 L7.000,15.000 L7.000,8.000 L-0.000,8.000 L-0.000,7.000 L7.000,7.000 L7.000,-0.000 L8.000,-0.000 L8.000,7.000 L15.000,7.000 L15.000,8.000 Z"/></svg></a>
+								<a href="../usercontrol?function=productadd&no=ZX156472" class="product__add"><svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px"><path fill-rule="evenodd" d="M15.000,8.000 L8.000,8.000 L8.000,15.000 L7.000,15.000 L7.000,8.000 L-0.000,8.000 L-0.000,7.000 L7.000,7.000 L7.000,-0.000 L8.000,-0.000 L8.000,7.000 L15.000,7.000 L15.000,8.000 Z"/></svg></a>
 								<footer class="product__footer">
-									<h3 class="product__title">Iron s101</h3>
-									<span class="product__price product__price--new">$137</span>
+									<h3 class="product__title">活着</h3>
+									<span class="product__price product__price--new">￥24.80</span>
 								</footer>
 							</article>
 						</div>
 
 						<div class="col-6 col-md-4 col-xl-3">
 							<article class="product">
-								<a href="product.jsp" class="product__link"></a>
+								<a href="../usercontrol?function=product&no=ZX156467" class="product__link"></a>
 								<div class="product__img">
-									<img src="../img/products/product6.png" alt="">
+									<img src="../img//picture/005.jpg" alt="">
 								</div>
-								<a href="#" class="product__add"><svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px"><path fill-rule="evenodd" d="M15.000,8.000 L8.000,8.000 L8.000,15.000 L7.000,15.000 L7.000,8.000 L-0.000,8.000 L-0.000,7.000 L7.000,7.000 L7.000,-0.000 L8.000,-0.000 L8.000,7.000 L15.000,7.000 L15.000,8.000 Z"/></svg></a>
+								<a href="../usercontrol?function=productadd&no=ZX156467" class="product__add"><svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px"><path fill-rule="evenodd" d="M15.000,8.000 L8.000,8.000 L8.000,15.000 L7.000,15.000 L7.000,8.000 L-0.000,8.000 L-0.000,7.000 L7.000,7.000 L7.000,-0.000 L8.000,-0.000 L8.000,7.000 L15.000,7.000 L15.000,8.000 Z"/></svg></a>
 								<footer class="product__footer">
-									<h3 class="product__title">Meat grinder zx345</h3>
-									<span class="product__price">$399</span>
+									<h3 class="product__title">朝花夕拾</h3>
+									<span class="product__price">￥38.50</span>
 								</footer>
 							</article>
 						</div>
@@ -337,92 +347,7 @@
 	</div>
 	<!-- end product grid -->
 
-	<!-- new items -->
-	<section class="section">
-		<div class="container">
-			<div class="row">
-				<div class="col-12">
-					<div class="section__title">
-						<h2>New items</h2>
-
-						<div class="section__nav">
-							<button class="section__btn section__btn--prev" type="button">
-								<i class="lnr lnr-arrow-left"></i>
-							</button>
-							<button class="section__btn section__btn--next" type="button">
-								<i class="lnr lnr-arrow-right"></i>
-							</button>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-12">
-					<div class="product-slider owl-carousel">
-						<article class="product">
-							<a href="product.jsp" class="product__link"></a>
-							<div class="product__img">
-								<img src="../img/products/product3.png" alt="">
-							</div>
-							<a href="#" class="product__add"><svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px"><path fill-rule="evenodd" d="M15.000,8.000 L8.000,8.000 L8.000,15.000 L7.000,15.000 L7.000,8.000 L-0.000,8.000 L-0.000,7.000 L7.000,7.000 L7.000,-0.000 L8.000,-0.000 L8.000,7.000 L15.000,7.000 L15.000,8.000 Z"/></svg></a>
-							<footer class="product__footer">
-								<h3 class="product__title">Power bank B600</h3>
-								<span class="product__price product__price--new">$55</span>
-							</footer>
-						</article>
-
-						<article class="product">
-							<a href="product.jsp" class="product__link"></a>
-							<div class="product__img">
-								<img src="../img/products/product.png" alt="">
-							</div>
-							<a href="#" class="product__add"><svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px"><path fill-rule="evenodd" d="M15.000,8.000 L8.000,8.000 L8.000,15.000 L7.000,15.000 L7.000,8.000 L-0.000,8.000 L-0.000,7.000 L7.000,7.000 L7.000,-0.000 L8.000,-0.000 L8.000,7.000 L15.000,7.000 L15.000,8.000 Z"/></svg></a>
-							<footer class="product__footer">
-								<h3 class="product__title">Iron s101</h3>
-								<span class="product__price product__price--new">$137</span>
-							</footer>
-						</article>
-
-						<article class="product">
-							<a href="product.jsp" class="product__link"></a>
-							<div class="product__img">
-								<img src="../img/products/product7.png" alt="">
-							</div>
-							<a href="#" class="product__add"><svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px"><path fill-rule="evenodd" d="M15.000,8.000 L8.000,8.000 L8.000,15.000 L7.000,15.000 L7.000,8.000 L-0.000,8.000 L-0.000,7.000 L7.000,7.000 L7.000,-0.000 L8.000,-0.000 L8.000,7.000 L15.000,7.000 L15.000,8.000 Z"/></svg></a>
-							<footer class="product__footer">
-								<h3 class="product__title">Beauty mirror m142</h3>
-								<span class="product__price product__price--new">$37</span>
-							</footer>
-						</article>
-
-						<article class="product">
-							<a href="product.jsp" class="product__link"></a>
-							<div class="product__img">
-								<img src="../img/products/product8.png" alt="">
-							</div>
-							<a href="#" class="product__add"><svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px"><path fill-rule="evenodd" d="M15.000,8.000 L8.000,8.000 L8.000,15.000 L7.000,15.000 L7.000,8.000 L-0.000,8.000 L-0.000,7.000 L7.000,7.000 L7.000,-0.000 L8.000,-0.000 L8.000,7.000 L15.000,7.000 L15.000,8.000 Z"/></svg></a>
-							<footer class="product__footer">
-								<h3 class="product__title">Cutting board SHUM500</h3>
-								<span class="product__price product__price--new">$100</span>
-							</footer>
-						</article>
-
-						<article class="product">
-							<a href="product.jsp" class="product__link"></a>
-							<div class="product__img">
-								<img src="../img/products/product4.png" alt="">
-							</div>
-							<a href="#" class="product__add"><svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px"><path fill-rule="evenodd" d="M15.000,8.000 L8.000,8.000 L8.000,15.000 L7.000,15.000 L7.000,8.000 L-0.000,8.000 L-0.000,7.000 L7.000,7.000 L7.000,-0.000 L8.000,-0.000 L8.000,7.000 L15.000,7.000 L15.000,8.000 Z"/></svg></a>
-							<footer class="product__footer">
-								<h3 class="product__title">Toaster t301</h3>
-								<span class="product__price product__price--new">$250</span>
-							</footer>
-						</article>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- end new items -->
+	
 
 	<!-- subscribe -->
 	<div class="section">

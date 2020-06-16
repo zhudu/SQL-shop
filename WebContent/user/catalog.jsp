@@ -74,7 +74,14 @@
 
 							<a href="cart.jsp" class="header__cart">
 								<i class="lnr lnr-cart"></i>
-								<span>2</span>
+								<%
+								String cartnum=String.valueOf(session.getAttribute("cartnum"));
+								if(cartnum.equals("null")==false){
+									if(cartnum.equals("0")==false){
+										out.print("<span>"+cartnum+"</span>");
+									}
+								}
+								%>
 							</a>
 							
 							<button class="header__menu" type="button">
@@ -84,9 +91,9 @@
 							</button>
 						</div>
 
-						<form action="#" class="header__form">
-							<input type="text" placeholder="点击Enter进行搜索">
-							<button type="button">
+						<form action="../usercontrol?function=search" method="post" class="header__form">
+							<input id="search" name="search" type="text" placeholder="点击Enter进行搜索">
+							<button type="submit">
 								<span></span>
 								<span></span>
 							</button>
@@ -130,8 +137,6 @@
 			<button type="button"><i class="lnr lnr-arrow-left"></i> Back</button>
 
 			<nav>
-				<a href="product.jsp">Product style 1</a>
-				<a href="product2.jsp">Product style 2</a>
 				<a href="cart.jsp">Cart</a>
 				<a href="checkout.jsp">Checkout</a>
 				<a href="delivery.jsp">交货</a>
@@ -156,10 +161,10 @@
 		</div>
 
 		<nav class="catmenu__nav">
-			<a href="catalog.jsp">厨具</a>
-			<a href="catalog.jsp">家具</a>
-			<a href="catalog.jsp">健康</a>
-			<a href="catalog.jsp">配饰</a>
+			<a href="../usercontrol?function=class&class=文具">文具</a>
+			<a href="../usercontrol?function=class&class=家具">家具</a>
+			<a href="../usercontrol?function=class&class=手表">手表</a>
+			<a href="../usercontrol?function=class&class=服饰">服饰</a>
 		</nav>
 	</div>
 	<!-- end catmenu -->
@@ -186,56 +191,49 @@
 				<!-- sidebar -->
 				<div class="col-12 col-xl-3">
 					<div class="catalog-menu">
-						<button class="catalog-menu__btn" type="button" data-toggle="collapse" data-target="#collapse0" aria-expanded="false" aria-controls="collapse0">Menu</button>
+						<button class="catalog-menu__btn" type="button" data-toggle="collapse" data-target="#collapse0" aria-expanded="false" aria-controls="collapse0">目录</button>
 
 						<div class="collapse catalog-menu__wrap" id="collapse0">
-							<div class="catalog-menu__item">
-								<button type="button" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">Drinks</button>
+							<%
+								String classselect=(String)session.getAttribute("classselect");
+									out.print(classselect);
+							%>
+							<!-- <div class="catalog-menu__item">
+								<button type="button" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">文具</button>
 
 								<div class="collapse show" id="collapse1">
 									<div class="catalog-menu__collapse">
-										<a href="#">Kettles</a>
-										<a class="active" href="#">Coffee stations</a>
-										<a href="#">Coffee makers</a>
-										<a href="#">Blenders</a>
-										<a href="#">Juicers</a>
-										<a href="#">Coffee grinders</a>
-										<a href="#">Wine Decanters</a>
-										<a href="#">Coffee makers</a>
+										<a class="active" href="#">文具</a>
 									</div>
 								</div>
 							</div>
 
 							<div class="catalog-menu__item">
-								<button type="button" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">Deserts</button>
+								<button type="button" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">家具</button>
 
 								<div class="collapse" id="collapse2">
 									<div class="catalog-menu__collapse">
-										<a href="#">Kettles</a>
-										<a href="#">Coffee stations</a>
-										<a href="#">Coffee makers</a>
-										<a href="#">Blenders</a>
-										<a href="#">Juicers</a>
-										<a href="#">Coffee grinders</a>
-										<a href="#">Wine Decanters</a>
-										<a href="#">Coffee makers</a>
+										<a href="#">家具</a>
 									</div>
 								</div>
 							</div>
 
 							<div class="catalog-menu__item">
-								<button type="button" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">Other</button>
+								<button type="button" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">手表</button>
 
 								<div class="collapse" id="collapse3">
 									<div class="catalog-menu__collapse">
-										<a href="#">Kettles</a>
-										<a href="#">Coffee stations</a>
-										<a href="#">Coffee makers</a>
-										<a href="#">Blenders</a>
-										<a href="#">Juicers</a>
-										<a href="#">Coffee grinders</a>
-										<a href="#">Wine Decanters</a>
-										<a href="#">Coffee makers</a>
+										<a href="#">手表</a>
+									</div>
+								</div>
+							</div>
+							
+							<div class="catalog-menu__item">
+								<button type="button" data-toggle="collapse" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">服饰</button>
+
+								<div class="collapse" id="collapse4">
+									<div class="catalog-menu__collapse">
+										<a href="#">服饰</a>
 									</div>
 								</div>
 							</div>
@@ -244,7 +242,7 @@
 				</div>
 				<!-- end sidebar -->
 
-				<!-- product-grid -->
+				<!-- product-grid 
 				<div class="col-12 col-xl-9">
 					<div class="product-grid row">
 						<div class="col-6 col-md-4 col-xl-4">
@@ -371,9 +369,9 @@
 									<span class="product__price product__price--new">$65</span>
 								</footer>
 							</article>
-						</div>
+						</div>-->
 
-						<!-- pagination -->
+						<!-- pagination 
 						<div class="col-12">
 							<div class="pagination">
 								<a href="#" class="pagination__nav">
@@ -402,79 +400,7 @@
 	</div>
 	<!-- end content -->
 
-	<!-- view also -->
-	<section class="section">
-		<div class="container">
-			<div class="row">
-				<div class="col-12">
-					<div class="section__title">
-						<h2>View also</h2>
-					</div>
-				</div>
-
-				<div class="col-12">
-					<div class="product-grid row">
-						<div class="col-6 col-md-4 col-xl-3">
-							<article class="product">
-								<a href="product.jsp" class="product__link"></a>
-								<div class="product__img">
-									<img src="../img/products/product3.png" alt="">
-								</div>
-								<a href="#" class="product__add"><svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px"><path fill-rule="evenodd" d="M15.000,8.000 L8.000,8.000 L8.000,15.000 L7.000,15.000 L7.000,8.000 L-0.000,8.000 L-0.000,7.000 L7.000,7.000 L7.000,-0.000 L8.000,-0.000 L8.000,7.000 L15.000,7.000 L15.000,8.000 Z"/></svg></a>
-								<footer class="product__footer">
-									<h3 class="product__title">Power bank B600</h3>
-									<span class="product__price">$55</span>
-								</footer>
-							</article>
-						</div>
-
-						<div class="col-6 col-md-4 col-xl-3">
-							<article class="product">
-								<a href="product.jsp" class="product__link"></a>
-								<div class="product__img">
-									<img src="../img/products/product.png" alt="">
-								</div>
-								<a href="#" class="product__add"><svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px"><path fill-rule="evenodd" d="M15.000,8.000 L8.000,8.000 L8.000,15.000 L7.000,15.000 L7.000,8.000 L-0.000,8.000 L-0.000,7.000 L7.000,7.000 L7.000,-0.000 L8.000,-0.000 L8.000,7.000 L15.000,7.000 L15.000,8.000 Z"/></svg></a>
-								<footer class="product__footer">
-									<h3 class="product__title">Iron s101</h3>
-									<span class="product__price">$137</span>
-								</footer>
-							</article>
-						</div>
-
-						<div class="col-6 col-md-4 col-xl-3">
-							<article class="product">
-								<a href="product.jsp" class="product__link"></a>
-								<div class="product__img">
-									<img src="../img/products/product7.png" alt="">
-								</div>
-								<a href="#" class="product__add"><svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px"><path fill-rule="evenodd" d="M15.000,8.000 L8.000,8.000 L8.000,15.000 L7.000,15.000 L7.000,8.000 L-0.000,8.000 L-0.000,7.000 L7.000,7.000 L7.000,-0.000 L8.000,-0.000 L8.000,7.000 L15.000,7.000 L15.000,8.000 Z"/></svg></a>
-								<footer class="product__footer">
-									<h3 class="product__title">Beauty mirror m142</h3>
-									<span class="product__price">$37</span>
-								</footer>
-							</article>
-						</div>
-
-						<div class="col-6 col-md-4 col-xl-3">
-							<article class="product">
-								<a href="product.jsp" class="product__link"></a>
-								<div class="product__img">
-									<img src="../img/products/product8.png" alt="">
-								</div>
-								<a href="#" class="product__add"><svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px"><path fill-rule="evenodd" d="M15.000,8.000 L8.000,8.000 L8.000,15.000 L7.000,15.000 L7.000,8.000 L-0.000,8.000 L-0.000,7.000 L7.000,7.000 L7.000,-0.000 L8.000,-0.000 L8.000,7.000 L15.000,7.000 L15.000,8.000 Z"/></svg></a>
-								<footer class="product__footer">
-									<h3 class="product__title">Cutting board SHUM500</h3>
-									<span class="product__price">$100</span>
-								</footer>
-							</article>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- end view also -->
+	
 
 	<!-- subscribe -->
 	<div class="section">
