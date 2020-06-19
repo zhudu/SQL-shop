@@ -17,6 +17,7 @@ import shop.entity.Delivery;
 import shop.entity.Employees;
 import shop.entity.Form;
 import shop.entity.Goods;
+import shop.entity.Merchant;
 import shop.entity.Sort;
 import shop.service.Userservice;
 
@@ -171,32 +172,41 @@ public class UserServiceImpl implements Userservice{
 			f=it.next();
 			List<Goods> goods=ud.Form2Goods(f.getGoo_no());
 			Iterator<Goods> it1=goods.iterator();
-			g=it1.next();
-			List<Sort> sort=ud.Form2Sort(f.getFor_no());
-			Iterator<Sort> it2=sort.iterator();
-			s=it2.next();
-			List<Delivery> deliveriy=ud.Sort2Delivery(s.getSor_no());
-			Iterator<Delivery> it3=deliveriy.iterator();
-			d=it3.next();
-			info.append("<tr>\r\n" + 
-					"<td><a href=\"#\">"+f.getFor_no()+"</a></td>\r\n" + 
-					"<td>"+g.getGoo_name()+"</td>\r\n" + 
-					"<td>"+f.getFor_time().substring(0, 10)+"</td>\r\n" + 
-					"<td>"+f.getFor_num()+"</td>\r\n" + 
-					"<td>"+f.getFor_num()*g.getGoo_price()+"</td>\r\n");
-			if(s.getSor_state()==0) {
-				info.append("<td>待出库</td>\r\n" + 
-						"<td><button type=\"button\"><i class=\"lnr lnr-sync\"></i></button></td>\r\n</tr>");
-			}else if (s.getSor_state()==1) {
-				if(d.getDel_status()==0) {
-					info.append("<td>待配送</td>\r\n" + 
-							"<td><button type=\"button\"><i class=\"lnr lnr-sync\"></i></button></td>\r\n</tr>");
-				}else if (d.getDel_status()==1) {
-					info.append("<td>配送中</td>\r\n" + 
-							"<td><button type=\"button\"><i class=\"lnr lnr-sync\"></i></button></td>\r\n</tr>");
-				}else if (d.getDel_status()==2) {
-					info.append("<td>已送达，请确认</td>\r\n" + 
-							"<td><button type=\"button\"><i class=\"lnr lnr-sync\"></i></button></td>\r\n</tr>");
+			if(it1.hasNext()) {
+				g=it1.next();
+				info.append("<tr>\r\n" + 
+						"<td><a href=\"#\">"+f.getFor_no()+"</a></td>\r\n" + 
+						"<td>"+g.getGoo_name()+"</td>\r\n" + 
+						"<td>"+f.getFor_time().substring(0, 10)+"</td>\r\n" + 
+						"<td>"+f.getFor_num()+"</td>\r\n" + 
+						"<td>"+f.getFor_num()*g.getGoo_price()+"</td>\r\n");
+				List<Sort> sort=ud.Form2Sort(f.getFor_no());
+				Iterator<Sort> it2=sort.iterator();
+				if(it2.hasNext()) {
+					s=it2.next();
+					List<Delivery> deliveriy=ud.Sort2Delivery(s.getSor_no());
+					Iterator<Delivery> it3=deliveriy.iterator();
+					if(it3.hasNext()) {
+						d=it3.next();
+						
+						if(s.getSor_state()==0) {
+							info.append("<td>待出库</td>\r\n" + 
+									"<td><button type=\"button\"><i class=\"lnr lnr-sync\"></i></button></td>\r\n</tr>");
+						}else if (s.getSor_state()==1) {
+							if(d.getDel_status()==0) {
+								info.append("<td>待配送</td>\r\n" + 
+										"<td><button type=\"button\"><i class=\"lnr lnr-sync\"></i></button></td>\r\n</tr>");
+							}else if (d.getDel_status()==1) {
+								info.append("<td>配送中</td>\r\n" + 
+										"<td><button type=\"button\"><i class=\"lnr lnr-sync\"></i></button></td>\r\n</tr>");
+							}else if (d.getDel_status()==2) {
+								info.append("<td>已送达，请确认</td>\r\n" + 
+										"<td><button type=\"button\"><i class=\"lnr lnr-sync\"></i></button></td>\r\n</tr>");
+							}
+						}
+					}
+				}else {
+					info.append("</tr>");
 				}
 			}
 		}
@@ -248,6 +258,10 @@ public class UserServiceImpl implements Userservice{
 		Iterator<Goods> it=goods.iterator();
 		Goods g1;
 		g1=it.next();
+		List<Merchant> Mer=ud.searchmer(g1.getMer_no());
+		Iterator<Merchant> it1=Mer.iterator();
+		Merchant m;
+		m=it1.next();
 		StringBuffer info = new StringBuffer();
 		info.append("<div class=\"col-12 col-md-6\">\r\n" + 
 				"<div class=\"product-head__content\">\r\n" + 
@@ -280,12 +294,13 @@ public class UserServiceImpl implements Userservice{
 				"<input id=\"num\"  name=\"num\" type=\"text\" value=\"1\">\r\n" + 
 				"<button id=\"rb\">\r\n" + 
 				"<i class=\"lnr lnr-chevron-right\"></i>\r\n" + 
-				"</button>\r\n</div>\r\n</div>\r\n\r\n" + 
+				"</button>\r\n</div></div>\r\n\r\n" + 
 				"<div class=\"product-head__list\">\r\n" + 
 				"<button class=\"product-head__btn product-head__btn--dark\" type=\"submit\">加入购物车</button>\r\n" + 
 				"\r\n" + 
 				"<span class=\"product-head__price\">￥"+g1.getGoo_price()+"</span>\r\n" + 
 				"</div>\r\n" + 
+				"<p class=\"product-head__text product-head__text--dark\">"+m.getMer_name()+"</p>"+
 				"</form>\r\n" + 
 				"</div>\r\n" + 
 				"</div>\r\n" + 
@@ -561,26 +576,27 @@ public class UserServiceImpl implements Userservice{
 		int i;
 		Random random = new Random();
 		String no="";
-		do {
-			for(i=0;i<5;i++) {
-				int j=random.nextInt(100);
-				if(j<10) {
-					no=no+"0"+String.valueOf(j);
-				}else {
-					no=no+String.valueOf(j);
-				}
-			}
-		} while (ud.Formno(no)==1);
-		f.setFor_no(no);
 		String clino=f.getCli_no();
 		List<Cart> c=ud.cart(clino);
 		Iterator<Cart> it=c.iterator();
 		Cart c1;
 		while(it.hasNext()) {
+			do {
+				for(i=0;i<5;i++) {
+					int j=random.nextInt(100);
+					if(j<10) {
+						no=no+"0"+String.valueOf(j);
+					}else {
+						no=no+String.valueOf(j);
+					}
+				}
+			} while (ud.Formno(no)==1);
+			f.setFor_no(no);
 			c1=it.next();
 			f.setFor_num(c1.getCart_num());
 			f.setGoo_no(c1.getGoo_no());
 			ud.addform(f);
+			no="";
 		}
 		return 1;
 	}
@@ -589,5 +605,11 @@ public class UserServiceImpl implements Userservice{
 	public int updatecart(Cart c) {
 		int num=ud.updatecart(c);
 		return 1;
+	}
+
+	@Override
+	public void test(String no) {
+		ud.test(no);
+		
 	}
 }

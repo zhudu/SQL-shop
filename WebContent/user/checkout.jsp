@@ -72,7 +72,7 @@
 								<i class="lnr lnr-magnifier"></i>
 							</button>
 
-							<a href="cart.jsp" class="header__cart">
+							<a href="../usercontrol?function=cart" class="header__cart">
 								<i class="lnr lnr-cart"></i>
 								<%
 								String cartnum=String.valueOf(session.getAttribute("cartnum"));
@@ -137,7 +137,7 @@
 			<button type="button"><i class="lnr lnr-arrow-left"></i> Back</button>
 
 			<nav>
-				<a href="cart.jsp">Cart</a>
+				<a href="../usercontrol?function=cart">Cart</a>
 				<a href="checkout.jsp">Checkout</a>
 				<a href="delivery.jsp">交货</a>
 				<a href="getintouch.jsp">保持联系</a>
@@ -176,7 +176,7 @@
 				<div class="col-12">
 					<div class="cart__title">
 						<h2>你的订单</h2>
-						<a href="cart.jsp"><i class="lnr lnr-arrow-left"></i> 返回购物车</a>
+						<a href="../usercontrol?function=cart"><i class="lnr lnr-arrow-left"></i> 返回购物车</a>
 					</div>
 				</div>
 

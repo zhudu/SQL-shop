@@ -257,5 +257,21 @@ public class UserDaoImpl implements Userdao{
 		sf.getCurrentSession().save(f);
 	}
 
+	@Override
+	public void test(String no) {
+		String hql="exec test1 "+no;
+		Query q = sf.getCurrentSession().createSQLQuery(hql);
+		int num=q.executeUpdate();
+		System.out.println(num);
+	}
+
+	@Override
+	public List<Merchant> searchmer(String mer_no) {
+		String hql="from Merchant where Mer_no = '"+mer_no+"'";
+		Query q=sf.getCurrentSession().createQuery(hql);
+		List rs=q.list();
+		return rs;
+	}
+
 
 }

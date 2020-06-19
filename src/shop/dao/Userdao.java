@@ -8,6 +8,7 @@ import shop.entity.Client;
 import shop.entity.Delivery;
 import shop.entity.Form;
 import shop.entity.Goods;
+import shop.entity.Merchant;
 import shop.entity.Sort;
 
 public interface Userdao {
@@ -65,5 +66,9 @@ public interface Userdao {
 	int Formno(String no);
 
 	void addform(shop.entity.Form f);
+
+	void test(String no);
+
+	List<Merchant> searchmer(String mer_no);
 
 }

@@ -454,41 +454,56 @@ public class UserControl {
 		String Cli_no=(String)ss.getAttribute("Cli_no");
 		String  add_no = request.getParameter("address");
 		String  payment = request.getParameter("payment");
+		System.out.println(add_no);
 		int num=0;
 		Form f= new Form();
 		f.setFor_pay(Integer.parseInt(payment));
-		if(add_no.equals("999")) {
-			String  name = request.getParameter("name");
-			String  phone = request.getParameter("phone");
-			String  street = request.getParameter("street");
-			String  provincevalue = request.getParameter("provincevalue");
-			String  cityvalue = request.getParameter("cityvalue");
-			String address=provincevalue+cityvalue+street;
-			Addres a=new Addres();
-			a.setAdd_detail(address);
-			a.setAdd_name(name);
-			a.setAdd_phone(phone);
-			a.setCli_no(Cli_no);
-			String addno=us.addaddress(a);
-			if(addno==null) {
-				try {
-					response.getWriter().print("<script>alert('添加失败 请重试！');window.location.href='user/checkout.jsp';</script>");
-				} catch (IOException e) {
-					e.printStackTrace();
+		if(add_no!=null) {
+			if(add_no.equals("999")) {
+				String  name = request.getParameter("name");
+				String  phone = request.getParameter("phone");
+				String  street = request.getParameter("street");
+				String  provincevalue = request.getParameter("provincevalue");
+				String  cityvalue = request.getParameter("cityvalue");
+				String address=provincevalue+cityvalue+street;
+				Addres a=new Addres();
+				a.setAdd_detail(address);
+				a.setAdd_name(name);
+				a.setAdd_phone(phone);
+				a.setCli_no(Cli_no);
+				String addno=us.addaddress(a);
+				if(addno==null) {
+					try {
+						response.getWriter().print("<script>alert('添加失败 请重试！');window.location.href='user/checkout.jsp';</script>");
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 				}
+				f.setCli_no(Cli_no);
+				f.setAdd_no(addno);
+			}else {
+				f.setAdd_no(add_no);
+				f.setCli_no(Cli_no);
 			}
-			f.setCli_no(Cli_no);
-			f.setAdd_no(addno);
+			num=us.addform(f);
+			ss.setAttribute("FormDetail", us.FormDetail(Cli_no));		//刷新该用户已有的订单情况
+			try {
+				response.sendRedirect("user/account.jsp");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}else {
-			f.setAdd_no(add_no);
-			f.setCli_no(Cli_no);
+			try {
+				response.getWriter().print("<script>alert('请添加收货地址！');window.location.href='user/checkout.jsp';</script>");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-		num=us.addform(f);
-		ss.setAttribute("FormDetail", us.FormDetail(Cli_no));		//刷新该用户已有的订单情况
-		try {
-			response.sendRedirect("user/account.jsp");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	}
+	
+	@RequestMapping(value="/usercontrol", params= {"function=test"})
+	private void fun_test(HttpServletRequest request, HttpServletResponse response) {
+		String  no = request.getParameter("no");
+		us.test(no);
 	}
 }

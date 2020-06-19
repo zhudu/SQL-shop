@@ -56,4 +56,6 @@ public interface Userservice {
 
 	int updatecart(Cart c);
 
+	void test(String no);
+
 }
