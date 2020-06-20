@@ -94,9 +94,9 @@ public class AdmDaoImpl implements Admdao{
 
 	@Override
 	public int empdelete(String id) {
-		Query q = sf.getCurrentSession().createQuery("delete from Employees where Emp_no='"+id+"'");
-		int num=q.executeUpdate();
-		return num;
+		String hql="exec proc_newWork '"+id+"'";
+		Query q = sf.getCurrentSession().createSQLQuery(hql);
+		return 1;
 	}
 
 	@Override
