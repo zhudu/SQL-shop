@@ -18,7 +18,7 @@
 
 	<!-- Favicons -->
 	<link rel="icon" type="image/png" href="../icon/temp.ico" sizes="32x32">
-	<link rel="apple-touch-icon" href="icon/temp.ico">
+	<link rel="apple-touch-icon" href="../icon/temp.ico">
 	<link rel="apple-touch-icon" sizes="72x72" href="../icon/apple-touch-icon-72x72.png">
 	<link rel="apple-touch-icon" sizes="114x114" href="../icon/apple-touch-icon-114x114.png">
 	<link rel="apple-touch-icon" sizes="144x144" href="../icon/apple-touch-icon-144x144.png">
@@ -67,6 +67,7 @@
 							<!-- <a href="account.jsp" class="header__phone">
 								8 800 333 00 44
 							</a> -->
+
 							<button class="header__search" type="button">
 								<i class="lnr lnr-magnifier"></i>
 							</button>
@@ -129,7 +130,7 @@
 			<a href="news.jsp">新闻</a>
 			<a href="about.jsp">关于</a>
 			<a class="menu__drop" href="#">Pages</a>
-			<a href="authorization.jsp">登 录 / 注 册</a>
+			<a href="authorization.jsp">登 录 / 登 出</a>
 		</nav>
 
 		<div class="menu__submenu">
@@ -168,133 +169,74 @@
 	</div>
 	<!-- end catmenu -->
 
-	<!-- cart -->
-	<div class="cart">
+	<!-- product head -->
+	<div class="product-head">
 		<div class="container">
 			<div class="row">
-				<div class="col-12">
-					<div class="cart__title">
-						<h2>你的订单</h2>
-						<a href="catalog.jsp"><i class="lnr lnr-arrow-left"></i> 商品</a>
-					</div>
-				</div>
-
-				<div class="col-12">
-					<div class="cart__wrap">
-						<div class="cart__content">
-							<%
-								String cartdetail=(String)session.getAttribute("cartdetail");
-								out.print(cartdetail);
-								%>
-							<!-- <div class="cart__item">
-								<div class="cart__item-img">
-									<img src="../img/products/product6.png" alt="">
-								</div>
-
-								<div class="cart__item-wrap">
-									<div class="cart__item-content">
-										<h3>Meat grinder zx345</h3>
-										<ul>
-											<li>It uses a dictionary</li>
-										</ul>
-									</div>
-
-									<div class="cart__item-quantity">
-										<button>
-											<i class="lnr lnr-chevron-left"></i>
-										</button>
-										<input type="text" value="1">
-										<button>
-											<i class="lnr lnr-chevron-right"></i>
-										</button>
-									</div>
-
-									<div class="cart__item-price">$399</div>
-
-									<button class="cart__item-delete" type="button">
-										<i class="lnr lnr-cross"></i>
-									</button>
+				<%
+					String Goodsproduct=(String)session.getAttribute("Goodsproduct");
+					out.print(Goodsproduct);
+				%>
+				<!-- slider 
+				<div class="col-12 col-md-6">
+					<div class="product-head__content">
+						<div class="product-head__wrap">
+							<div class="product-head__slider owl-carousel">
+								<div class="product-head__slide">
+									<img src="../img/products/product4.png" alt="">
 								</div>
 							</div>
 
-							<div class="cart__item">
-								<div class="cart__item-img">
-									<img src="../img/products/product5.png" alt="">
-								</div>
+							<div class="product-head__navs">
+								<button class="product-head__nav product-head__nav--prev" type="button">
+									<i class="lnr lnr-arrow-left"></i>
+								</button>
+								<button class="product-head__nav product-head__nav--next" type="button">
+									<i class="lnr lnr-arrow-right"></i>
+								</button>
+							</div>
 
-								<div class="cart__item-wrap">
-									<div class="cart__item-content">
-										<h3>Microwave oven M707</h3>
-										<ul>
-											<li>Letraset sheets</li>
-											<li>Lorem Ipsum comes</li>
-											<li>The first line</li>
-											<li>It uses a dictionary</li>
-											<li>Various versions</li>
-										</ul>
-									</div>
+							<div class="product-head__counter"></div>
+						</div>
+					</div>
+				</div>
+				<!-- end slider 
 
-									<div class="cart__item-quantity">
-										<button>
-											<i class="lnr lnr-chevron-left"></i>
-										</button>
-										<input type="text" value="1">
-										<button>
-											<i class="lnr lnr-chevron-right"></i>
-										</button>
-									</div>
-
-									<div class="cart__item-price">$430</div>
-
-									<button class="cart__item-delete" type="button">
-										<i class="lnr lnr-cross"></i>
-									</button>
-								</div>
+				<!-- content 
+				<div class="col-12 col-md-6">
+					<div class="product-head__content product-head__content--2">
+						<h1 class="product-head__title product-head__title--dark">华为手环4</h1>
+						<p class="product-head__text product-head__text--dark">华为官方华为手环4</p>
+						<form action="../usercontrol?function=addproduct&no=CZ888898" method="post">
+						<div class="product-head__list">
+							<div class="cart__item-quantity cart__item-quantity--dark2">
+								<button id="lb">
+									<i class="lnr lnr-chevron-left"></i>
+								</button>
+								<input id="num"  name="num" type="text" value="1">
+								<button id="rb">
+									<i class="lnr lnr-chevron-right"></i>
+								</button>
 							</div>
 						</div>
 
-						<div class="cart__total">
-							<div class="cart__total-wrap">
-								<div class="cart__total-value">共计: <b>$829</b></div>
-								<a href="checkout.jsp" class="cart__total-btn">结算</a>
-							</div>
-						</div><!--  -->
-					</div>
-				</div>
+						<div class="product-head__list">
+							<button class="product-head__btn product-head__btn--dark" type="submit">加入购物车</button>
 
-				<div class="col-12 col-md-6 col-lg-4">
-					<div class="cart__features">
-						<span>
-							<i class="lnr lnr-phone"></i>
-						</span>
-						<h4>支持</h4>
-						<p>如果对使用该系统有疑问，可以致电8 888 888 888或离您最近的服务中心。我们将迅速找到正确的解决方案。</p>
+							<span class="product-head__price">$200</span>
+						</div>
+						</form>
 					</div>
 				</div>
-
-				<div class="col-12 col-md-6 col-lg-4">
-					<div class="cart__features">
-						<span>
-							<i class="lnr lnr-sync"></i>
-						</span>
-						<h4>换货和退货</h4>
-						<p>如果对使用该系统有疑问，可以致电8 888 888 888或离您最近的服务中心。我们将迅速找到正确的解决方案。</p>
-					</div>
-				</div>
-
-				<div class="col-12 col-md-6 col-lg-4">
-					<div class="cart__features">
-						<span>
-							<i class="lnr lnr-location"></i>
-						</span>
-						<h4>定位</h4>
-						<p>如果对使用该系统有疑问，可以致电8 888 888 888或离您最近的服务中心。我们将迅速找到正确的解决方案。</p>
-					</div>
-				</div>
+				<!-- end content -->
 			</div>
 		</div>
 	</div>
-	<!-- end cart -->
+	<!-- end product head -->
+
+	
+
+	
 
 	<!-- subscribe -->
 	<div class="section">

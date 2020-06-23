@@ -8,6 +8,8 @@ import org.apache.derby.catalog.types.UDTAliasInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sun.xml.internal.messaging.saaj.soap.ver1_1.Envelope1_1Impl;
+
 import shop.dao.Empdao;
 import shop.entity.*;
 import shop.service.Empservice;
@@ -23,6 +25,27 @@ public class EmpServiceImpl implements Empservice{
 
 	public void setEd(Empdao ed) {
 		this.ed = ed;
+	}
+
+	@Override
+	public MerchantDetail merlogin(Merchant m) {
+		MerchantDetail md=new MerchantDetail();
+		md.setI(0);
+		String info;
+		List<Merchant> rs=ed.merlogin(m);
+		Iterator<Merchant> it=rs.iterator();
+		Merchant m1=new Merchant();
+		if(it.hasNext()) {
+			m1=it.next();
+		}
+		String mer_no=m1.getMer_no();
+		if(mer_no!=null) {
+			info=Mer2Goods(m);
+			md.setI(1);
+			md.setInfo(info);
+			md.setM(m1);
+		}
+		return md;
 	}
 
 	@Override
@@ -88,8 +111,42 @@ public class EmpServiceImpl implements Empservice{
 	}
 
 	@Override
+	public int register(Merchant m) {
+		if (ed.mercheck(m)==0) {		//账号不存在才创建
+			return ed.register(m);
+		}else {
+			return 0;
+		}
+	}
+
+	@Override
 	public int forget(Employees e) {
 		return ed.forget(e);
+	}
+
+	@Override
+	public int forget(Merchant m) {
+		return ed.forget(m);
+	}
+
+	private String Mer2Goods(Merchant m) {
+		List<Goods> goods=ed.Mer2Goods(m);
+		Iterator<Goods> it=goods.iterator();
+		Goods g;
+		StringBuffer info=new StringBuffer();
+		info.append("<thead>\r\n<tr>\r\n<th>商品条码</th>\r\n<th>品名</th>\r\n<th>售价</th>\r\n" + 
+				"<th>仓库号</th>\r\n<th>类别</th>\r\n<th><a href=\"../admin/Gooadd.jsp\"><button type=\"button\">"
+				+ "<i class=\"lnr lnr-users\"/></button></a></th>\r\n</tr>\r\n</thead><tbody>");
+		while(it.hasNext()) {
+			g=it.next();
+			info.append("<tr>\r\n<td><a href=\"#\">"+g.getGoo_no()+"</a></td>\r\n<td>"+g.getGoo_name()+"</td>\r\n<td>"+g.getGoo_price()+"</td>\r\n" + 
+					"<td>"+g.getStore()+"</td><td>"+g.getGoo_class()+"</td>\r\n<th>\r\n" + 
+					"<a href=\"../admcontrol?function=goo_update&id="+g.getGoo_no()+"\"><button type=\"button\"><i class=\"lnr lnr-sync\"></i></button></a>\r\n" + 
+					"<a href=\"../admcontrol?function=goodelete&id="+g.getGoo_no()+"\"><button type=\"button\"><i class=\"lnr lnr-cross\"></i></button></a>\r\n" + 
+					"</th>\r\n</tr>");
+		}
+		info.append("</tbody>");
+		return info.toString();
 	}
 
 	@Override
@@ -107,21 +164,21 @@ public class EmpServiceImpl implements Empservice{
 			Iterator<Addres> it1=addres.iterator();
 			a=it1.next();
 			info.append("<tr>\r\n<td><a href=\"#\">"+d.getDel_no()+"</a></td>\r\n<td>"+a.getAdd_detail()+"</td>\r\n" + 
-					"<td>"+a.getAdd_phone()+"</td>\r\n<td>"+d.getDel_gettime()+"</td>\r\n");
+					"<td>"+a.getAdd_phone()+"</td>\r\n<td>"+d.getDel_gotime()+"</td>\r\n");
 			if(d.getDel_status()!=2) {
 				info.append("<td>----:--:--</td>");
 			}else {
 				info.append("<td>"+d.getDel_gettime()+"</td>");
 			}
 			if(d.getDel_status()==0) {
-				info.append("<td>待配送</td>\r\n<td><form action=\"../empcontrol?function=delivery?Del_no="+d.getDel_no()+"\" method=\"post\">"+
+				info.append("<td>待配送</td>\r\n<td><form action=\"../empcontrol?function=delivery&Del_no="+d.getDel_no()+"\" method=\"post\">"+
 							"<button type=\"submit\"><i class=\"lnr lnr-select\"></i></button></form></td>\r\n</tr>");
 			}else if (d.getDel_status()==1) {
-				info.append("<td>正在配送</td><td><form action=\"../empcontrol?function=delivery1?Del_no="+d.getDel_no()+"\" method=\"post\">"+
-							"<button type=\"button\"><i class=\"lnr lnr-earth\"></i></button></form></td>\r\n</tr>");
+				info.append("<td>正在配送</td><td><form action=\"../empcontrol?function=delivery1&Del_no="+d.getDel_no()+"\" method=\"post\">"+
+							"<button type=\"submit\"><i class=\"lnr lnr-earth\"></i></button></form></td>\r\n</tr>");
 			}else if (d.getDel_status()==2&&d.getDel_voucher()==0) {
-				info.append("<td>待确认</td><td><form action=\"../empcontrol?function=delivery2?Del_no="+d.getDel_no()+"\" method=\"post\">"+
-							"<button type=\"button\"><i class=\"lnr lnr-sync\"></i></button></form></td>\r\n</tr>");
+				info.append("<td>待确认</td><td><form action=\"../empcontrol?function=delivery2&Del_no="+d.getDel_no()+"\" method=\"post\">"+
+							"<button type=\"submit\"><i class=\"lnr lnr-sync\"></i></button></form></td>\r\n</tr>");
 			}else {
 				info.append("<td>已签收</td><td><button type=\"button\"><i class=\"lnr lnr-sync\"></i></button></td>\r\n</tr>");
 			}
@@ -152,7 +209,7 @@ public class EmpServiceImpl implements Empservice{
 			info.append("<tr>\r\n<td><a href=\"#\">"+s.getSor_no()+"</a></td>\r\n<td>"+g.getGoo_name()+"</td>\r\n" + 
 					"<td>"+s.getSor_time()+"</td>\r\n<td>"+f.getFor_num()+"</td>\r\n");
 			if(s.getSor_state()==0) {
-				info.append("<td>待分拣</td>\r\n<td><form action=\"../empcontrol?function=sort?Sor_no="+s.getSor_no()+"\" method=\"post\"><button type=\"submit\"><i class=\"lnr lnr-arrow-up\">"+
+				info.append("<td>待分拣</td>\r\n<td><form action=\"../empcontrol?function=sort&Sor_no="+s.getSor_no()+"\" method=\"post\"><button type=\"submit\"><i class=\"lnr lnr-arrow-up\">"+
 							"</i></button></form></td>\r\n</tr>");
 			}else if (s.getSor_state()==1) {
 				info.append("<td>任务完成</td>\r\n<td><button type=\"button\"><i class=\"lnr lnr-sync\">"+
@@ -181,23 +238,23 @@ public class EmpServiceImpl implements Empservice{
 					"<td>"+client.getCli_password()+"</td>\r\n<th><a href=\"../admcontrol?function=user_update&id="+client.getCli_no()+"\"><button type=\"button\"><i class=\"lnr lnr-sync\"></i></button></a>\r\n" + 
 					"<form action=\"../admcontrol?function=userdelete&id="+client.getCli_no()+"\"><button type=\"submit\"><i class=\"lnr lnr-cross\"></i></button></form></th>\r\n</tr>");
 		}
-		info.append("</tbody>\r\n</table>\r\n</div>\r\n\r\n<div id=\"tab12\" class=\"tab-pane fade\" role=\"tabpanel\" aria-labelledby=\"tab-12\">\r\n" + 
-				"<table class=\"account__table\">\r\n<thead>\r\n<tr>\r\n<th>商品编号</th>\r\n<th>商品名称</th>\r\n<th>销售价格</th>\r\n" + 
-				"<th>仓库编号</th>\r\n<th>商家编号</th>\r\n<th>商品类别</th>\r\n" + 
-				"<th><a href=\"../admin/Gooadd.jsp\"><button type=\"button\"><i class=\"lnr lnr-users\"/></button></a></th>\r\n" + 
-				"\r\n</tr>\r\n</thead>\r\n\r\n<tbody>");
-		
-		List g=ed.GooList();
-		Iterator<Goods> it1=g.iterator();
-		Goods goods;
-		while(it1.hasNext()) {
-			goods=it1.next();
-			info.append("<tr>\r\n<td><a href=\"#\">"+goods.getGoo_no()+"</a></td>\r\n<td>"+goods.getGoo_name()+"</td>\r\n<td>"+goods.getGoo_price()+"</td>\r\n" + 
-					"<td>"+goods.getStore()+"</td>\r\n<td>"+goods.getMer_no()+"</td>\r\n<td>"+goods.getGoo_class()+"</td>\r\n<th>\r\n" + 
-					"<a href=\"../admcontrol?function=goo_update&id="+goods.getGoo_no()+"\"><button type=\"button\"><i class=\"lnr lnr-sync\"></i></button></a>\r\n" + 
-					"<a href=\"../admcontrol?function=goodelete&id="+goods.getGoo_no()+"\"><button type=\"button\"><i class=\"lnr lnr-cross\"></i></button></a>\r\n" + 
-					"</th>\r\n</tr>");
-		}
+//		info.append("</tbody>\r\n</table>\r\n</div>\r\n\r\n<div id=\"tab12\" class=\"tab-pane fade\" role=\"tabpanel\" aria-labelledby=\"tab-12\">\r\n" + 
+//				"<table class=\"account__table\">\r\n<thead>\r\n<tr>\r\n<th>商品编号</th>\r\n<th>商品名称</th>\r\n<th>销售价格</th>\r\n" + 
+//				"<th>仓库编号</th>\r\n<th>商家编号</th>\r\n<th>商品类别</th>\r\n" + 
+//				"<th><a href=\"../admin/Gooadd.jsp\"><button type=\"button\"><i class=\"lnr lnr-users\"/></button></a></th>\r\n" + 
+//				"\r\n</tr>\r\n</thead>\r\n\r\n<tbody>");
+//		
+//		List g=ed.GooList();
+//		Iterator<Goods> it1=g.iterator();
+//		Goods goods;
+//		while(it1.hasNext()) {
+//			goods=it1.next();
+//			info.append("<tr>\r\n<td><a href=\"#\">"+goods.getGoo_no()+"</a></td>\r\n<td>"+goods.getGoo_name()+"</td>\r\n<td>"+goods.getGoo_price()+"</td>\r\n" + 
+//					"<td>"+goods.getStore()+"</td>\r\n<td>"+goods.getMer_no()+"</td>\r\n<td>"+goods.getGoo_class()+"</td>\r\n<th>\r\n" + 
+//					"<a href=\"../admcontrol?function=goo_update&id="+goods.getGoo_no()+"\"><button type=\"button\"><i class=\"lnr lnr-sync\"></i></button></a>\r\n" + 
+//					"<a href=\"../admcontrol?function=goodelete&id="+goods.getGoo_no()+"\"><button type=\"button\"><i class=\"lnr lnr-cross\"></i></button></a>\r\n" + 
+//					"</th>\r\n</tr>");
+//		}
 		info.append("</tbody>\r\n</table>\r\n</div>\r\n\r\n<div id=\"tab13\" class=\"tab-pane fade\" role=\"tabpanel\" aria-labelledby=\"tab-13\">\r\n" + 
 				"<table class=\"account__table\">\r\n<thead>\r\n<tr>\r\n<th>工号</th>\r\n<th>姓名</th>\r\n" + 
 				"<th>性别</th>\r\n<th>生日</th>\r\n<th>部门</th>\r\n<th>登录密码</th>\r\n" + 
@@ -252,8 +309,32 @@ public class EmpServiceImpl implements Empservice{
 	}
 
 	@Override
+	public String MerDetail(Merchant m) {
+		StringBuffer info = new StringBuffer();
+		info.append("<div class=\"col-12 col-md-6 col-lg-12 col-xl-6\"><label for=\"name\" class=\"form__label\">店名</label>\r\n" + 
+				"<input id=\"name\" type=\"text\" value=\""+m.getMer_name()+"\" name=\"name\" class=\"form__input\"></div>\r\n" + 
+				"<div class=\"col-12 col-md-6 col-lg-12 col-xl-6\"><label for=\"Mer_legal\" class=\"form__label\">法人代表</label>\r\n" + 
+				"<input id=\"Mer_legal\" type=\"text\" value=\""+m.getMer_legal()+"\" name=\"Mer_legal\" class=\"form__input\"></div>\r\n" + 
+				"<div class=\"col-12 col-md-6 col-lg-12 col-xl-6\">\r\n" + 
+				"<label for=\"Mer_phone\" class=\"form__label\">联系电话</label>\r\n" + 
+				"<input id=\"Mer_phone\" type=\"text\" value=\""+m.getMer_phone()+"\" name=\"Mer_phone\" class=\"form__input\">\r\n" + 
+				"</div><div class=\"col-12 col-md-6 col-lg-12 col-xl-6\">\r\n" + 
+				"<label for=\"email\" class=\"form__label\">Email</label>\r\n" + 
+				"<input id=\"email\" type=\"text\" value=\""+m.getMer_email()+"\" name=\"email\" class=\"form__input\">\r\n" + 
+				"</div><div class=\"col-12 col-md-6 col-lg-12\">\r\n" + 
+				"<label for=\"Mer_address\" class=\"form__label\">地址</label>\r\n" + 
+				"<input id=\"Mer_address\" type=\"text\" value=\""+m.getMer_address()+"\" name=\"Mer_address\" class=\"form__input\"></div>");
+		return info.toString();
+	}
+
+	@Override
 	public int UpdateEmp(Employees e) {
 		return ed.UpdateEmp(e);
+	}
+
+	@Override
+	public int UpdateMer(Merchant m) {
+		return ed.UpdateMer(m);
 	}
 
 	@Override
@@ -264,6 +345,42 @@ public class EmpServiceImpl implements Empservice{
 		}else {
 			return ed.changepwd(newe);
 		}
+	}
+
+	@Override
+	public int changepwd(Merchant oldm, Merchant newm) {
+		int num=ed.checkpwd(oldm);
+		if(num==2) {
+			return 2;
+		}else {
+			return ed.changepwd(newm);
+		}
+	}
+
+	@Override
+	public String search(String mer_no) {
+		Merchant m=new Merchant();
+		m.setMer_no(mer_no);
+		List<Goods> goods=ed.Mer2Goods(m);
+		Iterator<Goods> it=goods.iterator();
+		Goods g;
+		StringBuffer info=new StringBuffer();
+		while(it.hasNext()) {
+			g=it.next();
+			info.append("<div class=\"col-6 col-md-4 col-xl-4\">\r\n" + 
+					"<article class=\"product\">\r\n" + 
+					"<a class=\"product__link\"></a>\r\n" + 
+					"<div class=\"product__img\">\r\n" + 
+					"<img src=\""+g.getGoo_img()+"\" alt=\"\">\r\n" + 
+					"</div>\r\n" +  
+					"<footer class=\"product__footer\">\r\n" + 
+					"<h3 class=\"product__title\">"+g.getGoo_name()+"</h3>\r\n" + 
+					"<span class=\"product__price\">￥"+g.getGoo_price()+"</span>\r\n" + 
+					"</footer>\r\n" + 
+					"</article>\r\n" + 
+					"</div>");
+		}
+		return info.toString();
 	}
 
 }

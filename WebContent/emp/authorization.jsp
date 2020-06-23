@@ -111,8 +111,6 @@
 											<div class="nav page__nav page__nav--white" role="tablist">
 												<a class="active" id="tab-11" data-toggle="tab" href="#tab11" role="tab" aria-controls="tab11" aria-selected="true">用户管理</a>
 												
-												<a class="" id="tab-12" data-toggle="tab" href="#tab12" role="tab" aria-controls="tab12" aria-selected="false">商品管理</a>
-												
 												<a class="" id="tab-13" data-toggle="tab" href="#tab13" role="tab" aria-controls="tab13" aria-selected="false">员工管理</a>
 												
 												<a class="" id="tab-14" data-toggle="tab" href="#tab14" role="tab" aria-controls="tab14" aria-selected="false">商家管理</a>
@@ -123,7 +121,7 @@
 													out.print(empjob);
 											%>
 											
-											<!-- 此处有魔法，傻逼别乱动
+											<!-- 
 												<div id="tab11" class="tab-pane fade show active" role="tabpanel" aria-labelledby="tab-11">
 													<table class="account__table">	
 														<thead>

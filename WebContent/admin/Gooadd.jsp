@@ -73,7 +73,7 @@
 				<div class="col-12">
 					<div class="authorization">
 						<div class="nav page__nav" role="tablist">
-							<a href="../emp/admin.jsp">返回</a>
+							<a href="../Mer/account.jsp">返回</a>
 							
 							<a class="active" id="tab-1" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="true">添加商品</a>
 
@@ -126,7 +126,7 @@
 											<label for="Goo_detail" class="form__label">简介</label>
 											<input id="Goo_detail" type="text" name="Goo_detail" class="form__textarea">	
 										</div>
-
+										
 										<div class="col-12">
 											<button class="form__send" type="submit">添加</button>
 										</div>

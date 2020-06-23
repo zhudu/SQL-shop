@@ -96,6 +96,7 @@ public class AdmDaoImpl implements Admdao{
 	public int empdelete(String id) {
 		String hql="exec proc_newWork '"+id+"'";
 		Query q = sf.getCurrentSession().createSQLQuery(hql);
+		int num=q.executeUpdate();
 		return 1;
 	}
 

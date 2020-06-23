@@ -73,7 +73,7 @@
 				<div class="col-12">
 					<div class="authorization">
 						<div class="nav page__nav" role="tablist">
-							<a href="../emp/admin.jsp">返回</a>
+							<a href="../emp/authorization.jsp">返回</a>
 							
 							<a class="active" id="tab-1" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="true">更新信息</a>
 

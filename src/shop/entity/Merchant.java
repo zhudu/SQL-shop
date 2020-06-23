@@ -26,6 +26,8 @@ public class Merchant {
 	private String Mer_phone;			//联系电话
 	@Column(name="Mer_email")
 	private String Mer_email;			//邮箱
+	@Column(name="Mer_pwd")
+	private String Mer_pwd;			//邮箱
 	public String getMer_no() {
 		return Mer_no;
 	}
@@ -61,5 +63,11 @@ public class Merchant {
 	}
 	public void setMer_email(String mer_email) {
 		Mer_email = mer_email;
+	}
+	public String getMer_pwd() {
+		return Mer_pwd;
+	}
+	public void setMer_pwd(String mer_pwd) {
+		Mer_pwd = mer_pwd;
 	}
 }

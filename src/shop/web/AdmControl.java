@@ -211,7 +211,8 @@ public class AdmControl {
 		String Goo_class=request.getParameter("Goo_class");
 		String Goo_detail=request.getParameter("Goo_detail");
 		String  file = request.getParameter("img");
-		String new_adress="..\\eework\\sql_shop\\WebContent\\img\\picture\\"+Goo_no+".jpg";
+		System.out.println(file);
+		String new_adress="..\\eework\\sql_shop2\\WebContent\\img\\picture\\"+Goo_no+".jpg";
 		try {
 			BufferedImage image=ImageIO.read(new File(file));
 			ImageIO.write(image, "jpg", new File(new_adress));
@@ -235,7 +236,7 @@ public class AdmControl {
 		String info=es.job3();
 		try {
 			ss.setAttribute("empjob", info);		//将工作内容写入session属性
-			response.sendRedirect("emp/authorization.jsp");		//跳转管理员操作界面
+			response.sendRedirect("Mer/acount.jsp");		//跳转管理员操作界面
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}

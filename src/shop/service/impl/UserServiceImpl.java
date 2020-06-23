@@ -152,8 +152,8 @@ public class UserServiceImpl implements Userservice{
 					"<td><a href=\"#\">"+a.getAdd_name()+"</a></td>\r\n" + 
 					"<td>"+a.getAdd_detail()+"</td>\r\n" + 
 					"<td>"+a.getAdd_phone()+"</td>\r\n" + 
-					"<td><form action=\"../usercontrol?function=deleteaddress?Add_no="+a.getAdd_no()+
-					"\" method=\"post\"><button type=\"button\"><i class=\"lnr lnr-cross\"></i></button></form></td>\r\n" + 
+					"<td><form action=\"../usercontrol?function=deleteaddress&Add_no="+a.getAdd_no()+
+					"\" method=\"post\"><button type=\"submit\"><i class=\"lnr lnr-cross\"></i></button></form></td>\r\n" + 
 					"</tr>");
 		}
 		return info.toString();
@@ -184,15 +184,14 @@ public class UserServiceImpl implements Userservice{
 				Iterator<Sort> it2=sort.iterator();
 				if(it2.hasNext()) {
 					s=it2.next();
-					List<Delivery> deliveriy=ud.Sort2Delivery(s.getSor_no());
-					Iterator<Delivery> it3=deliveriy.iterator();
-					if(it3.hasNext()) {
-						d=it3.next();
-						
-						if(s.getSor_state()==0) {
-							info.append("<td>待出库</td>\r\n" + 
-									"<td><button type=\"button\"><i class=\"lnr lnr-sync\"></i></button></td>\r\n</tr>");
-						}else if (s.getSor_state()==1) {
+					if(s.getSor_state()==0) {
+						info.append("<td>待出库</td>\r\n" + 
+								"<td><button type=\"button\"><i class=\"lnr lnr-sync\"></i></button></td>\r\n</tr>");
+					}else {
+						List<Delivery> deliveriy=ud.Sort2Delivery(s.getSor_no());
+						Iterator<Delivery> it3=deliveriy.iterator();
+						if(it3.hasNext()) {
+							d=it3.next();
 							if(d.getDel_status()==0) {
 								info.append("<td>待配送</td>\r\n" + 
 										"<td><button type=\"button\"><i class=\"lnr lnr-sync\"></i></button></td>\r\n</tr>");

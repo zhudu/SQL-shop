@@ -8,6 +8,7 @@ import shop.entity.Delivery;
 import shop.entity.Employees;
 import shop.entity.Form;
 import shop.entity.Goods;
+import shop.entity.Merchant;
 import shop.entity.Sort;
 
 public interface Empdao {
@@ -49,5 +50,21 @@ public interface Empdao {
 	int checkpwd(Employees e);
 
 	int changepwd(Employees e);
+
+	List<Merchant> merlogin(Merchant m);
+
+	List<Goods> Mer2Goods(Merchant m);
+
+	int forget(Merchant m);
+
+	int mercheck(Merchant m);
+
+	int register(Merchant m);
+
+	int UpdateMer(Merchant m);
+
+	int checkpwd(Merchant oldm);
+
+	int changepwd(Merchant newm);
 
 }
