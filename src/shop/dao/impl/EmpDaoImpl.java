@@ -129,18 +129,18 @@ public class EmpDaoImpl implements Empdao{
 	}
 
 	@Override
-	public List<Goods> SearchGoods(Form f) {
-		String hql="from Goods where Goo_no='"+f.getGoo_no()+"'";
+	public List<Goodsbak> SearchGoods(Form f) {
+		String hql="from Goodsbak where Goo_no='"+f.getGoo_no()+"'";
 		Query q=sf.getCurrentSession().createQuery(hql);
-		List<Goods> rs=q.list();
+		List<Goodsbak> rs=q.list();
 		return rs;
 	}
 
 	@Override
-	public List<Addres> Searchaddres(Delivery d) {
-		String hql="from Addres where Add_no='"+d.getAdd_no()+"'";
+	public List<AddressBak> Searchaddres(Delivery d) {
+		String hql="from AddressBak where Add_no='"+d.getAdd_no()+"'";
 		Query q=sf.getCurrentSession().createQuery(hql);
-		List<Addres> rs=q.list();
+		List<AddressBak> rs=q.list();
 		return rs;
 	}
 

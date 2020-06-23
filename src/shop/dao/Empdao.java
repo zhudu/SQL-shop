@@ -4,10 +4,12 @@ package shop.dao;
 import java.util.List;
 
 import shop.entity.Addres;
+import shop.entity.AddressBak;
 import shop.entity.Delivery;
 import shop.entity.Employees;
 import shop.entity.Form;
 import shop.entity.Goods;
+import shop.entity.Goodsbak;
 import shop.entity.Merchant;
 import shop.entity.Sort;
 
@@ -35,9 +37,9 @@ public interface Empdao {
 
 	List<Form> SearchForm(Sort s);
 
-	List<Goods> SearchGoods(Form f);
+	List<Goodsbak> SearchGoods(Form f);
 
-	List<Addres> Searchaddres(Delivery d);
+	List<AddressBak> Searchaddres(Delivery d);
 
 	int register(Employees e);
 

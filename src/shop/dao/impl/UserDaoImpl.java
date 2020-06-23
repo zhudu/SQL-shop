@@ -75,6 +75,14 @@ public class UserDaoImpl implements Userdao{
 	}
 
 	@Override
+	public List<Goodsbak> Form2Goodsbak(String goo_no) {
+		String hql="from Goodsbak where Goo_no = '"+goo_no+"'";
+		Query q=sf.getCurrentSession().createQuery(hql);
+		List rs=q.list();
+		return rs;
+	}
+
+	@Override
 	public List<Sort> Form2Sort(String for_no) {
 		String hql="from Sort where For_no = '"+for_no+"'";
 		Query q=sf.getCurrentSession().createQuery(hql);

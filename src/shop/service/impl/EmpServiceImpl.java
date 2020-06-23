@@ -154,14 +154,14 @@ public class EmpServiceImpl implements Empservice{
 		List del=ed.SearchDelivery(e);
 		Iterator<Delivery> it=del.iterator();
 		Delivery d;
-		Addres a;
+		AddressBak a;
 		StringBuffer info = new StringBuffer();
 		info.append("<thead>\r\n<tr>\r\n<th>配送号</th>\r\n<th>收货地址</th>\r\n<th>收件人号码</th>\r\n<th>配送时间</th>\r\n" + 
 				"<th>送达时间</th>\r\n<th>状态</th>\r\n<th></th>\r\n</tr>\r\n</thead>\r\n\r\n<tbody>");
 		while(it.hasNext()) {
 			d=it.next();
-			List<Addres> addres=ed.Searchaddres(d);
-			Iterator<Addres> it1=addres.iterator();
+			List<AddressBak> addres=ed.Searchaddres(d);
+			Iterator<AddressBak> it1=addres.iterator();
 			a=it1.next();
 			info.append("<tr>\r\n<td><a href=\"#\">"+d.getDel_no()+"</a></td>\r\n<td>"+a.getAdd_detail()+"</td>\r\n" + 
 					"<td>"+a.getAdd_phone()+"</td>\r\n<td>"+d.getDel_gotime()+"</td>\r\n");
@@ -195,7 +195,7 @@ public class EmpServiceImpl implements Empservice{
 		StringBuffer info = new StringBuffer();
 		Sort s;
 		Form f;
-		Goods g;
+		Goodsbak g;
 		info.append("<thead>\r\n<tr>\r\n<th>分拣号</th>\r\n<th>品名</th>\r\n<th>截止时间/完成时间</th>\r\n" + 
 				"<th>数量</th>\r\n<th>状态</th>\r\n<th></th>\r\n</tr>\r\n</thead>\r\n\r\n<tbody>");
 		while (it.hasNext()) {
@@ -203,8 +203,8 @@ public class EmpServiceImpl implements Empservice{
 			List<Form> form=ed.SearchForm(s);
 			Iterator<Form> it1=form.iterator();
 			f=it1.next();
-			List<Goods> goods=ed.SearchGoods(f);
-			Iterator<Goods> it2=goods.iterator();
+			List<Goodsbak> goods=ed.SearchGoods(f);
+			Iterator<Goodsbak> it2=goods.iterator();
 			g=it2.next();
 			info.append("<tr>\r\n<td><a href=\"#\">"+s.getSor_no()+"</a></td>\r\n<td>"+g.getGoo_name()+"</td>\r\n" + 
 					"<td>"+s.getSor_time()+"</td>\r\n<td>"+f.getFor_num()+"</td>\r\n");

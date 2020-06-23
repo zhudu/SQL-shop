@@ -501,6 +501,18 @@ public class UserControl {
 		}
 	}
 	
+	@RequestMapping(value="/usercontrol", params= {"function=reflesh"})
+	private void fun_reflesh(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession ss = request.getSession();
+		String Cli_no=(String)ss.getAttribute("Cli_no");
+		ss.setAttribute("FormDetail", us.FormDetail(Cli_no));		//查询该用户已有的订单情况
+		try {
+			response.sendRedirect("user/account.jsp");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}		//跳转操作界面
+	}
+	
 	@RequestMapping(value="/usercontrol", params= {"function=test"})
 	private void fun_test(HttpServletRequest request, HttpServletResponse response) {
 		String  no = request.getParameter("no");

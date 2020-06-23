@@ -17,6 +17,7 @@ import shop.entity.Delivery;
 import shop.entity.Employees;
 import shop.entity.Form;
 import shop.entity.Goods;
+import shop.entity.Goodsbak;
 import shop.entity.Merchant;
 import shop.entity.Sort;
 import shop.service.Userservice;
@@ -166,6 +167,7 @@ public class UserServiceImpl implements Userservice{
 		StringBuffer info = new StringBuffer();
 		Form f;
 		Goods g;
+		Goodsbak gk;
 		Sort s;
 		Delivery d;
 		while (it.hasNext()) {
@@ -185,27 +187,67 @@ public class UserServiceImpl implements Userservice{
 				if(it2.hasNext()) {
 					s=it2.next();
 					if(s.getSor_state()==0) {
-						info.append("<td>待出库</td>\r\n" + 
-								"<td><button type=\"button\"><i class=\"lnr lnr-sync\"></i></button></td>\r\n</tr>");
+						info.append("<td>待出库</td><td><form action=\"../usercontrol?function=reflesh\" method=\"post\">" + 
+								"<button type=\"submit\"><i class=\"lnr lnr-sync\"></i></button></form></td>\r\n</tr>");
 					}else {
 						List<Delivery> deliveriy=ud.Sort2Delivery(s.getSor_no());
 						Iterator<Delivery> it3=deliveriy.iterator();
 						if(it3.hasNext()) {
 							d=it3.next();
 							if(d.getDel_status()==0) {
-								info.append("<td>待配送</td>\r\n" + 
-										"<td><button type=\"button\"><i class=\"lnr lnr-sync\"></i></button></td>\r\n</tr>");
+								info.append("<td>待配送</td><td><form action=\"../usercontrol?function=reflesh\" method=\"post\">" + 
+										"<button type=\"submit\"><i class=\"lnr lnr-sync\"></i></button></form></td>\r\n</tr>");
 							}else if (d.getDel_status()==1) {
-								info.append("<td>配送中</td>\r\n" + 
-										"<td><button type=\"button\"><i class=\"lnr lnr-sync\"></i></button></td>\r\n</tr>");
+								info.append("<td>配送中</td><td><form action=\"../usercontrol?function=reflesh\" method=\"post\">" + 
+										"<button type=\"submit\"><i class=\"lnr lnr-sync\"></i></button></form></td>\r\n</tr>");
 							}else if (d.getDel_status()==2) {
-								info.append("<td>已送达，请确认</td>\r\n" + 
-										"<td><button type=\"button\"><i class=\"lnr lnr-sync\"></i></button></td>\r\n</tr>");
+								info.append("<td>已送达，请确认</td><td><form action=\"../usercontrol?function=reflesh\" method=\"post\">" + 
+										"<button type=\"button\"><i class=\"lnr lnr-sync\"></i></button></form></td>\r\n</tr>");
 							}
 						}
 					}
 				}else {
 					info.append("</tr>");
+				}
+			}
+			else {
+				List<Goodsbak> goodsbak=ud.Form2Goodsbak(f.getGoo_no());
+				Iterator<Goodsbak> it4=goodsbak.iterator();
+				if(it4.hasNext()) {
+					gk=it4.next();
+					info.append("<tr>\r\n" + 
+							"<td><a href=\"#\">"+f.getFor_no()+"</a></td>\r\n" + 
+							"<td>"+gk.getGoo_name()+"[已下架]</td>\r\n" + 
+							"<td>"+f.getFor_time().substring(0, 10)+"</td>\r\n" + 
+							"<td>"+f.getFor_num()+"</td>\r\n" + 
+							"<td>"+f.getFor_num()*gk.getGoo_price()+"</td>\r\n");
+					List<Sort> sort=ud.Form2Sort(f.getFor_no());
+					Iterator<Sort> it2=sort.iterator();
+					if(it2.hasNext()) {
+						s=it2.next();
+						if(s.getSor_state()==0) {
+							info.append("<td>待出库</td><td><form action=\"../usercontrol?function=reflesh\" method=\"post\">" + 
+									"<button type=\"submit\"><i class=\"lnr lnr-sync\"></i></button></form></td>\r\n</tr>");
+						}else {
+							List<Delivery> deliveriy=ud.Sort2Delivery(s.getSor_no());
+							Iterator<Delivery> it3=deliveriy.iterator();
+							if(it3.hasNext()) {
+								d=it3.next();
+								if(d.getDel_status()==0) {
+									info.append("<td>待配送</td><td><form action=\"../usercontrol?function=reflesh\" method=\"post\">" + 
+											"<button type=\"submit\"><i class=\"lnr lnr-sync\"></i></button></form></td>\r\n</tr>");
+								}else if (d.getDel_status()==1) {
+									info.append("<td>配送中</td><td><form action=\"../usercontrol?function=reflesh\" method=\"post\">" + 
+											"<button type=\"submit\"><i class=\"lnr lnr-sync\"></i></button></form></td>\r\n</tr>");
+								}else if (d.getDel_status()==2) {
+									info.append("<td>已送达，请确认</td><td><form action=\"../usercontrol?function=reflesh\" method=\"post\">" + 
+											"<button type=\"button\"><i class=\"lnr lnr-sync\"></i></button></form></td>\r\n</tr>");
+								}
+							}
+						}
+					}else {
+						info.append("</tr>");
+					}
 				}
 			}
 		}
