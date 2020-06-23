@@ -1,36 +1,12 @@
 # SQL-shop
 
-jsp文件一览：
+### 前言：
 
-about:公司介绍
+​		该项目为集美大学大二下数据库课设。由项目组成员共同完成，该项目采用springMVC+spring+hibernate实现，前端部分使用网络模板，其余部分由项目组共同设计，数据库部分采用Microsoft SQL server实现。
 
-account：账户界面
+​		该项目中sql文件夹是存放部分sql需求及触发器，存储过程的代码。其余部分为eclipse的项目结构。其中WebContent中html存放基础模板信息，admin存放员工、商家、用户、商品的增加更新界面。emp、user、Mer分别为员工、用户、商家模块的实现。
 
-article：
-
-authorization：登录注册界面
-
-cart：购物车
-
-catalog：目录
-
-checkout：付款界面
-
-index：首页
-
-news：新闻
-
-payment：付款方式一览
-
-product：商品介绍页
-
-product2：
-
-refund：换货和退款一览
-
-
-
-界面整体框架：
+### 界面整体框架：
 
 ```javascript
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -284,36 +260,165 @@ refund：换货和退款一览
 </html>
 ```
 
+### 更新日志
 
+> ##### 6.6
+>
+> 1.员工表中新增登录密码
+>
+> 2.商品表增加商品类别
+>
+> 3.分拣表增加分拣状态
+>
+> 4.配送表增加配送状态
+>
+> ##### 6.20
+>
+> 修复购物车结算后数据无法读取、管理员无法更新数据、添加商品购物车界面不发生改变
+>
+> ##### 6.20-1
+>
+> 新增顾客未登录时对购物车及结算等功能的过滤操作。更正员工离职时任务的重分配情况。
+>
+> ##### 6.22
+>
+> 新增商家功能
+>
+> ##### 6.22-1
+>
+> 优化商品下架及用户删除地址的显示
 
-hql多表查询：https://www.cnblogs.com/qlqwjy/p/8989917.html
+### 实现功能展示：
 
+##### 概览
 
+电子购物商城主要分为三个模块：用户模块、员工模块、商家模块；其中员工又分为分拣员、配送员和管理员。
 
-6.6
+##### 用户模块一览
 
-1.员工表中新增登录密码
+正常在用户未登录时，可以浏览商品信息。下图为该商城首页情况。
 
-2.商品表增加商品类别
+![img](https://p.qlogo.cn/qqmail_head/Q3auHgzwzM7qJfYMXHt5doEGNELY23yZus0XmDC0Yxic5rz0uvtt7FATx5O80bkn3XibYkMC21sp8/0) 
 
-3.分拣表增加分拣状态
+ 
 
-4.配送表增加配送状态
+其中在首页的导航栏中包含了较多的功能信息
 
-5.商品表增加商品上架时间
+![img](https://p.qlogo.cn/qqmail_head/Q3auHgzwzM7qJfYMXHt5doEGNELY23yZus0XmDC0Yx9SAVLlYhmibfDNTPECaGqDnVQHFztS1j0w/0) 
 
+目录：根据商品分类对商品进行检索
 
+![img](https://p.qlogo.cn/qqmail_head/Q3auHgzwzM7qJfYMXHt5doEGNELY23yZus0XmDC0YxicnQqgqJlDynXD2AqKDucw5C53qnB6upxc/0) 
 
+其效果分别为：
 
+![img](https://p.qlogo.cn/qqmail_head/Q3auHgzwzM7qJfYMXHt5doEGNELY23yZus0XmDC0Yx9sq6nXiczXzkexPkV4ICrGYvJvM1Pxs3no/0)![img](https://p.qlogo.cn/qqmail_head/Q3auHgzwzM7qJfYMXHt5doEGNELY23yZus0XmDC0Yx96icLNsVbicc8eAvTImk7U4gnU5Bic5iaibbZA/0) 
 
-6.20
+![img](https://p.qlogo.cn/qqmail_head/Q3auHgzwzM7qJfYMXHt5doEGNELY23yZus0XmDC0YxibRxyiamekgBSb8ptjrEc6xVVZ3XXGpeSsI/0)![img](https://p.qlogo.cn/qqmail_head/Q3auHgzwzM7qJfYMXHt5doEGNELY23yZus0XmDC0YxicZvy7VYoaa9zTLicK0bQ2LmXlS4cdprKU4/0) 
 
-修复购物车结算后数据无法读取、管理员无法更新数据、添加商品购物车界面不发生改变
+ 
 
-6.20-1
+用户登录状态显示:初始显示为“未登录”，点击跳转登录界面，登出后亦显示“未登录”。且该界面包含注册账户与忘记的功能。（依次为从左到右）
 
-新增顾客未登录时对购物车及结算等功能的过滤操作。更正员工离职时任务的重分配情况。
+![img](https://p.qlogo.cn/qqmail_head/Q3auHgzwzM7qJfYMXHt5doEGNELY23yZus0XmDC0Yx9HpfcoO16o5qJLsWNBHDmSCqM2SlNcjIg/0)![img](https://p.qlogo.cn/qqmail_head/Q3auHgzwzM7qJfYMXHt5doEGNELY23yZus0XmDC0Yx9wzkhg0DYrhvUjymOXoO6Qccv9ypmsQQ4/0)![img](https://p.qlogo.cn/qqmail_head/ajNVdqHZLLCqQWMopm4DOo60nVicfh4lzOYoNgtcvmeVFEOcexJH9mRdJviaicVPwhLPlez0cMUGrI/0) 
 
-6.22新增商家功能
+商品检索：（此处以检索手表为例）（检索方式：检索名称中包含检索关键字或者类别包含检索关键字的商品）
 
-6.22-1优化商品下架及用户删除地址的显示
+![img](https://p.qlogo.cn/qqmail_head/ajNVdqHZLLCqQWMopm4DOo60nVicfh4lzOYoNgtcvmeWY2QvPgckxEwNM5TEjp4Z9nS4MnT5mkM4/0) 
+
+![img](https://p.qlogo.cn/qqmail_head/ajNVdqHZLLCqQWMopm4DOo60nVicfh4lzOYoNgtcvmeWcMGa0eI8SNvJibYTibCic3mVBNgVGicWCRWQ/0) 
+
+用户成功登录后可以查看购物车中的信息，若尚未登录则会跳转到登录界面。
+
+![img](https://p.qlogo.cn/qqmail_head/ajNVdqHZLLCqQWMopm4DOo60nVicfh4lzOYoNgtcvmeWm1p5OgiaY1iaGun3aw3Tnu3SsicI8T65Kfc/0) 
+
+可以购物车界面直接增减商品数量，或者去除商品，亦可对购物车中的商品进行结算。
+
+结算过程中可以选择收货地址或者新增收货地址。
+
+![img](https://p.qlogo.cn/qqmail_head/ajNVdqHZLLCqQWMopm4DOo60nVicfh4lzOYoNgtcvmeXX4gtm7licsvzW66gBib0Gia8qRfxPKWXNJs/0)![img](https://p.qlogo.cn/qqmail_head/ajNVdqHZLLCqQWMopm4DOo60nVicfh4lzOYoNgtcvmeWsxOe7QdoyQLHLlBESGF4FZfyZlJskAdU/0) 
+
+支付完成后跳转至账户详情页，账户详情页可以查看个人信息、改密、查看订单，修改收货地址以及登出等功能。
+
+![img](https://p.qlogo.cn/qqmail_head/ajNVdqHZLLCqQWMopm4DOo60nVicfh4lzOYoNgtcvmeXkDKwYnjYfhjJQRla6biawQicWTnibq6hp4c/0) 
+
+可以看到刚刚结算的商品信息添加到我的订单中去了，并且购物车也清除了该商品。
+
+![img](https://p.qlogo.cn/qqmail_head/ajNVdqHZLLCqQWMopm4DOo60nVicfh4lzOYoNgtcvmeUh5ibM1xkcqKaqmic2ibRtsR7SR6ZKbse79M/0) 
+
+![img](https://p.qlogo.cn/qqmail_head/ajNVdqHZLLCqQWMopm4DOo60nVicfh4lzOYoNgtcvmeXNmGydj8zkF5icgRAwVAvjKDAib07Qgh9ug/0) 
+
+添加收货地址：（并且可以直接点击后侧的x删除地址信息）
+
+![img](https://p.qlogo.cn/qqmail_head/ajNVdqHZLLCqQWMopm4DOo60nVicfh4lzOYoNgtcvmeWSpMy6N4W8oXMl0LDFmIX08uORYJJwFL4/0)![img](https://p.qlogo.cn/qqmail_head/ajNVdqHZLLCqQWMopm4DOo60nVicfh4lzOYoNgtcvmeWunvr4J4OibqjSEXmBJPT6mAwEzEOicEXpQ/0) 
+
+ 
+
+##### 员工模块一览
+
+员工登录界面与用户登录界面大致功能相似。后台会根据员工的部门号进行员工界面的分发。
+
+![img](https://p.qlogo.cn/qqmail_head/ajNVdqHZLLCqQWMopm4DOo60nVicfh4lzOYoNgtcvmeWoh064q0vBoYibEaJeMo60GfDk18SlZXxg/0) 
+
+###### 分拣员界面：
+
+![img](https://p.qlogo.cn/qqmail_head/ajNVdqHZLLCqQWMopm4DOo60nVicfh4lzOYoNgtcvmeXQsTKGBPA7kcSCgTbmjBp6nv4OQZWUr9s/0) 
+
+由于为了便于测试，此处登录的员工是刚刚下单的用户的订单所分配的员工：
+
+![img](https://p.qlogo.cn/qqmail_head/ajNVdqHZLLCqQWMopm4DOo60nVicfh4lzOYoNgtcvmeW3W9Lic8yodEA7klxHqv5bE80oNyqGmJaA/0) 
+
+待员工分拣完商品后，点击右侧的提交：
+
+![img](https://p.qlogo.cn/qqmail_head/ajNVdqHZLLCqQWMopm4DOo60nVicfh4lzOYoNgtcvmeXQ1nxMaxON3g6xeXZReic9hUvfcKq8T9J0/0) 
+
+并且用户界面会发生更改：
+
+![img](https://p.qlogo.cn/qqmail_head/ajNVdqHZLLCqQWMopm4DOo60nVicfh4lzOYoNgtcvmeX9pnKh4GdzjSQrpDYXAUMGAEACibw0vJ10/0) 
+
+###### 配送员界面：
+
+![img](https://p.qlogo.cn/qqmail_head/ajNVdqHZLLCqQWMopm4DOo60nVicfh4lzOYoNgtcvmeXPbJlCfc9bKNYFURZeeRLQ4arJlJian4NY/0) 
+
+初分配任务时会显示待配送字样，当员工接到货物开始配送时可以点击右侧图标。更新配送状态。
+
+![img](https://p.qlogo.cn/qqmail_head/ajNVdqHZLLCqQWMopm4DOo60nVicfh4lzOYoNgtcvmeUXcdGIxwOoZDuxceexj8mwgxiao3eAXDv4/0) 
+
+开始配送时的配送员界面：
+
+![img](https://p.qlogo.cn/qqmail_head/ajNVdqHZLLCqQWMopm4DOo60nVicfh4lzOYoNgtcvmeVkmnnYb0GViaFOjNDExaPIGndTiahRcEdic8/0) 
+
+对应用户界面：
+
+![img](https://p.qlogo.cn/qqmail_head/ajNVdqHZLLCqQWMopm4DOo60nVicfh4lzOYoNgtcvmeWhV4AqzMHGTQ61YjmU0ddibObmVMolMjCk/0) 
+
+当配送员成功送达货物后，点击右侧图标。
+
+![img](https://p.qlogo.cn/qqmail_head/ajNVdqHZLLCqQWMopm4DOo60nVicfh4lzOYoNgtcvmeXvu7ybt5RDqx93cwczUVLke8Xf3YtR2JQ/0) 
+
+对应用户界面：
+
+![img](https://p.qlogo.cn/qqmail_head/ajNVdqHZLLCqQWMopm4DOo60nVicfh4lzOYoNgtcvmeVoseHBENhrGIeFC55PUfqcLz7uZW3z9WM/0) 
+
+###### 管理员界面：
+
+![img](https://p.qlogo.cn/qqmail_head/ajNVdqHZLLCqQWMopm4DOo60nVicfh4lzOYoNgtcvmeWOAJsdzhbtFP51rEDgYYZshtQwgBEvMjo/0) 
+
+![img](https://p.qlogo.cn/qqmail_head/ajNVdqHZLLCqQWMopm4DOo60nVicfh4lzOYoNgtcvmeX0oQ8310MLAzFwXDmturo1ibzU3Ou1MpWQ/0) 
+
+管理员可以对员工，用户，商家进行增删改操作。具体不一一展示。
+
+##### 商家模块一览
+
+![img](https://p.qlogo.cn/qqmail_head/ajNVdqHZLLCqQWMopm4DOo60nVicfh4lzOYoNgtcvmeVaHJUI34Gt1CxfkMOWsWRUFRE3b4gcXRc/0) 
+
+![img](https://p.qlogo.cn/qqmail_head/ajNVdqHZLLCqQWMopm4DOo60nVicfh4lzOYoNgtcvmeWYNP8ibWAfEDicqTYAushOAIG6ibuHE2onH0/0) 
+
+商品管理：
+
+![img](https://p.qlogo.cn/qqmail_head/ajNVdqHZLLCqQWMopm4DOo60nVicfh4lzOYoNgtcvmeUr1pCIFxuGatYoIiaFKWzDLXOaQBNkrOZ4/0) 
+
+可以浏览添加的商品情况：
+
+![img](https://p.qlogo.cn/qqmail_head/ajNVdqHZLLCqQWMopm4DOo60nVicfh4lzOYoNgtcvmeU8YytWOeYxMBOGSrzoVrSPT9sf6XcUCME/0) 
+
